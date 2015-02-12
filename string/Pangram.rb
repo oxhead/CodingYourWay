@@ -1,5 +1,9 @@
 #!/usr/bin/ruby
 
+=begin
+https://www.hackerrank.com/challenges/pangrams
+=end
+
 require 'set'
 
 sentence = gets.chomp.downcase
