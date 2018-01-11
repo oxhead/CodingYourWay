@@ -13,9 +13,18 @@ def to_linked_list(numbers):
 def to_list(node):
     l = list()
     while node != None:
-        l.append(node.value)
+        l.append(node.val)
         node = node.next
     return l
+
+def find_node_by_index(node, index):
+    count = 0
+    while node and count <= index:
+        if count == index:
+            return node
+        count += 1
+        node = node.next
+    return None
 
 
 def parse_tree(input_list):
