@@ -52,3 +52,16 @@ def print_tree_inorder(root):
     print(root.val)
     print_tree_inorder(root.left)
     print_tree_inorder(root.right)
+
+def is_height_balanced_bst(root):
+    if not root:
+        return True
+    return abs(get_tree_height(root.left) - get_tree_height(root.right)) <= 1
+
+def get_tree_height(root):
+    if not root:
+        return 0
+    return 1 + max(get_tree_height(root.left), get_tree_height(root.right))
+
+        
+
