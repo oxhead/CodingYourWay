@@ -1,8 +1,45 @@
-from base import ListNode
+"""
+https://leetcode.com/problems/reverse-linked-list
+
+Related:
+  - lt_92
+  - lt_156
+  - lt_234
+
+Complexity:
+  - Time: O(n)
+  - Space: O(1)
+"""
+
+"""
+Reverse a singly linked list.
+
+click to show more hints.
+Hint:
+
+    A linked list can be reversed either iteratively or recursively. Could you implement both?
+"""
+
 from utils import to_linked_list, to_list
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
 class Solution:
-    def reverseList1(self, head):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        previous = None
+        while head:
+            head.next, previous, head = previous, head, head.next
+        return previous
+
+    def reverseList2(self, head):
         """
         :type head: ListNode
         :rtype: ListNode
@@ -21,30 +58,18 @@ class Solution:
             
         return new_head
 
-    def reverseList(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
-        current_node = head
-        previous_node = None
-        while current_node != None:
-            tmp = current_node.next
-            current_node.next = previous_node
-            previous_node = current_node
-            current_node = tmp
-        return previous_node
-
 if __name__ == '__main__':
     test_cases = [
-        [],
-        [1],
-        [1, 2, 3]
+        ([], []),
+        ([1], [1]),
+        ([1, 2], [2, 1]),
+        ([1, 2, 3], [3, 2, 1])
     ]
 
     for test_case in test_cases:
         print('case:', test_case)
-        node = Solution().reverseList(to_linked_list(test_case))
-        print('output:', to_list(node))
-        assert to_list(node) == list(reversed(test_case))
+        root = to_linked_list(test_case[0])
+        root_new = Solution().reverseList(root)
+        print('output:', to_list(root_new))
+        assert to_list(root_new) == test_case[1]
 
