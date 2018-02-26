@@ -39,6 +39,22 @@ class Solution:
             global_max = max(global_max, local_max)
         return global_max 
 
+    def maxSubArray_dp(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        dp = [0] * len(nums)
+        dp[0] = nums[0]
+        for i in range(1, len(nums)):
+            if dp[i-1] <= 0 and nums[i] >= 0:
+                dp[i] = nums[i]
+                continue
+            tmp = dp[i-1] + nums[i]
+            if tmp >= 0: dp[i] = tmp
+            else: dp[i] = nums[i]
+        return max(dp)
+
 
 if __name__ == '__main__':
     test_cases = [
