@@ -31,6 +31,7 @@ def parse_tree(input_list):
     """
     https://discuss.leetcode.com/topic/16600/tree-deserializer-and-visualizer-for-python
     """
+    if not input_list or len(input_list) < 1: return None
     nodes = [TreeNode(n) if n is not None else None for n in input_list]
     children = nodes[::-1]
     root = children.pop()
