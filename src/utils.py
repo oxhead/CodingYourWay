@@ -9,6 +9,15 @@ def to_linked_list(numbers):
 
     return head.next
 
+def to_linked_list_by_pairs(lists):
+    object_set = set()
+    for n1, n2 in lists:
+        object_set.add(n1)
+        object_set.add(n2)
+    objects = {n: ListNode(n) for n in object_set}
+    for n1, n2 in lists:
+        objects[n1].next = objects[n2]
+    return objects[lists[0][0]]
 
 def to_list(node):
     l = list()
