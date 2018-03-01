@@ -69,8 +69,8 @@ def print_tree(root, kind='inorder'):
 def print_tree_inorder(root):
     if not root:
         return
-    print(root.val)
     print_tree_inorder(root.left)
+    print(root.val)
     print_tree_inorder(root.right)
 
 def is_height_balanced_bst(root):
