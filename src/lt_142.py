@@ -33,6 +33,7 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
+        # https://www.quora.com/How-does-Floyds-cycle-finding-algorithm-work-How-does-moving-the-tortoise-to-the-beginning-of-the-linked-list-while-keeping-the-hare-at-the-meeting-place-followed-by-moving-both-one-step-at-a-time-make-them-meet-at-starting-point-of-the-cycle
         if not head or not head.next: return None
 
         fast = slow = head
