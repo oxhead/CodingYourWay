@@ -48,7 +48,7 @@ class Solution:
             odd = odd.next
             even.next = odd.next
             even = even.next
-            odd.next = even_head
+        odd.next = even_head
         return head
 
     def oddEvenList_naive(self, head):
