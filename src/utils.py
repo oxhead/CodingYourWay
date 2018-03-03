@@ -1,4 +1,5 @@
 from base import ListNode, TreeNode
+from base import NestedInteger
 
 def to_linked_list(numbers):
     head = ListNode('#')
@@ -84,5 +85,5 @@ def get_tree_height(root):
         return 0
     return 1 + max(get_tree_height(root.left), get_tree_height(root.right))
 
-        
-
+def to_nested_list(data):
+    return [NestedInteger(d) for d in data]
