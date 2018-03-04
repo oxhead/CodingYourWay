@@ -48,7 +48,7 @@ def find_node_by_index(node, index):
     return None
 
 
-def parse_tree(input_list):
+def parse_tree(input_list, return_nodes=False):
     """
     https://discuss.leetcode.com/topic/16600/tree-deserializer-and-visualizer-for-python
     """
@@ -60,7 +60,16 @@ def parse_tree(input_list):
         if node:
             if children: node.left = children.pop()
             if children: node.right = children.pop()
-    return root
+    if return_nodes:
+        return root, nodes
+    else:
+        return root
+
+
+def search_node_by_value(nodes, val):
+    for node in nodes:
+        if node and node.val == val: return node
+    return None
 
 
 def print_tree(root, kind='inorder'):
