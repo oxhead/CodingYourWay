@@ -43,6 +43,25 @@ class Solution:
                 return True
         return False
 
+    def increasingTriplet_range(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        # http://www.cnblogs.com/grandyang/p/5194599.html
+        if not nums or len(nums) < 3: return False
+        n = len(nums)
+        forwards = [float('inf')] * n
+        backwards = [float('-inf')] * n
+        for i in range(1, n):
+            forwards[i] = min(forwards[i-1], nums[i])
+        for i in range(n-2, -1, -1):
+            backwards[i] = max(backwards[i+1], nums[i])
+        for i in range(n):
+            if forwards[i] < nums[i] < backwards[i]:
+                return True
+        return False
+
 if __name__ == '__main__':
     test_cases = [
        ([1, 2, 3, 4, 5], True),
