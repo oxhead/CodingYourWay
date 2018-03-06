@@ -2,10 +2,6 @@
 https://leetcode.com/problems/symmetric-tree
 
 Related:
-
-Complexity:
-  - Time: O()
-  - Space: O()
 """
 
 """
@@ -46,14 +42,36 @@ class Solution:
         :type root: TreeNode
         :rtype: bool
         """
+        # Time: O(n)
+        # Space: O(1)
+        def is_matched(left, right):
+            if not left and not right: return True
+            if not left or not right: return False
+            if left.val != right.val: return False
+            return is_matched(left.left, right.right) and is_matched(left.right, right.left)
         if not root: return True
-        return self.isMatched(root.left, root.right)
+        return is_matched(root.left, root.right)
 
-    def isMatched(self, left, right):
-        if not left and not right: return True
-        if not left or not right: return False
-        if left.val != right.val: return False
-        return self.isMatched(left.left, right.right) and self.isMatched(left.right, right.left)
+    def isSymmetric_iterative(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        # Time: O(n)
+        # Space: O(h), h is the tree height
+        if not root: return True
+        queue = [root.left, root.right]
+        while queue:
+            front, end = queue.pop(0), queue.pop()
+            if not front and not end: continue
+            if not (front and end): return False
+            if front.val != end.val: return False
+            queue.insert(0, front.right)
+            queue.insert(0, front.left)
+            queue.append(end.left)
+            queue.append(end.right)
+        return True
+
 
 if __name__ == '__main__':
     test_cases = [
@@ -66,6 +84,7 @@ if __name__ == '__main__':
     for test_case in test_cases:
         print('case:', test_case)
         output = Solution().isSymmetric(parse_tree(test_case[0]))
+        # output = Solution().isSymmetric_iterative(parse_tree(test_case[0]))
         print('output:', output)
         assert output == test_case[1]
 
