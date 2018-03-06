@@ -42,6 +42,7 @@ class Solution:
         :type grid: List[List[str]]
         :rtype: int
         """
+        # https://www.tangjikai.com/algorithms/leetcode-200-number-of-islands
         def dfs(i, j):
             grid[i][j] = WATER
             if i + 1 < len(grid) and grid[i+1][j] == LAND:
