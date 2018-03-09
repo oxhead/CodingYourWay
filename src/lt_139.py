@@ -40,6 +40,7 @@ class Solution:
 
 if __name__ == '__main__':
     test_cases = [
+        (('leleetcode', {'leet', 'code'}), False),     
         (('leetcode', {'leet', 'code'}), True),
         (('thetabledownthere', {'the', 'theta', 'table', 'down', 'there', 'bled', 'own'}), True),
     ]
