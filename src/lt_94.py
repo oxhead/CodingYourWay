@@ -9,10 +9,6 @@ Related:
   - lt_230
   - lt_272
   - lt_285
-
-Complexity:
-  - Time: O()
-  - Space: O()
 """
 
 """
@@ -51,13 +47,12 @@ class Solution:
         stack = []
         node = root
         while len(stack) > 0 or node:
-            if node:
+            while node:
                 stack.append(node)
                 node = node.left
-            else:
-                node = stack.pop()
-                path_list.append(node.val)
-                node = node.right
+            node = stack.pop()
+            path_list.append(node.val)
+            node = node.right
         return path_list
  
     def inorderTraversal_recursive(self, root):
@@ -65,6 +60,8 @@ class Solution:
         :type root: TreeNode
         :rtype: List[int]
         """
+        # Time: O(n)
+        # Space: O(1)
         def inorder_recursive(node, path_list):
             if not node: return
             inorder_recursive(node.left, path_list)
@@ -73,6 +70,34 @@ class Solution:
         path_list = []
         inorder_recursive(root, path_list)
         return path_list
+
+    def inorderTraversal_morris(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        # Time: O(n)
+        # Space: O(1)
+        # https://en.wikipedia.org/wiki/Threaded_binary_tree
+        # https://github.com/algorhythms/LeetCode/blob/master/095%20Binary%20Tree%20Inorder%20Traversal.py
+        output = []
+        node = root
+        while node:
+            if not node.left:
+                output.append(node.val)
+                node = node.right
+            else:
+                previous = node.left
+                while previous.right and previous.right != node:
+                    previous = previous.right
+                if not previous.right:
+                    previous.right = node
+                    node = node.left
+                else:
+                    previous.right = None
+                    output.append(node.val)
+                    node = node.right
+        return output
 
 if __name__ == '__main__':
     test_cases = [
