@@ -41,6 +41,8 @@ class Solution:
         :type root: TreeNode
         :rtype: List[float]
         """
+        # Time: O(n)
+        # Space: O(n), in the worst case
         if not root: return []
 
         output = []
