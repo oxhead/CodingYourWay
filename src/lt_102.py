@@ -7,10 +7,6 @@ Related:
   - lt_111
   - lt_314
   - lt_637
-
-Complexity:
-  - Time:
-  - Space:
 """
 
 """
@@ -47,6 +43,8 @@ class Solution:
         :type root: TreeNode
         :rtype: List[List[int]]
         """
+        # Time: O(n)
+        # Space: O(n)
         if not root: return []
         output = []
         queue = [root]
