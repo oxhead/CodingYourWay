@@ -87,17 +87,18 @@ class Solution:
         dfs(digits, "")
         return output
 
+
 if __name__ == '__main__':
     test_cases = [
         ("", []),
         ("23", ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]),
-        #("234", []),
-        #("222", []),
+        ("234", ['adg', 'adh', 'adi', 'aeg', 'aeh', 'aei', 'afg', 'afh', 'afi', 'bdg', 'bdh', 'bdi', 'beg', 'beh', 'bei', 'bfg', 'bfh', 'bfi', 'cdg', 'cdh', 'cdi', 'ceg', 'ceh', 'cei', 'cfg', 'cfh', 'cfi']),
+        ("222", ['aaa', 'aab', 'aac', 'aba', 'abb', 'abc', 'aca', 'acb', 'acc', 'baa', 'bab', 'bac', 'bba', 'bbb', 'bbc', 'bca', 'bcb', 'bcc', 'caa', 'cab', 'cac', 'cba', 'cbb', 'cbc', 'cca', 'ccb', 'ccc']),
     ]
 
     for test_case in test_cases:
         print('case:', test_case)
-        output = Solution().letterCombinations_dfs(test_case[0])
+        output = Solution().letterCombinations(test_case[0])
         print('output:', output)
         assert sorted(output) == sorted(test_case[1])
 

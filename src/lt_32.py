@@ -19,6 +19,8 @@ class Solution:
         :type s: str
         :rtype: int
         """
+        # Time: O(n)
+        # Space: O(n)
         # https://tenderleo.gitbooks.io/leetcode-solutions-/content/GoogleHard/32.html
         max_count = 0
         invalid_index = -1
@@ -59,6 +61,7 @@ class Solution:
                     print('*', records)
         records.append(count)
         return max(records)
+
 
 if __name__ == '__main__':
     test_cases = [

@@ -5,10 +5,6 @@ Related:
   - lt_22
   - lt_32
   - lt_301
-
-Complexity:
-  - Time: O()
-  - Space: O()
 """
 
 """
@@ -23,6 +19,8 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
+        # Time: O(n)
+        # Space: O(n)
         stack = []
         for c in s:
             if c in ('(', '{', '['):

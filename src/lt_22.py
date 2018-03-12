@@ -30,6 +30,8 @@ class Solution:
         :type n: int
         :rtype: List[str]
         """
+        # Time: O(?)
+        # Space: O(?)
         def generate(left, right, current, output):
             if left == 0 and right == 0:
                 output.append(current)
