@@ -84,6 +84,16 @@ def print_tree_inorder(root):
     print(root.val)
     print_tree_inorder(root.right)
 
+def tree_traversal_inorder(root):
+    def _traversal(node):
+        if not node: return
+        _traversal(node.left)
+        output.append(node.val)
+        _traversal(node.right)
+    output = []
+    _traversal(root)
+    return output
+
 def is_height_balanced_bst(root):
     if not root:
         return True
@@ -93,6 +103,13 @@ def get_tree_height(root):
     if not root:
         return 0
     return 1 + max(get_tree_height(root.left), get_tree_height(root.right))
+
+def is_bst_equal(root1, root2):
+    if root1 and not root2: return False
+    if not root1 and root2: return False
+    if not root1 and not root2: return True
+    if root1.val != root2.val: return False
+    return is_bst_equal(root1.left, root2.left) and is_bst_equal(root1.right, root2.right)
 
 def to_nested_list(data):
     return [NestedInteger(d) for d in data]
