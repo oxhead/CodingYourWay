@@ -69,6 +69,29 @@ class Solution:
         preorder_recursive(root, path_list)
         return path_list
 
+    def preorderTraversal_morris(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        output, node = [], root
+        while node:
+            if node.left is None:
+                output.append(node.val)
+                node = node.right
+            else:
+                previous = node.left
+                while previous.right and previous.right != node:
+                    previous = previous.right
+                if previous.right is None:
+                    output.append(node.val)
+                    previous.right = node
+                    node = node.left
+                else:
+                    previous.right = None
+                    node = node.right
+        return output
+
 if __name__ == '__main__':
     test_cases = [
         ([1, None, 2, 3], [1, 2, 3]),
