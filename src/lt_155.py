@@ -4,10 +4,6 @@ https://leetcode.com/problems/min-stack
 Related:
   - lt_239
   - lt_716
-
-Complexity:
-  - Time: O()
-  - Space: O()
 """
 
 """
@@ -74,7 +70,6 @@ class MinStack:
         if len(self.stack) < 1:
             raise IndexError('getMin from empty stack')
         return self.min_value
-        
 
 
 # Your MinStack object will be instantiated and called as such:
