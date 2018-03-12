@@ -5,10 +5,6 @@ Related:
   - lt_43
   - lt_67
   - lt_369
-
-Complexity:
-  - Time: O()
-  - Space: O()
 """
 
 """
@@ -25,16 +21,16 @@ class Solution:
         :type digits: List[int]
         :rtype: List[int]
         """
-        if not digits: return [0]
-        output = [d for d in digits]
-        output[-1] += 1
-        carry = 0
-        for i in range(len(output)-1, -1, -1):
-            output[i] += carry
-            carry = output[i] // 10
-            output[i] = output[i] % 10
-        if carry: output.insert(0, 1)
-        return output
+        # Time: O(n)
+        # Space: O(1)
+        carry = 1
+        for i in range(len(digits) - 1, -1, -1):
+            n = digits[i] + carry
+            carry = n // 10
+            digits[i] = n % 10
+        if carry > 0:
+            digits.insert(0, carry)
+        return digits
 
 if __name__ == '__main__':
     test_cases = [
