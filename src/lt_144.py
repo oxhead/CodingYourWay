@@ -42,6 +42,23 @@ class Solution:
         :type root: TreeNode
         :rtype: List[int]
         """
+        output, stack = [], [(root, False)]
+        while stack:
+            node, is_visited = stack.pop()
+            if not node: continue
+            if is_visited:
+                output.append(node.val)
+            else:
+                stack.append((node.right, False))
+                stack.append((node.left, False))
+                stack.append((node, True))
+        return output
+
+    def preorderTraversal_iterative2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
         if not root: return []
         path_list = []
         stack = []

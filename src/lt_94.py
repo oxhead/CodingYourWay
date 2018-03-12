@@ -42,6 +42,23 @@ class Solution:
         """
         :type root: TreeNode
         :rtype: List[int]
+        """ 
+        output, stack = [], [(root, False)]
+        while stack:
+            node, is_visited = stack.pop()
+            if not node: continue
+            if is_visited:
+                output.append(node.val)
+            else:
+                stack.append((node.right, False))
+                stack.append((node, True))
+                stack.append((node.left, False))
+        return output
+
+    def inorderTraversal_iterative2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
         """
         path_list = []
         stack = []
