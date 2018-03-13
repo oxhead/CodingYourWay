@@ -3,10 +3,6 @@ https://leetcode.com/problems/container-with-most-water
 
 Related:
   - lt_42
-
-Complexity:
-  - Time:
-  - Space:
 """
 
 """
@@ -21,6 +17,8 @@ class Solution:
         :type height: List[int]
         :rtype: int
         """
+        # Time: O(n)
+        # Space: O(1)
         left, right = 0, len(height) - 1
         area = 0
         while left < right:
@@ -42,6 +40,7 @@ class Solution:
             for j in range(i+1, len(height)):
                 area = max(area, (j - i) * min(height[i], height[j]))
         return area
+
 
 if __name__ == '__main__':
     test_cases = [
