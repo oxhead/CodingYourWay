@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
     for test_case in test_cases:
         print('case:', test_case)
-        output = Solution().maxArea_naive(test_case[0])
+        output = Solution().maxArea(test_case[0])
         print('output:', output)
         assert output == test_case[1]
 
