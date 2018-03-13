@@ -25,6 +25,8 @@ class Solution:
         :type wordDict: List[str]
         :rtype: bool
         """
+        # Time: O(n^3), not sure
+        # Space: O(n)
         # https://shenjie1993.gitbooks.io/leetcode-python/139%20Word%20Break.html
         # https://github.com/algorhythms/LeetCode/blob/master/139%20Word%20Break.py
         n = len(s)
