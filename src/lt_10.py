@@ -37,6 +37,7 @@ class Solution:
         # Space: O(m * n)
         # https://github.com/kamyu104/LeetCode/blob/master/Python/regular-expression-matching.py
         # http://jianlu.github.io/2016/11/07/leetcode10-Regular-Expression-Matching/
+        # https://www.youtube.com/watch?v=l3hda49XcDE
         dp = [[False for _ in range(len(p) + 1)] for _ in range(len(s) + 1)]
         dp[0][0] = True
         for i in range(2, len(p) + 1):
@@ -48,6 +49,14 @@ class Solution:
                 if p[j - 1] != '*':
                     dp[i][j] = dp[i - 1][j - 1] and (s[i - 1] == p[j - 1] or p[j - 1] == '.')
                 else:
+                    # case 1: 0 occurence
+                    #         s = xa
+                    #         p = xa* = x (dp[i][j-2])
+                    # case 2: > 1 occurence
+                    #      a) s = xa
+                    #         p = xa*
+                    #      b) s = xa
+                    #         p = xa* or x.*
                     dp[i][j] = dp[i][j - 2] or (dp[i - 1][j] and (s[i - 1] == p[j - 2] or p[j - 2] == '.'))
         return dp[len(s)][len(p)]
 
