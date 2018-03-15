@@ -35,6 +35,8 @@ class Solution:
         :type intervals: List[Interval]
         :rtype: List[Interval]
         """
+        # Time: O(nlogn)
+        # Space: O(1)
         if not intervals: return []
         elif len(intervals) == 1: return intervals
 
