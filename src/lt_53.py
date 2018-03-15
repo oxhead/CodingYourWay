@@ -5,10 +5,6 @@ Related:
   - lt_121
   - lt_152
   - lt_697
-
-Complexity:
-  - Time: O()
-  - Space: O()
 """
 
 """
@@ -25,6 +21,20 @@ Complexity:
 
 class Solution:
     def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # Time: O(n)
+        # Space: O(1)
+        max_sum = nums[0]
+        current_sum = nums[0]
+        for n in nums[1:]:
+            current_sum = max(current_sum + n, n)
+            max_sum = max(max_sum, current_sum)
+        return max_sum
+
+    def maxSubArray_verbose(self, nums):
         """
         :type nums: List[int]
         :rtype: int

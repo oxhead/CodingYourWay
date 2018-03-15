@@ -3,10 +3,6 @@ https://leetcode.com/problems/min-cost-climbing-stairs
 
 Related:
   - lt_70
-
-Complexity:
-  - Time:
-  - Space:
 """
 
 """
@@ -33,32 +29,48 @@ Note:
 """
 
 class Solution:
-    def __init__(self):
-        self.records = {0: 0, 1: 0}
-
     def minCostClimbingStairs(self, cost):
+        """
+        :type cost: List[int]
+        :rtype: int
+        """
+        # Time: O(n)
+        # Space: O(1)
         dp = [0, 0, 0]
         for i in range(2, len(cost)+1):
             dp[2] = min(cost[i-2] + dp[0], cost[i-1] + dp[1])
             dp[0], dp[1] = dp[1], dp[2]
         return dp[2]
 
+    def minCostClimbingStairs_dp(self, cost):
+        """
+        :type cost: List[int]
+        :rtype: int
+        """
+        # Time: O(n)
+        # Space: O(n)
+        dp = [0x7FFFFFFF] * (len(cost) + 1)
+        dp[0] = 0
+        dp[1] = 0
+        for i in range(2, len(dp)):
+            dp[i] = min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2])
+        return dp[-1]
+
+
     def minCostClimbingStairs_recursive(self, cost):
         """
         :type cost: List[int]
         :rtype: int
         """
-        
-        return self.findCost(cost, len(cost))
-
-    def findCost(self, cost, index):
-        if index in self.records:
-            return self.records[index]
-        
-        self.records[index] = min(cost[index-2] + self.findCost(cost, index-2),
-                                  cost[index-1] + self.findCost(cost, index-1)) 
-
-        return self.records[index]
+        # Time: O(nlogn)
+        # Space: O(n)
+        def find_cost(index):
+            if index in records:
+                return records[index]
+            records[index] = min(cost[index - 2] + find_cost(index - 2), cost[index - 1] + find_cost(index - 1))
+            return records[index]
+        records = {0: 0, 1: 0}
+        return find_cost(len(cost))
 
 
 if __name__ == '__main__':

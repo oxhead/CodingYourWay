@@ -10,10 +10,6 @@ Related:
   - lt_600
   - lt_656
   - lt_740
-
-Complexity:
-  - Time: O()
-  - Space: O()
 """
 
 """
@@ -28,6 +24,8 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
+        # Time: O(n)
+        # Space: O(1)
         if not nums or len(nums) == 0: return 0
         elif len(nums) == 1: return nums[0]
 
@@ -43,6 +41,8 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
+        # Time: O(n)
+        # Space: O(n)
         if not nums and len(nums) == 0: return 0
         elif len(nums) < 2: return nums[0]
         
@@ -53,6 +53,7 @@ class Solution:
         for i in range(2, len(dp)):
             dp[i] = max(dp[i-1], dp[i-2] + nums[i])
         return dp[-1]
+
 
 if __name__ == '__main__':
     test_cases = [

@@ -7,10 +7,6 @@ Related:
   - lt_123
   - lt_188
   - lt_309
-
-Complexity:
-  - Time:
-  - Space:
 """
 
 """
@@ -40,6 +36,18 @@ class Solution:
         :type prices: List[int]
         :rtype: int
         """
+        max_profit = 0
+        min_price = 0x7FFFFFFF
+        for i in range(len(prices)):
+            min_price = min(min_price, prices[i])
+            max_profit = max(max_profit, prices[i] - min_price)
+        return max_profit
+
+    def maxProfit_verbose(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
         best_profit = 0
         if not prices or len(prices) < 1: return best_profit
         min_price =  prices[0]
@@ -62,6 +70,7 @@ class Solution:
                 current_profit = n2 - n1
                 best_profit = current_profit if current_profit > best_profit else best_profit
         return best_profit
+
 
 if __name__ == '__main__':
     test_cases = [
