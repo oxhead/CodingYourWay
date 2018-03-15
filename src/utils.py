@@ -1,5 +1,6 @@
 from base import ListNode, TreeNode
 from base import NestedInteger
+from base import Interval
 
 def to_linked_list(numbers):
     head = ListNode('#')
@@ -113,3 +114,11 @@ def is_bst_equal(root1, root2):
 
 def to_nested_list(data):
     return [NestedInteger(d) for d in data]
+
+def to_interval_list(interval_list):
+    return [Interval(*interval) for interval in interval_list]
+
+def is_interval_equal(il1, il2):
+    l1 = [(interval.start, interval.end) for interval in il1]
+    l2 = [(interval.start, interval.end) for interval in il2]
+    return sorted(l1) == sorted(l2)
