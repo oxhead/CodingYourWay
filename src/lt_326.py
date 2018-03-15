@@ -2,12 +2,8 @@
 https://leetcode.com/problems/power-of-three
 
 Related:
-  - lt_231
-  - lt_342
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_321_power-of-two
+  - lt_342_power-of-four
 """
 
 """
