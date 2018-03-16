@@ -32,13 +32,18 @@ class Solution:
         :type nums: List[int]
         :rtype: List[List[int]]
         """
+        # Time: O(n * n!)
+        # Space: O(n * n!)
         output = [[]]
         for n in nums:
             tmp = []
+            print(n)
+            print('before:', output)
             for sub in output:
                 for i in range(len(sub) + 1):
                     tmp.append(sub[:i] + [n] + sub[i:])
             output = tmp
+            print('after:', output)
         return output
 
     def permute_recursive(self, nums):
@@ -80,7 +85,7 @@ if __name__ == '__main__':
 
     for test_case in test_cases:
         print('case:', test_case)
-        output = Solution().permute_recursive(test_case[0])
+        output = Solution().permute(test_case[0])
         print('output:', output)
         assert sorted([tuple(x) for x in output]) == sorted([tuple(x) for x in itertools.permutations(test_case[0])])
 

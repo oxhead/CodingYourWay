@@ -26,8 +26,8 @@ class Solution:
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        # Time: O(n * n !)
-        # Space: O(n)
+        # Time: O(n * n!)
+        # Space: O(n * n!)
         output = [[]]
         for n in nums:
             tmp = []
