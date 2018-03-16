@@ -6,10 +6,6 @@ Related:
   - lt_47
   - lt_60
   - lt_77
-
-Complexity:
-  - Time: O()
-  - Space: O()
 """
 
 """
@@ -34,6 +30,22 @@ class Solution:
         :type nums: List[int]
         :rtype: List[List[int]]
         """
+        # Time: O(n * n!)
+        # Space: O(n)
+        if not nums: return [[]]
+        elif len(nums) == 1: return [nums]
+
+        output = []
+        for i in range(len(nums)):
+            for sub in self.permute(nums[:i] + nums[i+1:]):
+                output.append([nums[i]] + sub)
+        return output
+
+    def permute_verbose(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
         if not nums: return []
         elif len(nums) == 1: return [nums]
         elif len(nums) == 2:
@@ -42,7 +54,6 @@ class Solution:
             output = []
             for i, n in enumerate(nums):
                 output.extend([[n] + sub for sub in self.permute(nums[:i] + nums[i+1:])])
-            return output
 
 
 if __name__ == '__main__':
