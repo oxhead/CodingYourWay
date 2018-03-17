@@ -2,13 +2,9 @@
 https://leetcode.com/problems/unique-paths
 
 Related:
-  - lt_63
-  - lt_64
-  - lt_174
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_63_unique-paths-ii
+  - lt_64_minimum-path-sum
+  - lt_174_dungeon-game
 """
 
 """
