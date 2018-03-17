@@ -2,11 +2,7 @@
 https://leetcode.com/problems/climbing-stairs
 
 Related:
-  - lt_746
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_746_min-cost-climbing-stairs
 """
 
 """
@@ -41,6 +37,23 @@ class Solution:
         self.records = {}
 
     def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        # Time: O(n)
+        # Space: O(1)
+        if not n: return 0
+        elif n == 1: return 1
+        elif n == 2: return 2
+        dp = [0] * 3
+        dp[0], dp[1] = 1, 2
+        for _ in range(2, n):
+            dp[2] = dp[1] + dp[0]
+            dp[0], dp[1] = dp[1], dp[2]
+        return dp[-1]
+
+    def climbStairs_verbose(self, n):
         """
         :type n: int
         :rtype: int
@@ -81,8 +94,8 @@ class Solution:
         elif n == 2: return 2
 
         return self.climbStairs(n-1) + self.climbStairs(n-2)
-        
 
+        
 if __name__ == '__main__':
     test_cases = [
         (2, 2),
