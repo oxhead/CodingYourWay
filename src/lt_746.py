@@ -2,7 +2,7 @@
 https://leetcode.com/problems/min-cost-climbing-stairs
 
 Related:
-  - lt_70
+  - lt_70_climbing-stairs
 """
 
 """
