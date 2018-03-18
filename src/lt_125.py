@@ -2,12 +2,8 @@
 https://leetcode.com/problems/valid-palindrome
 
 Related:
-  - lt_234
-  - lt_680
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_234_palindrome-linked-list
+  - lt_680_valid-palindrome-ii
 """
 
 """
@@ -29,16 +25,20 @@ class Solution:
         :type s: str
         :rtype: bool
         """
-        i = 0
-        j = len(s)-1
-        while i < j:
-            while i < len(s) and not s[i].isalnum(): i += 1
-            if i >= len(s): return True
-            while j >= 0 and not s[j].isalnum(): j -= 1
-            if j < 0: return True
-            if s[i].lower() != s[j].lower(): return False
-            i += 1
-            j -= 1
+        # Time: O(n)
+        # Space: O(1)
+        left = 0
+        right = len(s) - 1
+        while left < right:
+            if not s[left].isalnum():
+                left += 1
+                continue
+            if not s[right].isalnum():
+                right -= 1
+                continue
+            if s[left].lower() != s[right].lower(): return False
+            left += 1
+            right -= 1
         return True
 
     def isPalindrome_builtin(self, s):
@@ -50,6 +50,7 @@ class Solution:
 
         ss = [c.lower() for c in s if c.isalnum()]
         return ss == ss[::-1]
+
 
 if __name__ == '__main__':
     test_cases = [
