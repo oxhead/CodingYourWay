@@ -2,13 +2,9 @@
 https://leetcode.com/problems/reverse-linked-list
 
 Related:
-  - lt_92
-  - lt_156
-  - lt_234
-
-Complexity:
-  - Time: O(n)
-  - Space: O(1)
+  - lt_92_reverse-linked-list-ii
+  - lt_156_binary-tree-upside-down
+  - lt_234_palindrome-linked-list
 """
 
 """
@@ -57,6 +53,7 @@ class Solution:
             n.next = s[-1] if len(s) > 0 else None
             
         return new_head
+
 
 if __name__ == '__main__':
     test_cases = [
