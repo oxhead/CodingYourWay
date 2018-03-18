@@ -2,13 +2,9 @@
 https://leetcode.com/problems/palindrome-linked-list
 
 Related:
-  - lt_9
-  - lt_125
-  - lt_206
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_9_palindrome-number
+  - lt_125_valid-palindrome
+  - lt_206_reverse-linked-list
 """
 
 """
@@ -32,6 +28,31 @@ class Solution:
         :type head: ListNode
         :rtype: bool
         """
+        def find_middle_node(node):
+            slow = fast = node
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
+            return slow
+        def reverse(node):
+            previous = None
+            while node:
+                node.next, previous, node = previous, node, node.next
+            return previous
+
+        middle = find_middle_node(head)
+        head2 = reverse(middle)
+        while head2:
+            if head.val != head2.val: return False
+            head = head.next
+            head2 = head2.next
+        return True
+
+    def isPalindrome_naive(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
         stack = []
         tmp = head
         while tmp:
@@ -43,34 +64,6 @@ class Solution:
             head = head.next
         return True
 
-    def isPalindrome_advance(self, head):
-        """
-        :type head: ListNode
-        :rtype: bool
-        """
-        node_middle = self.find_middle_node(head)
-        head2 = self.reverse_node(node_middle)
-        while head2:
-            if head.val != head2.val:
-                return False
-            head = head.next
-            head2 = head2.next
-        return True
-
-    def find_middle_node(self, node):
-        fast = slow = node
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-        return slow
-
-    def reverse_node(self, node):
-        if not node or not node.next: return node
-        previous = None
-        current = node
-        while current:
-            current.next, previous, current = previous, current, current.next
-        return previous
 
 if __name__ == '__main__':
     test_cases = [
