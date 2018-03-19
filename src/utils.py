@@ -66,6 +66,26 @@ def parse_tree(input_list, return_nodes=False):
     else:
         return root
 
+def serialize_tree(root):
+    output = []
+    queue = [root]
+    while queue:
+        node = queue.pop(0)
+        if node:
+            output.append(node.val)
+            queue.append(node.left)
+            queue.append(node.right)
+        else:
+            output.append(None)
+    i = len(output) - 1
+    while i >= 0:
+        if output[i] != None:
+            return output[:i+1]
+        i -= 1
+    return output[:i]
+    
+        
+
 
 def search_node_by_value(nodes, val):
     for node in nodes:
