@@ -27,10 +27,8 @@ class Solution:
         # Time: O(n)
         # Space: O(n)
         counter = collections.Counter(s)
-        odd = 0
-        for k, v in counter.items():
-            if v % 2 != 0: odd += 1
-        return odd <= 1
+        return len([n for n in counter.values() if n % 2]) <= 1
+
 
 if __name__ == '__main__':
     test_cases = [
