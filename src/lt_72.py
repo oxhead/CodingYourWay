@@ -40,6 +40,15 @@ class Solution:
                     dp[i][j] = dp[i-1][j-1]
                 else:
                     # insert, delete, replace
+                    # insert: dp[i][j-1]
+                    # abc  | abcb  | abc
+                    #   b  |    b  |
+                    # delete: dp[i-1][j]
+                    # abc  | ab
+                    #   b  |  b
+                    # replace: dp[i-1][j-1]
+                    # abc  | abb   | ab
+                    #   b  |   b   |  
                     dp[i][j] = 1 + min(dp[i][j-1], dp[i-1][j], dp[i-1][j-1])
         return dp[-1][-1]
         
