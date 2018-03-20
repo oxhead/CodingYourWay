@@ -28,6 +28,7 @@ class Solution:
         # Space: O(1)
         # https://www.cnblogs.com/AnnieKim/archive/2013/04/21/3034631.html
         # https://github.com/algorhythms/LeetCode/blob/master/040%20First%20Missing%20Positive.py
+        if not nums: return 1
         i = 0
         while i < len(nums):
             if nums[i] <= 0 or nums[i] > len(nums) or nums[nums[i] - 1] == nums[i]:
@@ -66,12 +67,12 @@ class Solution:
 
 if __name__ == '__main__':
     test_cases = [
-        #([2], 1),
-        #([1, 2, 0], 3),
-        #([3, 4, -1, 1], 2),
+        ([2], 1),
+        ([1, 2, 0], 3),
+        ([3, 4, -1, 1], 2),
         ([1, 2, 1, 4], 3),
-        #([1, 2, 3], 4),
-        #([1, 2, 3, -1], 4),
+        ([1, 2, 3], 4),
+        ([1, 2, 3, -1], 4),
     ]
 
     for test_case in test_cases:
