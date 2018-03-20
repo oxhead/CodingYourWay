@@ -2,11 +2,7 @@
 https://leetcode.com/problems/delete-node-in-a-linked-list
 
 Related:
-  - lt_203
-
-Complexity:
-  - Time: O(1)
-  - Space: O(1)
+  - lt_203_remove-linked-list-elements
 """
 
 """
@@ -30,6 +26,8 @@ class Solution(object):
         :type node: ListNode
         :rtype: void Do not return anything, modify node in-place instead.
         """
+        # Time: O(1)
+        # Space: O(1)
         if node and node.next:
             node.val = node.next.val
             node.next = node.next.next
