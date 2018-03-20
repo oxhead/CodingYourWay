@@ -28,7 +28,8 @@ class MyQueue:
         """
         Initialize your data structure here.
         """
-        self.stack = collections.deque()
+        self.s1 = collections.deque()
+        self.s2 = collections.deque()
         
     def push(self, x):
         """
@@ -38,37 +39,29 @@ class MyQueue:
         """
         # Time: O(1)
         # Space: O(1)
-        self.stack.append(x)
+        self.s1.append(x)
         
     def pop(self):
         """
         Removes the element from in front of queue and returns that element.
         :rtype: int
         """
-        # Time: O(n)
+        # Time: O(1), amortized
         # Space: O(n)
-        tmp = collections.deque()
-        while self.stack:
-            tmp.append(self.stack.pop())
-        val = tmp.pop()
-        while tmp:
-            self.stack.append(tmp.pop())
-        return val
+        self.peek()
+        return self.s2.pop()
 
     def peek(self):
         """
         Get the front element.
         :rtype: int
         """
-        # Time: O(n)
+        # Time: O(1), amortized
         # Space: O(n)
-        tmp = collections.deque()
-        while self.stack:
-            tmp.append(self.stack.pop())
-        val = tmp[-1]
-        while tmp:
-            self.stack.append(tmp.pop())
-        return val
+        if not self.s2:
+            while self.s1:
+                self.s2.append(self.s1.pop())
+        return self.s2[-1]
 
     def empty(self):
         """
@@ -77,7 +70,7 @@ class MyQueue:
         """
         # Time: O(1)
         # Space: O(1)
-        return len(self.stack) == 0
+        return not self.s1 and not self.s2
 
 
 # Your MyQueue object will be instantiated and called as such:
