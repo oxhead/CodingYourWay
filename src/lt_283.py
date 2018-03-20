@@ -1,20 +1,19 @@
 """
 https://leetcode.com/problems/move-zeroes
 
-Related
-lt_27
+Related:
+  - lt_27_https://leetcode.com/problems/remove-element
 """
 
 """
- Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
 
- For example, given nums = [0, 1, 0, 3, 12], after calling your function, nums should be [1, 3, 12, 0, 0].
+For example, given nums = [0, 1, 0, 3, 12], after calling your function, nums should be [1, 3, 12, 0, 0].
 
- Note:
+Note:
 
-         You must do this in-place without making a copy of the array.
-             Minimize the total number of operations.
-
+    You must do this in-place without making a copy of the array.
+    Minimize the total number of operations.
 """
 import copy
 import functools
@@ -25,13 +24,15 @@ class Solution:
         :type nums: List[int]
         :rtype: void Do not return anything, modify nums in-place instead.
         """
+        # Time: O(n)
+        # Space: O(1)
         index_zero = 0
         for i in range(len(nums)):
             if nums[i]:
                 nums[i], nums[index_zero] = nums[index_zero], nums[i]
                 index_zero += 1
 
-    def moveZeroes2(self, nums):
+    def moveZeroes(self, nums):
         """
         :type nums: List[int]
         :rtype: void Do not return anything, modify nums in-place instead.
