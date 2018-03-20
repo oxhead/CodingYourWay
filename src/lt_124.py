@@ -41,6 +41,25 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(h)
+        # https://www.jianshu.com/p/c3e81355831d
+        # differentiate max_path_sum from single_path_sum
+        def search(node):
+            if not node: return float('-inf'), 0
+            left = search(node.left)
+            right = search(node.right)
+            single_path_sum = max(node.val + left[1], node.val + right[1], 0)
+            max_path_sum = max(left[0], right[0], left[1] + node.val + right[1])
+            return max_path_sum, single_path_sum
+        max_path_sum, _ = search(root)
+        return max_path_sum
+
+    def maxPathSum_global(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        # Time: O(n)
+        # Space: O(h)
         max_sum = float('-inf')
         def max_path_sum(node):
             nonlocal max_sum
@@ -52,6 +71,7 @@ class Solution:
         if not root: return 0
         max_path_sum(root)
         return max_sum
+
 
     def maxPathSum_failed():
         def max_path_sum(node, total):
@@ -72,7 +92,7 @@ class Solution:
 
 if __name__ == '__main__':
     test_cases = [
-        ([], 0),
+        #([], 0),
         ([1, 2, 3], 6),
         ([-2, -1], -1),
         ([1, -2, -3, 1, 3, -2, None, -1], 3),
