@@ -2,11 +2,7 @@
 https://leetcode.com/problems/remove-duplicates-from-sorted-array
 
 Related:
-  - lt_27
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_27_remove-element
 """
 
 """
@@ -29,6 +25,8 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
+        # Time: O(n)
+        # Space: O(1)
         if not nums: return 0
         if len(nums) <= 1: return len(nums)
 
