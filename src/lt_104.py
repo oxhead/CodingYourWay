@@ -1,9 +1,9 @@
 """
 https://leetcode.com/problems/maximum-depth-of-binary-tree
 
-Related
-lt_110
-lt_111
+Related:
+  - lt_110_balanced-binary-tree
+  - lt_111_minimum-depth-of-binary-tree
 """
 
 """
@@ -38,9 +38,7 @@ if __name__ == '__main__':
 
     for test_case in test_cases:
         print('case:', test_case)
-        root = parse_tree(test_case[0])
-        print_tree(root, kind='inorder')
-        output = Solution().maxDepth(root)
+        output = Solution().maxDepth(parse_tree(test_case[0]))
         print('output:', output)
         assert output == test_case[1]
 
