@@ -54,6 +54,7 @@ class Solution:
                     return [i, j]
         return []
 
+
 if __name__ == '__main__':
     test_cases = [
         (([2, 7, 11, 15], 9), [0, 1]),
