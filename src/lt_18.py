@@ -2,14 +2,9 @@
 https://leetcode.com/problems/4sum
 
 Related:
-  - lt_1
-  - lt_15
-  - lt_18
-  - lt_454
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_1_two-sum
+  - lt_15_3sum
+  - lt_454_4sum-ii
 """
 
 """
@@ -34,6 +29,8 @@ class Solution:
         :type target: int
         :rtype: List[List[int]]
         """
+        # Time: O(n^3)
+        # Space: O(1)
         # https://www.tangjikai.com/algorithms/leetcode-18-4sum
         nums.sort()
         return [list(x) for x in set(Solution.kSum(nums, target, 4))]
@@ -58,6 +55,41 @@ class Solution:
                 for sub in Solution.kSum(nums[left+1:], target - nums[left], k - 1):
                     yield (nums[left],) + sub
                 left += 1
+
+    def fourSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        # https://www.tangjikai.com/algorithms/leetcode-18-4sum
+        def k_sum(nums, target, k):
+            if k == 2:
+                left, right = 0, len(nums) - 1
+                while left < right:
+                    if left > 0 and nums[left] == nums[left - 1]:
+                        left += 1
+                        continue
+                    if right < len(nums) - 1 and nums[right] == nums[right + 1]:
+                        right -= 1
+                        continue
+                    if nums[left] + nums[right] == target:
+                        yield (nums[left], nums[right])
+                        left += 1
+                    elif nums[left] + nums[right] < target:
+                        left += 1
+                    else:
+                        right -= 1
+            else:
+                for left in range(len(nums) - k + 1):
+                    # skip the same elements with previous
+                    if left > 0 and nums[left] == nums[left - 1]:
+                        continue
+                    for sub in k_sum(nums[left+1:], target - nums[left], k - 1):
+                        yield (nums[left],) + sub
+        if not nums: return []
+        nums.sort()
+        return list(list(x) for x in k_sum(nums, target, 4))
 
 if __name__ == '__main__':
     test_cases = [
