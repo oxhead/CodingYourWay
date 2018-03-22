@@ -2,11 +2,7 @@
 https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree
 
 Related:
-  - lt_109
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_109_convert-sorted-list-to-binary-search-tree
 """
 
 """
@@ -43,10 +39,11 @@ class Solution:
         """
         :type nums: List[int]
         :rtype: TreeNode
-        """ 
-        if len(nums) < 1:
-            return None
-        mid = len(nums) // 2
+        """
+        # Time: O(n)
+        # Space: O(n * logn)
+        if not nums: return None
+        mid = len(nums)//2 
         root = TreeNode(nums[mid])
         root.left = self.sortedArrayToBST(nums[:mid])
         root.right = self.sortedArrayToBST(nums[mid+1:])
