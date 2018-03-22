@@ -2,12 +2,8 @@
 https://leetcode.com/problems/merge-k-sorted-lists
 
 Related:
-  - lt_21
-  - lt_264
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_21_merge-two-sorted-lists
+  - lt_264_ugly-number-ii
 """
 
 """
@@ -31,6 +27,8 @@ class Solution:
         :type lists: List[ListNode]
         :rtype: ListNode
         """
+        # Time: O(n*logn*logk), n is the length of a list, k is the number of sorted lists
+        # Space: O(1)
         if not lists: return None
         if len(lists) == 0: return None
         elif len(lists) == 1: return lists[0]
@@ -61,28 +59,27 @@ class Solution:
         """
         if not l1: return l2
         if not l2: return l1
-        if l1.val <= l2.val:
-            head = l1
-            l1 = l1.next
-        else:
-            head = l2
-            l2 = l2.next
-        current = head
+        dummy = ListNode(-1)
+        node = dummy
         while l1 and l2:
             if l1.val <= l2.val:
-                current.next, l1 = l1, l1.next
+                node.next = l1
+                l1 = l1.next
             else:
-                current.next, l2 = l2, l2.next
-            current = current.next    
-        if l1: current.next = l1
-        if l2: current.next = l2
-        return head
+                node.next = l2
+                l2 = l2.next
+            node = node.next
+        if l1: node.next = l1
+        if l2: node.next = l2
+        return dummy.next
 
     def mergeKLists_heap(self, lists):
         """
         :type lists: List[ListNode]
         :rtype: ListNode
         """
+        # Time: O(n*k*logk), n is the length of a list, k is the number of sorted lists
+        # Space: O(logk)
         # works only in Python 2.x
         # because heapq requires object comparaison
         # Python 2.x uses __cmp__(self, other)
@@ -90,7 +87,6 @@ class Solution:
         heap = []
         for node in lists:
             if node:
-                print(node.val, node)
                 heapq.heappush(heap, (node.val, node))
 
         current = ListNode(-1)
@@ -103,6 +99,7 @@ class Solution:
                 heapq.heappush(heap, (node.next.val, node.next))
 
         return head.next
+
 
 if __name__ == '__main__':
     test_cases = [
