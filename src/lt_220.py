@@ -34,6 +34,25 @@ class Solution:
             window[bucket] = n
         return False
 
+    def containsNearbyAlmostDuplicate_sort(self, nums, k, t):
+        """
+        :type nums: List[int]
+        :type k: int
+        :type t: int
+        :rtype: bool
+        """
+        # Time: O(n * logn)
+        # Space: O(n)
+        indexs = sorted(range(len(nums)), key=lambda i: nums[i])
+        for i in range(len(nums)):
+            j = i + 1
+            while j < len(nums) and nums[indexs[j]] - nums[indexs[i]] <= t:
+                if abs(indexs[i] - indexs[j]) <= k:
+                    return True
+                j += 1
+        return False
+
+
 if __name__ == '__main__':
     test_cases = [
         (([1, 2], 1, 1), True),
