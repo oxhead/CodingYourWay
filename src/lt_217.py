@@ -2,17 +2,14 @@
 https://leetcode.com/problems/contains-duplicate
 
 Related:
-  - lt_219
-  - lt_220
-
-Complexity:
-  - Time: O(n)
-  - Space: O(n)
+  - lt_219_contains-duplicate-ii
+  - lt_220_contains-duplicate-iii
 """
 
 """
 Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct. 
 """
+
 from collections import defaultdict
 
 class Solution:
@@ -21,19 +18,9 @@ class Solution:
         :type nums: List[int]
         :rtype: bool
         """
+        # Time: O(n)
+        # Space: O(n)
         return len(nums) > len(set(nums))
-
-    def containsDuplicate2(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        counter = defaultdict(int)
-        for n in nums:
-            counter[n] += 1
-        for count in counter.values():
-            if count > 1: return True
-        return False
 
 
 if __name__ == '__main__':
