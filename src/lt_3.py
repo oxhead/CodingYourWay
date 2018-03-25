@@ -28,13 +28,16 @@ class Solution:
         records = {}
         left, max_length = 0, 0
         for i, c in enumerate(s):
+            # left represents the boundary of non-repeative characters
+            # if left > records[s[i]], then records[s[i]] should not be
+            # considered as a valid character
+            # because the max length is controlled by (i - left + 1 )
             if c in records and left <= records[c]:
                 left = records[c] + 1
             else:
                 max_length = max(max_length, i - left + 1)
             records[c] = i
         return max_length
- 
 
     def lengthOfLongestSubstring_naive(self, s):
         """
