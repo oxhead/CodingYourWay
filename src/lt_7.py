@@ -2,11 +2,7 @@
 https://leetcode.com/problems/reverse-integer
 
 Related:
-  - lt_8
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_8_string-to-integer-atoi
 """
 
 """
@@ -37,6 +33,8 @@ class Solution:
         :type x: int
         :rtype: int
         """
+        # Time: O(1)
+        # Space: O(1)
         sign = 1 if x >= 0 else -1
         x *= sign
         output = 0
@@ -68,6 +66,7 @@ class Solution:
         else:
             return output * sign
 
+
 if __name__ == '__main__':
     test_cases = [
         (123, 321),
@@ -79,8 +78,7 @@ if __name__ == '__main__':
 
     for test_case in test_cases:
         print('case:', test_case)
-        # output = Solution().reverse(test_case[0])
-        output = Solution().reverse_naive(test_case[0])
+        output = Solution().reverse(test_case[0])
         print('output:', output)
         assert output == test_case[1]
 
