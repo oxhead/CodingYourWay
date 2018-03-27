@@ -37,23 +37,6 @@ class Solution:
                     dp[n + coin] = min(dp[n + coin], dp[n] + 1)
         return dp[-1] if dp[-1] < float('inf') else -1
 
-    def coinChange(self, coins, amount):
-        """
-        :type coins: List[int]
-        :type amount: int
-        :rtype: int
-        """
-        # Time: O(m * n), amount = m and n coins
-        # Space: O(m)
-        # https://tenderleo.gitbooks.io/leetcode-solutions-/content/GoogleMedium/322.html
-        dp = [float('inf') for _ in range(amount + 1)]
-        dp[0] = 0
-        for n in range(amount + 1):
-            for coin in coins:
-                if n + coin <= amount:
-                    dp[n + coin] = min(dp[n + coin], dp[n] + 1)
-        return dp[-1] if dp[-1] < float('inf') else -1
-
     def coinChange_search(self, coins, amount):
         """
         :type coins: List[int]
