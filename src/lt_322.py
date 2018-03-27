@@ -2,10 +2,6 @@
 https://leetcode.com/problems/coin-change
 
 Related:
-
-Complexity:
-  - Time: O()
-  - Space: O()
 """
 
 """
@@ -23,8 +19,6 @@ Note:
 You may assume that you have an infinite number of each kind of coin. 
 """
 
-import sys
-
 class Solution:
     def coinChange(self, coins, amount):
         """
@@ -32,16 +26,33 @@ class Solution:
         :type amount: int
         :rtype: int
         """
+        # Time: O(m * n), amount = m and n coins
+        # Space: O(m)
         # https://tenderleo.gitbooks.io/leetcode-solutions-/content/GoogleMedium/322.html
-        sols = [sys.maxsize-1] * (amount+1)
-        sols[0] = 0
-
-        for total in range(amount+1):
+        dp = [float('inf') for _ in range(amount + 1)]
+        dp[0] = 0
+        for n in range(amount + 1):
             for coin in coins:
-                if (total + coin <= amount):
-                    sols[total + coin] = min(sols[total+coin], sols[total] + 1)
-                
-        return -1 if sols[amount] == sys.maxsize-1 else sols[amount]
+                if n + coin <= amount:
+                    dp[n + coin] = min(dp[n + coin], dp[n] + 1)
+        return dp[-1] if dp[-1] < float('inf') else -1
+
+    def coinChange(self, coins, amount):
+        """
+        :type coins: List[int]
+        :type amount: int
+        :rtype: int
+        """
+        # Time: O(m * n), amount = m and n coins
+        # Space: O(m)
+        # https://tenderleo.gitbooks.io/leetcode-solutions-/content/GoogleMedium/322.html
+        dp = [float('inf') for _ in range(amount + 1)]
+        dp[0] = 0
+        for n in range(amount + 1):
+            for coin in coins:
+                if n + coin <= amount:
+                    dp[n + coin] = min(dp[n + coin], dp[n] + 1)
+        return dp[-1] if dp[-1] < float('inf') else -1
 
     def coinChange_search(self, coins, amount):
         """
@@ -57,22 +68,24 @@ class Solution:
             if amount < 0: return
             for i in range(index, len(coins)):
                 # restric search space
+                # max coin changes allowed with coins[i]: self.output - count
                 if coins[i] <= amount < coins[i] * (self.output - count):
                     search(amount - coins[i], count + 1, i) 
         self.output = float('inf')
         coins.sort(reverse=True)
         search(amount, 0, 0)
         return self.output if self.output < float('inf') else -1
+
         
 if __name__ == '__main__':
     test_cases = [
-        #(([1], 0), 0),
-        #(([25, 20, 5, 1], 127), 7),
+        (([1], 0), 0),
+        (([25, 20, 5, 1], 127), 7),
         (([25, 20, 4, 1], 121), 6),
-        #(([50, 45, 10, 2], 3), -1),
-        #(([50, 45, 10, 2], 92), 3),
-        #(([176, 6, 366, 357, 484, 226, 1, 104, 160, 331], 5557), 13),
-        #(([370,417,408,156,143,434,168,83,177,280,117], 9953), 24),
+        (([50, 45, 10, 2], 3), -1),
+        (([50, 45, 10, 2], 92), 3),
+        (([176, 6, 366, 357, 484, 226, 1, 104, 160, 331], 5557), 13),
+        (([370,417,408,156,143,434,168,83,177,280,117], 9953), 24),
     ]
 
     for test_case in test_cases:
