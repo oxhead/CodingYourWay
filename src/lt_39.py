@@ -38,6 +38,29 @@ class Solution:
         """
         # Time: O(?)
         # Space: O(?)
+        def produce(nums, target, current, output):
+            if target == 0:
+                output.append(list(current))
+                return
+            for i, n in enumerate(nums):
+                if n > target: continue
+                current.append(n)
+                # the same num might be used: nums[i:]
+                produce(nums[i:], target - n, current, output)
+                current.pop()
+        output = []
+        candidates.sort()
+        produce(candidates, target, [], output)
+        return output
+
+    def combinationSum_verbose(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        # Time: O(?)
+        # Space: O(?)
         if target == 0: return [[]]
         elif not candidates: return []
         elif target < min(candidates): return []
