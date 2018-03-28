@@ -38,6 +38,26 @@ class Solution:
         # Time: O(nlogn)
         # Space: O(1)
         if not intervals: return []
+        intervals.sort(key=lambda x: x.start)
+        output = []
+        current_interval = Interval(intervals[0].start, intervals[0].end)
+        for interval in intervals[1:]:
+            if interval.start > current_interval.end:
+                output.append(current_interval)
+                current_interval = Interval(interval.start, interval.end)
+            else:
+                current_interval.end = max(current_interval.end, interval.end)
+        output.append(current_interval)
+        return output
+
+    def merge_verbose(self, intervals):
+        """
+        :type intervals: List[Interval]
+        :rtype: List[Interval]
+        """
+        # Time: O(nlogn)
+        # Space: O(1)
+        if not intervals: return []
         elif len(intervals) == 1: return intervals
 
         intervals = sorted(intervals, key=lambda x: (x.start, x.end))
@@ -59,8 +79,10 @@ class Solution:
             left = right
         return output
 
+
 if __name__ == '__main__':
     test_cases = [
+        ([], []),
         ([[1,3],[2,6],[8,10],[15,18]], [[1,6],[8,10],[15,18]]),
         ([[1, 4], [4, 5]], [[1, 5]]),
         ([[1, 4], [2, 3]], [[1, 4]]),
