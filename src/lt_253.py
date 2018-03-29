@@ -2,13 +2,9 @@
 https://leetcode.com/problems/meeting-rooms-ii
 
 Related:
-  - lt_56
-  - lt_252
-  - lt_452
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_56_merge-intervals
+  - lt_252_meeting-rooms
+  - lt_452_minimum-number-of-arrows-to-burst-balloons
 """
 
 """
@@ -34,6 +30,8 @@ class Solution:
         :type intervals: List[Interval]
         :rtype: int
         """
+        # Time: O(nlogn)
+        # Space: O(n)
         # scanline or sweep line algotihm?
         count = 0
         heap = []
@@ -50,6 +48,8 @@ class Solution:
         :type intervals: List[Interval]
         :rtype: int
         """
+        # Time: O(nlogn)
+        # Space: O(n)
         # http://www.cnblogs.com/yrbbest/p/5012534.html
         starts = sorted([interval.start for interval in intervals])
         ends = sorted([interval.end for interval in intervals]) 
@@ -67,6 +67,8 @@ class Solution:
         :type intervals: List[Interval]
         :rtype: int
         """
+        # Time: O(nlogn)
+        # Space: O(n)
         # http://blog.csdn.net/qq508618087/article/details/50762939
         records = {}
         for interval in intervals:
@@ -79,6 +81,7 @@ class Solution:
             count += records[k]
             ans = max(ans, count)
         return ans
+
 
 if __name__ == '__main__':
     test_cases = [
