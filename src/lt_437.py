@@ -35,6 +35,7 @@ Return 3. The paths that sum to 8 are:
 2.  5 -> 2 -> 1
 3. -3 -> 11
 """
+import collections
 
 from utils import parse_tree
 
@@ -52,7 +53,7 @@ class Solution:
         :type sum: int
         :rtype: int
         """
-        # Time: O(n)
+        # Time: O(n^2)
         # Space: O(h)
         # http://rainykat.blogspot.com/2017/01/leetcode-437-path-sum-iii-2dfs.html
         def search(node, sum):
@@ -64,7 +65,33 @@ class Solution:
             return count
         if not root: return 0
         return search(root, sum) + self.pathSum(root.left, sum) + self.pathSum(root.right, sum)       
- 
+
+    def pathSum_hashtable(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: int
+        """
+        # Time: O(n)
+        # Space: O(h)
+        # https://github.com/kamyu104/LeetCode/blob/master/Python/path-sum-iii.py
+        def search(node, current, target, records):
+            if not node: return 0
+            current += node.val
+            # this is important because the path comes from top
+            # if there exists a prefix sum (current - target),
+            # current node is a part of a solution
+            count = records.get(current - target, 0)
+            records[current] += 1
+            count += search(node.left, current, target, records) + search(node.right, current, target, records)
+            # remember to pop out the current count because the subtree is traversed
+            records[current] -= 1
+            return count
+
+        records = collections.defaultdict(int)
+        records[0] = 1
+        return search(root, 0, sum, records)
+
     def pathSum_failed(self, root, sum):
         """
         :type root: TreeNode
@@ -76,6 +103,7 @@ class Solution:
         count = 1 if root.val == sum else 0
         return count + self.pathSum(root.left, sum) + self.pathSum(root.left, sum - root.val) + self.pathSum(root.right, sum) + self.pathSum(root.right, sum - root.val)
 
+
 if __name__ == '__main__':
     test_cases = [
         (([], 1), 0),
@@ -83,6 +111,7 @@ if __name__ == '__main__':
         (([8, None, -3, None, 11], 8), 2),
         (([10, 5, -3, 3, 2, None, 11, 3, -2, None, 1], 8), 3),
         (([1, None, 2, None, 3, None, 4, None, 5], 3), 2),
+        (([1, 2, None, -1, None, -1, None, 2], 2), 4),
     ]
 
     for test_case in test_cases:
