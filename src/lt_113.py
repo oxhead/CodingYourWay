@@ -47,6 +47,25 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(h)
+        def search(node, total, current, output):
+            if node and not node.left and not node.right and total == node.val:
+                output.append(current + [node.val])
+            elif node:
+                current.append(node.val)
+                search(node.left, total - node.val, current, output)
+                search(node.right, total - node.val, current, output)
+                current.pop()
+            return output
+        return search(root, sum, [], [])
+
+    def pathSum_verbose(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: List[List[int]]
+        """
+        # Time: O(n)
+        # Space: O(h)
         if not root: return []
         if not root.left and not root.right and root.val == sum: return [[root.val]]
         
@@ -56,7 +75,7 @@ class Solution:
         for sub in self.pathSum(root.right, sum - root.val):
             output.append([root.val] + sub)
         return output
-         
+
 
 if __name__ == '__main__':
     test_cases = [
