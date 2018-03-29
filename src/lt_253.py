@@ -55,8 +55,6 @@ class Solution:
         ends = sorted([interval.end for interval in intervals]) 
         count = 0
         end_index = 0
-        print('start:', starts)
-        print('end:', ends) 
         for i in range(len(intervals)):
             if starts[i] < ends[end_index]: count += 1
             else: end_index += 1
