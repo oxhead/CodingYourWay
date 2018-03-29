@@ -52,6 +52,25 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
+        # Time: O(n), equal to O(2^logn)=O(n)
+        # Space: O(n)
+        def search(node, count):
+            if node not in records: return 0
+            elif (node[0] + 1, (node[1] - 1) * 2 + 1) not in records and (node[0] + 1, (node[1] - 1) * 2 + 2) not in records:
+                return count + records[node]
+            else:
+                return search((node[0] + 1, (node[1] - 1) * 2 + 1), count + records[node]) + search((node[0] + 1, (node[1] - 1) * 2 + 2), count + records[node])
+        records = {}
+        for num in nums:
+            D, P, V = num//100, num//10%10, num%10
+            records[(D, P)] = V
+        return search((1, 1), 0)
+
+    def pathSum_v2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
         def path_sum(d, p, total):
             if (d, p) not in records:
                 return None
@@ -70,6 +89,7 @@ class Solution:
         for n in nums:
             records[(n // 100, n % 100 // 10)] = n % 10
         return path_sum(1, 1, 0)
+
 
 if __name__ == '__main__':
     test_cases = [
