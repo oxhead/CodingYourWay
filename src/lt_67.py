@@ -23,6 +23,25 @@ class Solution:
         :type b: str
         :rtype: str
         """
+        output = []
+        i, j, carry = 0, 0, 0
+        while i < len(a) or j < len(b) or carry:
+            n1 = int(a[i]) if i < len(a) else 0
+            n2 = int(b[j]) if j < len(b) else 0
+            n = n1 + n2 + carry
+            carry = n // 2
+            n = n % 2
+            output.append(str(n))
+            i += 1
+            j += 1
+        return "".join(reversed(output))
+
+    def addBinary_verbose(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
         if len(b) > len(a):
             a, b = b, a
         offset = len(a) - len(b)
@@ -37,7 +56,7 @@ class Solution:
         if carry:
             output.insert(0, carry)
         return ''.join([str(d) for d in output])
-        
+
 
 if __name__ == '__main__':
     test_cases = [
