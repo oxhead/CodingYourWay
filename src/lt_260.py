@@ -29,6 +29,7 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(1)
+        # https://segmentfault.com/a/1190000004886431
         diff = 0
         for n in nums:
             diff ^= n
