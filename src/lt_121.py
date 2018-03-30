@@ -2,11 +2,11 @@
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock
 
 Related:
-  - lt_53
-  - lt_122
-  - lt_123
-  - lt_188
-  - lt_309
+  - lt_53_maximum-subarray
+  - lt_122_best-time-to-buy-and-sell-stock-ii
+  - lt_123_best-time-to-buy-and-sell-stock-iii
+  - lt_188_best-time-to-buy-and-sell-stock-iv
+  - lt_309_best-time-to-buy-and-sell-stock-with-cooldown
 """
 
 """
@@ -36,6 +36,8 @@ class Solution:
         :type prices: List[int]
         :rtype: int
         """
+        # Time: O(n)
+        # Space: O(1)
         max_profit = 0
         min_price = 0x7FFFFFFF
         for i in range(len(prices)):
@@ -71,12 +73,28 @@ class Solution:
                 best_profit = current_profit if current_profit > best_profit else best_profit
         return best_profit
 
+    def maxProfit_failed(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        # The two pointers approach does not work.
+        max_profit = 0
+        left, right = 0, len(prices) - 1
+        while left < right:
+            max_profit = max(max_profit, prices[right] - prices[left])
+            if left + 1 < len(prices) and prices[left + 1] < prices[left]: left += 1
+            elif right - 1 >= 0 and prices[right - 1] > prices[right]: right -= 1
+            else: left += 1
+        return max_profit
+
 
 if __name__ == '__main__':
     test_cases = [
         ([7, 1, 5, 3, 6, 4], 5),
         ([7, 6, 4, 3, 1], 0),
         ([2, 1, 2, 0, 1], 1),
+        ([3, 2, 6, 5, 0, 3], 4),
     ]
 
     for test_case in test_cases:
