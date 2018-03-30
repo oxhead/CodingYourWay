@@ -2,15 +2,11 @@
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii
 
 Related:
-  - lt_121
-  - lt_123
-  - lt_188
-  - lt_309
-  - lt_714
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_121_best-time-to-buy-and-sell-stock
+  - lt_123_best-time-to-buy-and-sell-stock-iii
+  - lt_188_best-time-to-buy-and-sell-stock-iv
+  - lt_309_best-time-to-buy-and-sell-stock-with-cooldown
+  - lt_714_best-time-to-buy-and-sell-stock-with-transaction-fee
 """
 
 """
@@ -25,6 +21,20 @@ class Solution:
         :type prices: List[int]
         :rtype: int
         """
+        # Time: O(n)
+        # Space: O(1)
+        count = 0
+        for i in range(1, len(prices)):
+            count += max(0, prices[i] - prices[i - 1])
+        return count
+
+    def maxProfit_oneline(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        # Time: O(n)
+        # Space: O(n)
         return sum(map(lambda n: max(prices[n+1] - prices[n], 0), range(len(prices)-1)))
 
 
