@@ -2,8 +2,11 @@
 https://leetcode.com/problems/single-number
 
 Related
-lt_137
-lt_260
+  - lt_137_single-number-ii
+  - lt_260_single-number-iii
+  - lt_268_missing-number
+  - lt_287_find-the-duplicate-number
+  - lt_389_find-the-difference
 """
 
 """
@@ -22,6 +25,8 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
+        # Time: O(n)
+        # Space: O(1)
         return functools.reduce(operator.xor, nums)
 
 
