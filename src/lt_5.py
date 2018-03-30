@@ -158,6 +158,39 @@ class Solution:
                 pass       
         return ''
 
+    def longestPalindrome_manacher(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        # https://articles.leetcode.com/longest-palindromic-substring-part-ii/
+        # https://algodast.quora.com/Manachar%E2%80%99s-Algorithm
+        def preprocess(s):
+            if not s: return "^$"
+            return "^#" + "#".join(s) + "#$"
+
+        # populated string
+        T = preprocess(s)
+        # maximum palidrome around T[i]
+        P = [0] * len(T)
+        # center, right
+        C, R = 0, 0
+        for i in range(1, len(T) - 1):
+            i_mirror = 2 * C - i  # i' = C - (i - C)
+            P[i] = min(R - i, P[i_mirror]) if R > i else 0
+            while T[i + 1 + P[i]] == T[i - 1 - P[i]]:
+                P[i] += 1
+            if i + P[i] > R:
+                C = i
+                R = i + P[i]
+        max_index = 0
+        for i in range(1, len(T) - 1):
+            if P[i] >  P[max_index]:
+                max_index = i
+        start = (max_index - 1 - P[max_index]) // 2
+        return s[start:start+P[max_index]]
+        
+
 if __name__ == '__main__':
     test_cases = [
         ("a", ("a")),
