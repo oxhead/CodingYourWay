@@ -2,15 +2,11 @@
 https://leetcode.com/problems/maximum-product-subarray
 
 Related:
-  - lt_53
-  - lt_198
-  - lt_238
-  - lt_628
-  - lt_713
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_53_maximum-subarray
+  - lt_198_house-robber
+  - lt_238_product-of-array-except-self
+  - lt_628_maximum-product-of-three-numbers
+  - lt_713_subarray-product-less-than-k
 """
 
 """
