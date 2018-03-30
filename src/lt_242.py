@@ -2,13 +2,9 @@
 https://leetcode.com/problems/valid-anagram
 
 Related:
-  - lt_49
-  - lt_266
-  - lt_438
-
-Complexity:
-  - Time: O(n)
-  - Space: O(n)
+  - lt_49_group-anagrams
+  - lt_266_palindrome-permutation
+  - lt_438_find-all-anagrams-in-a-string
 """
 
 """
@@ -34,6 +30,8 @@ class Solution:
         :type t: str
         :rtype: bool
         """
+        # Time: O(n)
+        # Space: O(n)
         counter = defaultdict(int)
         for c in s:
             counter[c] += 1
@@ -45,6 +43,7 @@ class Solution:
 
     def isAnagram2(self, s, t):
         return all([s.count(c) == t.count(c) for c in [chr(c) for c in range(ord('a'), ord('z')+1)]])
+
 
 if __name__ == '__main__':
     test_cases = [
