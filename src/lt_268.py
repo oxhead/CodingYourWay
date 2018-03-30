@@ -1,33 +1,30 @@
 """
-https://leetcode.com/problems/missing-number/description
+https://leetcode.com/problems/missing-number
 
 Related:
-  - lt_41
-  - lt_136
-  - lt_287
-  - lt_765
+  - lt_41_first-missing-positive
+  - lt_136_single-number
+  - lt_287_find-the-duplicate-number
+  - lt_765_couples-holding-hands
 
-Complexity:
-  - Time: O()
-  - Space: O()
 """
 
 """
- Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
+Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
 
- Example 1
+Example 1
 
- Input: [3,0,1]
- Output: 2
+Input: [3,0,1]
+Output: 2
 
- Example 2
+Example 2
 
- Input: [9,6,4,2,3,5,7,0,1]
- Output: 8
+Input: [9,6,4,2,3,5,7,0,1]
+Output: 8
 
 
- Note:
-     Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity? 
+Note:
+Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?
 """
 
 class Solution:
