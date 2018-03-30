@@ -32,11 +32,11 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(n)
-        remainings = {}
+        records = {}
         for i, n in enumerate(nums):
-            if n in remainings: return [i, remainings[n]]
-            remaining = target - n
-            remainings[remaining] = i
+            if n in records:
+                return [records[n], i]
+            records[target - n] = i
         return []
 
     def twoSum_naive(self, nums, target):
