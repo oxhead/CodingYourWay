@@ -2,12 +2,8 @@
 https://leetcode.com/problems/group-anagrams
 
 Related:
-  - lt_242
-  - lt_249
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_242_valid-anagram
+  - lt_249_group-shifted-strings
 """
 
 """
@@ -31,6 +27,8 @@ class Solution:
         :type strs: List[str]
         :rtype: List[List[str]]
         """
+        # Time: O(n * klogk)
+        # Space: O(n)
         output = {}
         for s in strs:
             key = tuple(sorted(s))
@@ -38,6 +36,7 @@ class Solution:
                 output[key] = []
             output[key].append(s)
         return [group for group in output.values()]
+
 
 if __name__ == '__main__':
     test_cases = [
