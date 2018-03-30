@@ -54,6 +54,7 @@ class Solution:
             l2 = l2.next if l2 else l2
         return dummy.next
 
+
 if __name__ == '__main__':
     test_cases = [
         ((5, 5), 10),
