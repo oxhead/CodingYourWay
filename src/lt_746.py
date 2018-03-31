@@ -36,6 +36,18 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(1)
+        c2, c1 = 0, 0
+        for i in range(2, len(cost) + 1):
+            c2, c1 = c1, min(cost[i-1] + c1, cost[i-2] + c2)
+        return c1
+
+    def minCostClimbingStairs_v2(self, cost):
+        """
+        :type cost: List[int]
+        :rtype: int
+        """
+        # Time: O(n)
+        # Space: O(1)
         dp = [0, 0, 0]
         for i in range(2, len(cost)+1):
             dp[2] = min(cost[i-2] + dp[0], cost[i-1] + dp[1])
