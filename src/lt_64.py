@@ -41,6 +41,7 @@ class Solution:
                 dp[i][j] = grid[i][j] + min(dp[i - 1][j], dp[i][j-1])
         return dp[-1][-1]
 
+
 if __name__ == '__main__':
     test_cases = [
         ([[1,3,1], [1,5,1], [4,2,1]], 7),
