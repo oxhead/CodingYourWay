@@ -48,11 +48,35 @@ class Solution:
                     dp[j] += dp[j-1]
         return dp[-1]
 
+    def uniquePathsWithObstacles_v2(self, obstacleGrid):
+        """
+        :type obstacleGrid: List[List[int]]
+        :rtype: int
+        """
+        # Time: O(m * n)
+        # Space: O(m * n)
+        dp = [[0 for _ in range(len(obstacleGrid[0]))] for _ in range(len(obstacleGrid))]
+        for i in range(len(obstacleGrid)):
+            for j in range(len(obstacleGrid[i])):
+                if i == 0 and j == 0:
+                    dp[i][j] = 1 if obstacleGrid[i][j] == 0 else 0
+                elif i == 0 and j > 0:
+                    dp[i][j] = dp[i][j-1]
+                elif j == 0 and i > 0:
+                    dp[i][j] = dp[i-1][j] 
+                else:
+                    if obstacleGrid[i][j]:
+                        dp[i][j] = 0
+                    else:
+                        dp[i][j] = dp[i-1][j] + dp[i][j-1] 
+        return dp[-1][-1]
+        
+
 if __name__ == '__main__':
     test_cases = [
-        #([[0]], 1),
+        ([[0]], 1),
         ([[1, 0]], 0),
-        #([[0,0,0], [0,1,0], [0,0,0]], 2),
+        ([[0,0,0], [0,1,0], [0,0,0]], 2),
     ]
 
     for test_case in test_cases:
