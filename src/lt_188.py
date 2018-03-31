@@ -34,6 +34,7 @@ class Solution:
             return max_profit
 
         if not prices or len(prices) <= 1: return 0
+        # avoid timeout
         if k >= len(prices) // 2:
             return max_profit_unlimited(prices)
 
