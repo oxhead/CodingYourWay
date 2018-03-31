@@ -25,6 +25,9 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
+        # Time: O(m * n)
+        # Space: O(min(m, n))
+        m, n = min(m, n), max(m, n)
         dp = [1] * m
         for j in range(1, n):
             for i in range(1, m):
@@ -37,6 +40,8 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
+        # Time: O(m * n)
+        # Space: O(m * n)
         dp = [[1] * n for _ in range(m)]
         i = j = 0
         for i in range(1, m):
