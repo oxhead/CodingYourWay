@@ -43,6 +43,18 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(1)
+        previous, current = 0, 1
+        for _ in range(n):
+            previous, current = current, previous + current
+        return current
+
+    def climbStairs_v2(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        # Time: O(n)
+        # Space: O(1)
         if not n: return 0
         elif n == 1: return 1
         elif n == 2: return 2
@@ -95,7 +107,7 @@ class Solution:
 
         return self.climbStairs(n-1) + self.climbStairs(n-2)
 
-        
+       
 if __name__ == '__main__':
     test_cases = [
         (2, 2),
