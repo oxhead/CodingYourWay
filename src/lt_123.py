@@ -36,21 +36,24 @@ class Solution:
             sell_2 = max(sell_2, buy_2 + price)
         return sell_2
 
-    def maxProfit_mostk(self, prices):
+    def maxProfit_atmostk(self, prices):
         """
         :type prices: List[int]
         :rtype: int
         """
         def max_profit(prices, k):
-            k = min(k, len(prices)//2+1)
             max_buy = [float('-inf')] * (k + 1)
             max_sell = [0] * (k + 1)
             for i in range(len(prices)):
-                for j in range(1, k + 1):
+                for j in range(1, min(k, i//2+1) + 1):
                     max_buy[j] = max(max_buy[j], max_sell[j - 1] - prices[i])
                     max_sell[j] = max(max_sell[j], max_buy[j] + prices[i])
             return max_sell[k]
-        return max_profit(prices, 2)
+
+        if len(prices) >= 3: 
+            return max_profit(prices, 2)
+        else:
+            return max_profit(prices, 1)
 
     def maxProfit_dp(self, prices):
         """
@@ -80,6 +83,7 @@ if __name__ == '__main__':
         ([1], 0),
         ([1, 2], 1),
         ([2, 1], 0),
+        ([1, 2, 3], 2),
         ([3, 2, 4, 1], 2),
         ([3, 2, 1, 4, 2, 5, 6], 7),
     ]
