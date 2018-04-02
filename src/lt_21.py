@@ -2,14 +2,10 @@
 https://leetcode.com/problems/merge-two-sorted-lists
 
 Related:
-  - lt_23
-  - lt_88
-  - lt_148
-  - lt_244
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_23_merge-k-sorted-lists
+  - lt_88_merge-sorted-array
+  - lt_148_sort-list
+  - lt_244_shortest-word-distance-ii
 """
 
 """
@@ -21,6 +17,7 @@ Input: 1->2->4, 1->3->4
 Output: 1->1->2->3->4->4
 """
 
+from base import ListNode
 from utils import to_list, to_linked_list
 
 # Definition for singly-linked list.
@@ -36,6 +33,8 @@ class Solution:
         :type l2: ListNode
         :rtype: ListNode
         """
+        # Time: O(min(m, n))
+        # Space: O(1)
         if not l1: return l2
         if not l2: return l1
         if l1.val <= l2.val:
@@ -54,6 +53,7 @@ class Solution:
         if l1: current.next = l1
         if l2: current.next = l2
         return head
+
 
 if __name__ == '__main__':
     test_cases = [
