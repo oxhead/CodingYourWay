@@ -27,14 +27,27 @@ class Solution:
         :type lists: List[ListNode]
         :rtype: ListNode
         """
-        # Time: O(n*logn*logk), n is the length of a list, k is the number of sorted lists
+        # Time: O(n*logk), n is the total number of items, k is the number of sorted lists
         # Space: O(1)
+        def merge_two_lists(list1, list2):
+            if not list1: return list2
+            if not list2: return list1
+            dummy = ListNode(None)
+            node = dummy
+            while list1 and list2:
+                if list1.val <= list2.val:
+                    node.next = list1
+                    list1 = list1.next
+                else:
+                    node.next = list2
+                    list2 = list2.next
+                node = node.next
+            if list1: node.next = list1
+            elif list2: node.next = list2
+            return dummy.next
         if not lists: return None
-        if len(lists) == 0: return None
         elif len(lists) == 1: return lists[0]
-        elif len(lists) == 2: return self.mergeTwoLists(lists[0], lists[1])
-        return self.mergeTwoLists(self.mergeKLists(lists[:len(lists)//2]),
-				  self.mergeKLists(lists[len(lists)//2:]))
+        return merge_two_lists(self.mergeKLists(lists[:len(lists)//2]), self.mergeKLists(lists[len(lists)//2:]))
 
     def mergeKLists_naive(self, lists):
         """
@@ -78,27 +91,30 @@ class Solution:
         :type lists: List[ListNode]
         :rtype: ListNode
         """
-        # Time: O(n*k*logk), n is the length of a list, k is the number of sorted lists
+        # Time: O(n*logk)
         # Space: O(logk)
-        # works only in Python 2.x
+        # Note:
+        # the common implementation works only in Python 2.x
         # because heapq requires object comparaison
         # Python 2.x uses __cmp__(self, other)
         # Python 3.x uses __lt__(self, other)
+        # a trick is used here to support Python 3.x
         heap = []
-        for node in lists:
+        for index, node in enumerate(lists):
             if node:
-                heapq.heappush(heap, (node.val, node))
-
-        current = ListNode(-1)
-        head = current
+                # to support Python 3.x
+                # it is fine here because no duplicate index exists
+                heapq.heappush(heap, (node.val, index, node))
+        dummy = ListNode(None)
+        current = dummy
         while heap:
-            node = heapq.heappop(heap)[1]
+            index, node = heapq.heappop(heap)[1:]
             current.next = node
             current = current.next
             if node.next:
-                heapq.heappush(heap, (node.next.val, node.next))
-
-        return head.next
+                heapq.heappush(heap, (node.next.val, index, node.next))
+        return dummy.next
+        
 
 
 if __name__ == '__main__':
