@@ -2,13 +2,9 @@
 https://leetcode.com/problems/sort-list
 
 Related:
-  - lt_21
-  - lt_75
-  - lt_147
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_21_merge-two-sorted-lists
+  - lt_75_sort-colors
+  - lt_147_insertion-sort-list
 """
 
 """
