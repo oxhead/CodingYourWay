@@ -40,13 +40,52 @@ class Solution:
             right_max = max(right_max, h)
             right_maxs[i] = right_max
 
-        # print('left :', left_maxs)
-        # print('right:', right_maxs)
-        # print('vol  :', [max(0, min(left_maxs[i], right_maxs[i]) - h) for i, h in enumerate(height)])
+        #print('left :', left_maxs)
+        #print('right:', right_maxs)
+        #print('vol  :', [max(0, min(left_maxs[i], right_maxs[i]) - h) for i, h in enumerate(height)])
         volume = 0
         for i, h in enumerate(height):
-            volume += max(0, min(left_maxs[i], right_maxs[i]) - h)
+            volume += min(left_maxs[i], right_maxs[i]) - h
+            # this won't happen
+            # volume += max(0, min(left_maxs[i], right_maxs[i]) - h)
         return volume
+
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        # Time: O(n)
+        # Space: O(1)
+        # https://www.jianshu.com/p/7bca16941cea
+        left, right, total, max_height = 0, len(height) - 1, 0, 0
+        while left < right:
+            while left < right and height[left] <= max_height:
+                total += max_height - height[left]
+                left += 1
+            while left < right and height[right] <= max_height:
+                total += max_height - height[right]
+                right -= 1
+            max_height = min(height[left], height[right])
+        return total
+
+    def trap_failed(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        area = 0
+        left, right = 0, 1
+        while right < len(height):
+            if height[right] >= height[left]:
+                if left != 0:
+                    total = height[right] * (right - left - 1)
+                    volume = (height[right] - height[left]) * (right - left - 1)
+                    print('left={}, right={}, vol={}'.format(left, right, total-volume))
+                    area += total - volume
+                left = right
+            right += 1
+        return area
 
 
 if __name__ == '__main__':
