@@ -2,13 +2,9 @@
 https://leetcode.com/problems/sort-colors
 
 Related:
-  - lt_148
-  - lt_280
-  - lt_324
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_148_sort-list
+  - lt_280_wiggle-sort
+  - lt_324_wiggle-sort-ii
 """
 
 """
@@ -34,6 +30,8 @@ class Solution:
         :type nums: List[int]
         :rtype: void Do not return anything, modify nums in-place instead.
         """
+        # Time: O(n)
+        # Space: O(1)
         if not nums: return
         RED, WHITE, BLUE = 0, 1, 2
         left, mid, right = 0, 0, len(nums) - 1
@@ -62,6 +60,7 @@ class Solution:
             nums[counter[0] + i] = 1
         for i in range(counter[2]):
             nums[counter[0] + counter[1] + i] = 2
+
 
 if __name__ == '__main__':
     test_cases = [
