@@ -2,11 +2,7 @@
 https://leetcode.com/problems/merge-sorted-array
 
 Related:
-  - lt_21
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_21_merge-two-sorted-lists
 """
 
 """
@@ -37,6 +33,32 @@ class Solution:
         while index_n >= 0:
             nums1[index_m + index_n + 1] = nums2[index_n]
             index_n -= 1
+
+    def merge_v2(self, nums1, m, nums2, n):
+        """
+        :type nums1: List[int]
+        :type m: int
+        :type nums2: List[int]
+        :type n: int
+        :rtype: void Do not return anything, modify nums1 in-place instead.
+        """
+        i1 = m - 1
+        i2 = n - 1
+        for k in range(m+n-1, -1, -1):
+            if i1 < 0:
+                nums1[k] = nums2[i2]
+                i2 -= 1
+            elif i2 < 0:
+                i1 -= 1
+                continue
+            else:
+                if nums2[i2] >= nums1[i1]:
+                    nums1[k] = nums2[i2]
+                    i2 -= 1
+                else:
+                    nums1[k] = nums1[i1]
+                    i1 -= 1
+            k -= 1
 
 
 if __name__ == '__main__':
