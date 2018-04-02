@@ -2,7 +2,7 @@
 https://leetcode.com/problems/container-with-most-water
 
 Related:
-  - lt_42
+  - lt_42_trapping-rain-water
 """
 
 """
