@@ -29,6 +29,8 @@ class Solution:
         :type head: ListNode
         :rtype: ListNode
         """
+        # Time: O(n)
+        # Space: O(1)
         dummy = ListNode(-1)
         dummy.next = head
         current = dummy
@@ -38,6 +40,24 @@ class Solution:
             next_2.next = next_1
             next_1.next = next_3
             current = next_1
+        return dummy.next
+
+    def swapPairs_v2(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        dummy = ListNode(None)
+        previous = dummy
+        previous.next = head
+        node = head
+        while node and node.next:
+            end = node.next.next
+            previous.next = node.next
+            node.next.next = node
+            node.next = end
+            previous = previous.next.next
+            node = previous.next
         return dummy.next
 
     def swapPairs_illegal(self, head):
@@ -57,6 +77,7 @@ class Solution:
                 previous.val, node.val = node.val, previous.val 
             node = node.next
         return head
+
 
 if __name__ == '__main__':
     test_cases = [
