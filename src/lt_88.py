@@ -21,6 +21,8 @@ class Solution:
         :type n: int
         :rtype: void Do not return anything, modify nums1 in-place instead.
         """
+        # Time: O(n)
+        # Space: O(1)
         index_m = m - 1
         index_n = n - 1
         while index_m >= 0 and index_n >= 0:
