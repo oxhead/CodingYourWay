@@ -30,6 +30,8 @@ class Solution:
         :type head: ListNode
         :rtype: ListNode
         """
+        # Time: O(n)
+        # Space: O(1)
         previous = None
         while head:
             head.next, previous, head = previous, head, head.next
@@ -53,6 +55,19 @@ class Solution:
             n.next = s[-1] if len(s) > 0 else None
             
         return new_head
+
+    def reverseList_verbose(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        previous = None
+        while head:
+            tmp = head.next
+            head.next = previous
+            previous = head
+            head = tmp
+        return previous
 
 
 if __name__ == '__main__':
