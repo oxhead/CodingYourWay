@@ -82,10 +82,66 @@ class Solution:
             current.next = reverse(current.next, k)
         return dummy.next
 
+    def reverseKGroup_attempt2(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        count = 0
+        node = head
+        while node:
+            count += 1
+            node = node.next
+        dummy = ListNode(None)
+        previous = dummy
+        node = head
+        for i in range(count // k):
+            for j in range(k):
+                print(i, j)
+                previous.next, node.next, node.next.next = node.next, node.next.next, node
+                node = previous.next.next
+                previous = node
+        return dummy.next
+
+    def reverseKGroup_v2(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        def reverse(start, end):
+            previous = None
+            node = start
+            while node and node != end:
+                node.next, previous, node = previous, node, node.next
+            return previous
+        dummy = ListNode(None)
+        previous_group_end = None
+        group_start = head
+        node = head
+        count = 0
+        while node:
+            node = node.next
+            count = (count + 1) % k
+            if count == 0:
+                group_head = reverse(group_start, node)
+                if dummy.next is None:
+                    dummy.next = group_head
+                if previous_group_end:
+                    previous_group_end.next = group_head 
+                group_start.next = node
+                previous_group_end = group_start
+                group_start = node
+        return dummy.next if dummy.next else head
+                
+       
+
 if __name__ == '__main__':
     test_cases = [
-        #(([1, 2, 3, 4, 5], 2), [2, 1, 4, 3, 5]),
-        #(([1, 2, 3, 4, 5], 3), [3, 2, 1, 4, 5]),
+        (([1], 2), [1]),
+        (([1, 2, 3, 4, 5], 2), [2, 1, 4, 3, 5]),
+        (([1, 2, 3, 4, 5], 3), [3, 2, 1, 4, 5]),
         (([1, 2, 3, 4, 5], 4), [4, 3, 2, 1, 5]),
     ]
 
