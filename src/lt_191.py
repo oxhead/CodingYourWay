@@ -2,17 +2,13 @@
 https://leetcode.com/problems/number-of-1-bits
 
 Related:
-  - lt_190
-  - lt_231
-  - lt_338
-  - lt_401
-  - lt_461
-  - lt_693
-  - lt_762
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_190_reverse-bits
+  - lt_231_power-of-two
+  - lt_338_counting-bits
+  - lt_401_binary-watch
+  - lt_461_hamming-distance
+  - lt_693_binary-number-with-alternating-bits
+  - lt_762_prime-number-of-set-bits-in-binary-representation
 """
 
 """
@@ -27,6 +23,8 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
+        # Time: O(1)
+        # Space: O(1)
         bits = []
         while n > 0:
             bits.append(n % 2)
