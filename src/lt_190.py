@@ -3,10 +3,6 @@ https://leetcode.com/problems/reverse-bits
 
 Related:
   - lt_191
-
-Complexity:
-  - Time: O()
-  - Space: O()
 """
 
 """
@@ -24,6 +20,8 @@ class Solution:
     # @param n, an integer
     # @return an integer
     def reverseBits(self, n):
+        # Time: O(1)
+        # Space: O(1)
         # https://github.com/algorhythms/LeetCode/blob/master/190%20Reverse%20Bits.py
         output = 0
         BITS = 32
