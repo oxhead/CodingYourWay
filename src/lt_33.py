@@ -66,7 +66,7 @@ class Solution:
         if index == -1:
             index = binary_search(point + 1, len(nums) - 1)
         return index
-        
+
 
 if __name__ == '__main__':
     test_cases = [
