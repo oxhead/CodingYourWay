@@ -83,8 +83,6 @@ def serialize_tree(root):
             return output[:i+1]
         i -= 1
     return output[:i]
-    
-        
 
 
 def search_node_by_value(nodes, val):
