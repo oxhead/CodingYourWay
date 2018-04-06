@@ -90,6 +90,43 @@ class Solution:
                     else:
                         right -= 1
         return output
+
+    def fourSum_noyield(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        def k_sum(left, right, target, k):
+            if k == 2:
+                output = []
+                while left < right:
+                    if nums[left] + nums[right] == target:
+                        output.append([nums[left], nums[right]])
+                        while left < right and nums[left] == nums[left + 1]:
+                            left += 1
+                        while left < right and nums[right] == nums[right - 1]:
+                            right -= 1
+                        left += 1
+                        right -= 1
+                    elif nums[left] + nums[right] < target:
+                        left += 1
+                    else:
+                        right -= 1
+                return output
+            else:
+                output = []
+                for i in range(left, right - k + 1):
+                    if i > left and nums[i] == nums[i-1]:
+                        continue
+                    for sub in k_sum(i + 1, right, target - nums[i], k - 1):
+                        output.append([nums[i]] + sub)
+                return output
+
+        if not nums: return []
+        nums.sort()
+        return k_sum(0, len(nums) - 1, target, 4)
+        
             
         
 
