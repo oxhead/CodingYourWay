@@ -54,6 +54,26 @@ class Solution:
                     return [i, j]
         return []
 
+    def twoSum_sort(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        # Time: O(nlogn)
+        # Space: O(n)
+        data = [n for n in nums]
+        nums.sort()
+        left, right = 0, len(nums) - 1
+        while left < right:
+            if nums[left] + nums[right] == target:
+                return [data.index(nums[left]), data.index(nums[right])]
+            elif nums[left] + nums[right] < 0:
+                left += 1
+            else:
+                right -= 1
+        return []
+
 
 if __name__ == '__main__':
     test_cases = [
