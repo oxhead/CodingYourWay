@@ -72,8 +72,42 @@ class Solution:
                     output.append(list(s) + [nums[k]])
         return output
 
+    def threeSum_failed2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        if not nums or len(nums) < 3: return []
+        nums.sort()
+        output = []
+        left, right = 0, len(nums) - 1
+        while left < right:
+            #import time
+            #time.sleep(1)
+            print('left={}, right={}'.format(left, right))
+            i, j = left, right
+            k = i + 1
+            while i < k < j:
+                print('i={}, k={}, j={}'.format(i, k, j))
+                if nums[i] + nums[k] + nums[j] == 0:
+                    output.append([nums[i], nums[k], nums[j]])
+                    print('* found')
+                    break
+                elif nums[i] + nums[k] + nums[j] < 0:
+                    k += 1
+                else:
+                    j -= 1
+            left += 1
+            #while left > 0 and nums[left] == nums[left - 1]:
+            #    left += 1
+            #while right < len(nums) - 1 and nums[right] == nums[right + 1]:
+            #    right -= 1
+        return output
+
+
 if __name__ == '__main__':
     test_cases = [
+        ([0, 0, 0, 0], [[0,0,0]]),
         ([-1, 0, 1, 2, -1, -4], [[-1, 0, 1], [-1, -1, 2]]),
     ]
 
