@@ -37,7 +37,7 @@ class Solution(object):
             else:
                 left = mid + 1
         return left
-        
+
 
 if __name__ == '__main__':
     test_cases = [
@@ -46,7 +46,6 @@ if __name__ == '__main__':
         (10, 5),
         (10, 6),
         (10, 10),
-        
     ]
 
     for test_case in test_cases:
