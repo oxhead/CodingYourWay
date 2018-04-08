@@ -36,7 +36,6 @@ def guess(num):
     return 0 if ans == num else 1 if ans > num else -1
 
 class Solution(object):
-
     def guessNumber(self, n):
         """
         :type n: int
@@ -54,6 +53,7 @@ class Solution(object):
                 n_min = mid + 1
             else:
                 n_max = mid - 1
+
 
 if __name__ == '__main__':
     test_cases = [
