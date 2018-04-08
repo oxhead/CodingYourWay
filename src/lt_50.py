@@ -4,7 +4,6 @@ https://leetcode.com/problems/powx-n
 Related:
   - lt_69_sqrtx
   - lt_372_super-pow
-
 """
 
 """
@@ -38,6 +37,24 @@ class Solution:
             x *= x
             m >>= 1
         return ans if n >= 0 else 1 / ans
+
+    def myPow_recursive(self, x, n):
+        """
+        :type x: float
+        :type n: int
+        :rtype: float
+        """
+        if n == 0:
+            return 1
+        elif n == 1:
+            return x
+        elif n < 0:
+            return self.myPow(1/x, -n)
+        elif n % 2 == 0:
+            tmp = self.myPow(x, n//2)
+            return tmp * tmp
+        else:
+            return x * self.myPow(x, n - 1)
 
     def myPow_dp(self, x, n):
         """
