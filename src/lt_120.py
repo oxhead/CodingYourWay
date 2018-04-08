@@ -59,7 +59,17 @@ class Solution:
                 else:
                     dp[i][j] = min(dp[i-1][j-1] + triangle[i][j], dp[i-1][j] + triangle[i][j])
         return min(dp[-1])
-        
+
+    def minimumTotal_bottomup(self, triangle):
+        """
+        :type triangle: List[List[int]]
+        :rtype: int
+        """ 
+        for i in range(len(triangle) - 1, 0, -1):
+            for j in range(1, len(triangle[i])):
+                triangle[i-1][j-1] += min(triangle[i][j-1], triangle[i][j])
+        return triangle[0][0]
+
 
 if __name__ == '__main__':
     test_cases = [
