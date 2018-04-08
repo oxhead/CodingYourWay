@@ -48,6 +48,7 @@ class Solution:
         else:
             return min(self.findMin(nums[:mid]), nums[mid])
 
+
 if __name__ == '__main__':
     test_cases = [
         ([1], 1),
