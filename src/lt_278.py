@@ -2,7 +2,9 @@
 https://leetcode.com/problems/first-bad-version
 
 Related:
+  - lt_34_search-for-a-range
   - lt_35_search-insert-position
+  - lt_374_guess-number-higher-or-lower
 """
 
 """
