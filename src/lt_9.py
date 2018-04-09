@@ -36,6 +36,21 @@ class Solution:
             n //= 10
         return x == y
 
+    def isPalindrome_string(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        # Time: O(n)
+        # Space: O(n)
+        s = str(x)
+        left, right = 0, len(s) - 1
+        while left < right:
+            if s[left] != s[right]: return False
+            left += 1
+            right -= 1
+        return True
+
 if __name__ == '__main__':
     test_cases = [
         (1, True),
