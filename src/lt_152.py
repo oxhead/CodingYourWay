@@ -22,6 +22,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        # Time: O(n)
+        # Space: O(1)
+        max_product, current_max, current_min = float('-inf'), 1, 1
+        for n in nums:
+            current_max, current_min = max(current_max * n, current_min * n, n), min(current_min * n, current_max * n, n)
+            max_product = max(max_product, current_max)
+        return max_product
+
+    def maxProduct_v2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
         if not nums or len(nums) < 1: return 0
         
         current_min = nums[0]
@@ -39,6 +52,7 @@ if __name__ == '__main__':
     test_cases = [
         ([-2], -2),
         ([2, 3, -2, 4], 6),
+        ([-1, -2, -9, -6], 108),
     ]
 
     for test_case in test_cases:
