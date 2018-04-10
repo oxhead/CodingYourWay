@@ -2,11 +2,7 @@
 https://leetcode.com/problems/search-a-2d-matrix
 
 Related:
-  - lt_240
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_240_search-a-2d-matrix-ii
 """
 
 """
@@ -35,6 +31,29 @@ class Solution:
         :type target: int
         :rtype: bool
         """
+        # Time: O(log(m*n))
+        # Space: O(1)
+        num_rows = len(matrix) if matrix else -1
+        num_cols = len(matrix[0]) if num_rows >= 1 else -1
+        if num_rows < 1 or num_cols < 1: return False
+        left, right = 0, num_rows * num_cols - 1
+        while left <= right:
+            mid = left + (right - left) // 2
+            val = matrix[mid//num_cols][mid%num_cols]
+            if val == target:
+                return True
+            elif val < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return False
+
+    def searchMatrix_v2(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
         def to_coordinate(num_rows, num_cols, index):
             i = index // num_cols
             j = index - i * num_cols
@@ -54,9 +73,11 @@ class Solution:
             else: return True
         return False
 
+
 if __name__ == '__main__':
     test_cases = [
         (([], 0), False),
+        (([[1],[3]], 0), False),
         (([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 50]], 3), True),
     ]
 
