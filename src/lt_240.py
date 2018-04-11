@@ -2,11 +2,7 @@
 https://leetcode.com/problems/search-a-2d-matrix-ii
 
 Related:
-  - lt_74
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_74_search-a-2d-matrix
 """
 
 """
@@ -39,6 +35,8 @@ class Solution:
         :type target: int
         :rtype: bool
         """
+        # Time: O(mlogn)
+        # Space: O(1)
         m = len(matrix) if matrix else -1
         n = len(matrix[0]) if m > 0 else -1
         if m < 1 or n < 1: return False
@@ -53,6 +51,25 @@ class Solution:
                 else: return True
 
         return False
+
+    def searchMatrix_v2(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        # Time: O(m + n)
+        # Space: O(1)
+        m = len(matrix) if matrix else -1
+        n = len(matrix[0]) if m > 0 else -1
+        if m < 1 or n < 1: return False
+        i, j = m - 1, 0
+        while i >= 0 and j < n:
+            if matrix[i][j] == target: return True
+            elif matrix[i][j] > target: i -= 1
+            else: j += 1
+        return False
+
 
 if __name__ == '__main__':
     test_cases = [
