@@ -56,30 +56,6 @@ class Solution:
         nums = [n for n in range(1, n + 1)]
         return build(nums)
 
-    def generateTrees(self, n):
-        """
-        :type n: int
-        :rtype: List[TreeNode]
-        """
-        def build(start, end):
-            if start > end: return [None]
-            if (start, end) in dp: return dp[(start, end)]
-            output = []
-            for i in range(start, end + 1):
-                left_subtrees = build(start, i - 1)
-                right_subtrees = build(i + 1, end)
-                for left in left_subtrees:
-                    for right in right_subtrees:
-                        root = TreeNode(i)
-                        root.left = left
-                        root.right = right
-                        output.append(root)
-            dp[(start, end)] = output
-            return output
-        if n < 1: return []
-        dp = {}
-        return build(1, n)
-
 
 if __name__ == '__main__':
     test_cases = [
