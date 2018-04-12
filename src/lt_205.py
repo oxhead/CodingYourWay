@@ -48,6 +48,7 @@ class Solution:
         :type t: str
         :rtype: bool
         """
+        # https://blog.csdn.net/happyaaaaaaaaaaa/article/details/51345019
         return len(set(zip(s, t))) == len(set(s)) and len(set(zip(s, t))) == len(set(t))
 
 
