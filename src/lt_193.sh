@@ -23,6 +23,8 @@ Your script should output the following valid phone numbers:
 (123) 456-7890
 """
 
+# https://github.com/kamyu104/LeetCode/blob/master/Shell/valid-phone-numbers.sh
+
 # Read from the file file.txt and output all valid phone numbers to stdout.
 
 # Using grep:
