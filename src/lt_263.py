@@ -44,6 +44,7 @@ class Solution:
                 return self.isUgly(num // d)
         return False
 
+
 if __name__ == '__main__':
     test_cases = [
         (0, False),
