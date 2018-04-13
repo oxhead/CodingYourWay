@@ -26,31 +26,29 @@ class Solution:
         :type head: ListNode
         :rtype: ListNode
         """
+        # Time: O(nlogn)
+        # Space: O(long), call stack?
         # https://www.tangjikai.com/algorithms/leetcode-148-sort-list
         def merge(left, right):
-            dummy = current = ListNode(-1)
+            dummy = ListNode(None)
+            node = dummy
             while left and right:
-                if left.val <= right .val:
-                    current.next = left
+                if left.val <= right.val:
+                    node.next = left
                     left = left.next
                 else:
-                    current.next = right
+                    node.next = right
                     right = right.next
-                current = current.next
-            current.next = left or right
+                node = node.next
+            node.next = left if left else right
             return dummy.next
-
         if not head or not head.next: return head
-        slow = head
-        fast = head.next
+        slow, fast = head, head.next
         while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-        
-        right = self.sortList(slow.next)
+            slow, fast = slow.next, fast.next.next
+        left, right = head, slow.next
         slow.next = None
-        left = self.sortList(head)
-        return merge(left, right)
+        return merge(self.sortList(left), self.sortList(right))
 
 
 if __name__ == '__main__':
