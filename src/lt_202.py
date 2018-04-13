@@ -2,12 +2,8 @@
 https://leetcode.com/problems/happy-number
 
 Related:
-  - lt_258
-  - lt_263
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_258_add-digits
+  - lt_263_ugly-number
 """
 
 """
@@ -39,6 +35,25 @@ class Solution:
             else:
                 self.records.add(s)
                 return self.isHappy(s)
+
+
+    def isHappy_v2(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        def is_happy(n, records):
+            if n in records: return False
+            count = 0
+            d = n
+            while d > 0:
+                count += (d % 10) ** 2
+                d //= 10
+            if count == 1: return True
+            records[n] = count
+            return is_happy(count, records)
+        records = {}
+        return is_happy(n, records)
 
 if __name__ == '__main__':
     test_cases = [
