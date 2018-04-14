@@ -1,4 +1,4 @@
-from base import ListNode, TreeNode
+from base import ListNode, RandomListNode, TreeNode
 from base import NestedInteger
 from base import Interval
 
@@ -8,6 +8,20 @@ def to_linked_list(numbers):
     for n in numbers:
         ptr.next = ListNode(n)
         ptr = ptr.next
+
+    return head.next
+
+def to_random_linked_list(numbers, random_list):
+    head = RandomListNode('#')
+    ptr = head
+    random_node_list = []
+    for n in numbers:
+        ptr.next = RandomListNode(n)
+        ptr = ptr.next
+        random_node_list.append(ptr)
+
+    for i, random_index in enumerate(random_list):
+        random_node_list[i].random = random_node_list[random_list[i]] if random_list[i] is not None else None
 
     return head.next
 
@@ -38,6 +52,20 @@ def to_list(node):
         l.append(node.val)
         node = node.next
     return l
+
+def to_random_list(node):
+    l = list()
+    n = node
+    while n != None:
+        l.append(n.label)
+        n = n.next
+
+    r = list()
+    n = node
+    while n != None:
+        r.append(n.random.label if n.random else None)
+        n = n.next
+    return l, r
 
 def find_node_by_index(node, index):
     count = 0
