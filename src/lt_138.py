@@ -27,6 +27,39 @@ class Solution(object):
         :type head: RandomListNode
         :rtype: RandomListNode
         """
+        # Time: O(n)
+        # Space: O(1)
+        # https://blog.csdn.net/tmylzq187/article/details/50913211
+        if not head: return head
+
+        # duplicate nodes and attach duplicates to themself
+        node = head
+        while node:
+            node_copied = RandomListNode(node.label)
+            node_copied.next = node.next
+            node.next = node_copied
+            node = node.next.next
+
+        # copy the random pointer
+        node = head
+        while node:
+            if node.random:
+                node.next.random = node.random.next
+            node = node.next.next
+
+        # detach duplicates
+        node = head
+        new_head = node.next
+        while node:
+            node.next.next, node.next = node.next.next.next if node.next.next else None, node.next.next
+            node = node.next
+        return new_head
+        
+    def copyRandomList_hashtable(self, head):
+        """
+        :type head: RandomListNode
+        :rtype: RandomListNode
+        """
         records = {}
         node = head
         dummy = RandomListNode(0)
