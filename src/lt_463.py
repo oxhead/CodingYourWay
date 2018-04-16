@@ -61,6 +61,7 @@ class Solution:
                     if grid[i][j - 1]: overlapped += 1
         return count * 4 - overlapped
 
+
 if __name__ == '__main__':
     test_cases = [
         ([[1, 1], [1, 1]], 8),
