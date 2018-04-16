@@ -25,12 +25,26 @@ class Solution(object):
         """
         # Time: O(1)
         # Space: O(1)
+        count = 0
+        while n > 0:
+            count += n & 1
+            n >>= 1
+        return count
+
+    def hammingWeight_v2(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        # Time: O(1)
+        # Space: O(1)
         bits = []
         while n > 0:
             bits.append(n % 2)
             n = n // 2
             
         return sum(bits)
+
 
 if __name__ == '__main__':
     test_cases = [
