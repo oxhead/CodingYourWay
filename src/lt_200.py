@@ -2,16 +2,12 @@
 https://leetcode.com/problems/number-of-islands
 
 Related:
-  - lt_130
-  - lt_286
-  - lt_305
-  - lt_323
-  - lt_694
-  - lt_695
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_130_surrounded-regions
+  - lt_286_walls-and-gates
+  - lt_305_number-of-islands-ii
+  - lt_323_number-of-connected-components-in-an-undirected-graph
+  - lt_694_number-of-distinct-islands
+  - lt_695_max-area-of-island
 """
 
 """
@@ -124,10 +120,37 @@ class Solution:
                 left = right + 1
         return count
 
+    def numIslands_v2(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        stack = []
+        count = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[i])):
+                if grid[i][j] != "1": continue
+                count += 1
+                stack.append((i, j))
+                while stack:
+                    m, n = stack.pop() 
+                    if grid[m][n] != "1": continue
+                    grid[m][n] = "0"
+                    if m < len(grid) - 1 and grid[m + 1][n] == "1":
+                        stack.append((m + 1, n))
+                    if n < len(grid[m]) - 1 and grid[m][n + 1] == "1":
+                        stack.append((m, n + 1))
+                    if m > 0 and grid[m - 1][n] == "1":
+                        stack.append((m - 1, n))
+                    if n > 0 and grid[m][n - 1] == "1":
+                        stack.append((m, n - 1))
+        return count
+
 
 if __name__ == '__main__':
     test_cases = [
         ([['1']], 1),
+        ([["1", "1", "1"],["0", "1", "0"],["0", "1", "0"]], 1),
         ([['1', '1', '1', '1', '0'], ['1', '1', '0', '1', '0'], ['1', '1', '0', '0', '0'], ['0', '0', '0', '0', '0']], 1),
         ([['1', '1', '0', '0', '0'], ['1', '1', '0', '0', '0'], ['0', '0', '1', '0', '0'], ['0', '0', '0', '1', '1']], 3),
         ([['1', '0', '1', '1', '1'], ['1', '0', '1', '0', '1'], ['1', '1', '1', '0', '1']], 1),
