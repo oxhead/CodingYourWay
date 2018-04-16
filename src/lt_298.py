@@ -51,6 +51,27 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(h)
+        def dfs(node):
+            if not node: return 0
+            count = 1
+            for child in (node.left, node.right):
+                if not child: continue
+                count_child = dfs(child)
+                if child.val == node.val + 1:
+                    count = max(count, count_child + 1)
+            self.max_count = max(self.max_count, count)
+            return count
+        self.max_count = 0
+        dfs(root)
+        return self.max_count
+
+    def longestConsecutive_verbose(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        # Time: O(n)
+        # Space: O(h)
         def dfs(node, previous, count, max_count):
             if not node: return count
             if node.val == previous + 1:
