@@ -46,6 +46,25 @@ class Solution:
         slow.next = slow.next.next
         return dummy.next
 
+    def removeNthFromEnd_v2(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        previous, slow, fast = None, head, head
+        count = 0
+        while fast:
+            if count >= n:
+                previous, slow = slow, slow.next
+            fast = fast.next
+            count += 1
+        if not previous:
+            head = head.next
+        else:
+            previous.next = slow.next
+        return head
+
     def removeNthFromEnd_array(self, head, n):
         """
         :type head: ListNode
@@ -69,6 +88,26 @@ class Solution:
         else:
             data[-(n + 1)].next = data[-n].next
         return head
+
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        previous, slow, fast = None, head, head
+        count = 0
+        while fast:
+            if count >= n:
+                previous, slow = slow, slow.next
+            fast = fast.next
+            count += 1
+        if not previous:
+            head = head.next
+        else:
+            previous.next = slow.next
+        return head
+                
 
 if __name__ == '__main__':
     test_cases = [
