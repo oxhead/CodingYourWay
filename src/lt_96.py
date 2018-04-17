@@ -39,14 +39,20 @@ class Solution:
         dp = [[0] * n for _ in range(n)]
         return build(0, n - 1)
 
-    def numTrees(self, n):
+    def numTrees_math(self, n):
         """
         :type n: int
         :rtype: int
         """
         # Time: O(n^2)
         # Space: O(n)
-        if n < 2: return n
+        # https://www.jianshu.com/p/a7cbbfcff9a0
+        # f(5) = g(n1, [], [n2...n5]) +
+        #        g(n2, [n1], [n3...n5]) +
+        #        g(n3, [n1, n2], [n4, n5]) +
+        #        g(n4, [n1...n3], [n5]) +
+        #        g(n5, [n1...n4], [])
+        #      = g(j) * g(i - j - 1) for i <= n, j < i
         dp = [0 for _ in range(n + 1)]
         dp[0] = 1
         for i in range(1, n + 1):
