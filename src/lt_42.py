@@ -26,6 +26,23 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(n)
+        stack = []
+        vol = 0
+        for i, h in enumerate(height):
+            while stack and h > stack[-1][1]:
+                previous = stack.pop()
+                if not stack: continue
+                vol += (min(h, stack[-1][1]) - previous[1]) * (i - stack[-1][0] - 1)
+            stack.append((i, h))
+        return vol
+
+    def trap_twosides(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        # Time: O(n)
+        # Space: O(n)
         # https://github.com/algorhythms/LeetCode/blob/master/041%20Trapping%20Rain%20Water.py
         left_maxs = [0 for _ in height]
         right_maxs = [0 for _ in height]
@@ -40,9 +57,9 @@ class Solution:
             right_max = max(right_max, h)
             right_maxs[i] = right_max
 
-        #print('left :', left_maxs)
-        #print('right:', right_maxs)
-        #print('vol  :', [max(0, min(left_maxs[i], right_maxs[i]) - h) for i, h in enumerate(height)])
+        # print('left :', left_maxs)
+        # print('right:', right_maxs)
+        # print('vol  :', [max(0, min(left_maxs[i], right_maxs[i]) - h) for i, h in enumerate(height)])
         volume = 0
         for i, h in enumerate(height):
             volume += min(left_maxs[i], right_maxs[i]) - h
@@ -50,7 +67,7 @@ class Solution:
             # volume += max(0, min(left_maxs[i], right_maxs[i]) - h)
         return volume
 
-    def trap(self, height):
+    def trap_twopointers(self, height):
         """
         :type height: List[int]
         :rtype: int
@@ -91,6 +108,7 @@ class Solution:
 if __name__ == '__main__':
     test_cases = [
         ([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1], 6),
+        ([2, 1, 0, 2], 3),
     ]
 
     for test_case in test_cases:
