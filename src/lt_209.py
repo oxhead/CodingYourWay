@@ -26,6 +26,24 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
+        left, right = -1, 0
+        min_length = float('inf')
+        total = 0
+        while right < len(nums):
+            total += nums[right]
+            while left < right and total >= s:
+                min_length = min(min_length, right - left)
+                left += 1
+                total -= nums[left]
+            right += 1
+        return min_length if min_length != float('inf') else 0
+
+    def minSubArrayLen_v2(self, s, nums):
+        """
+        :type s: int
+        :type nums: List[int]
+        :rtype: int
+        """
         # Time: O(n)
         # Space: O(1)
         min_length = float('inf')
@@ -39,7 +57,7 @@ class Solution:
                 left += 1
         return min_length if min_length != float('inf') else 0
 
-    def minSubArrayLen_v2(self, s, nums):
+    def minSubArrayLen_v3(self, s, nums):
         """
         :type s: int
         :type nums: List[int]
@@ -114,9 +132,11 @@ class Solution:
                     left += 1
         return min_length if min_length < float('inf') else len(nums) if sum(nums) >= s else 0
 
+
 if __name__ == '__main__':
     test_cases = [
         ((100, []), 0),
+        ((3, [1, 1]), 0),
         ((7, [2, 3, 1, 2, 4, 3]), 2),
         ((15, [1, 2, 3, 4, 5]), 5),
         ((15, [5, 1, 3, 5, 10, 7, 4, 9, 2, 8]), 2),
