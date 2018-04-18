@@ -31,6 +31,35 @@ class Solution:
         """
         # Time: O(n^3)
         # Space: O(1)
+        nums.sort()
+        output = []
+        for i in range(len(nums) - 3):
+            if i > 0 and nums[i] == nums[i - 1]: continue
+            for j in range(i + 1, len(nums) - 2):
+                if j > i + 1 and nums[j] == nums[j - 1]: continue
+                m, n = j + 1, len(nums) - 1
+                total = target - nums[i] - nums[j]
+                while m < n:
+                    if nums[m] + nums[n] == total:
+                        output.append([nums[i], nums[j], nums[m], nums[n]])
+                        m += 1
+                        n -= 1
+                        while m < n and nums[m] == nums[m - 1]: m += 1
+                        while m < n and nums[n] == nums[n + 1]: n -= 1
+                    elif nums[m] + nums[n] < total:
+                        m += 1
+                    else:
+                        n -= 1
+        return output
+
+    def fourSum_modulized(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        # Time: O(n^3)
+        # Space: O(1)
         # https://www.tangjikai.com/algorithms/leetcode-18-4sum
         def k_sum(nums, target, k):
             if k == 2:
@@ -60,36 +89,6 @@ class Solution:
         nums.sort()
         return list(list(x) for x in k_sum(nums, target, 4))
 
-    def fourSum_nestedloop(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[List[int]]
-        """
-        output = []
-        nums.sort()
-        for i in range(len(nums) - 3):
-            if i > 0 and nums[i] == nums[i - 1]:
-                continue
-            for j in range(i + 1, len(nums) - 2):
-                if j > i + 1 and nums[j] == nums[j - 1]:
-                    continue
-                total = target - nums[i] - nums[j]
-                left, right = j + 1, len(nums) - 1
-                while left < right:
-                    if nums[left] + nums[right] == total:
-                        output.append([nums[i], nums[j], nums[left], nums[right]])
-                        left += 1
-                        right -= 1
-                        while left < right and nums[left] == nums[left + 1]:
-                            left += 1
-                        while left < right and nums[right] == nums[right - 1]:
-                            right -= 1
-                    elif nums[left] + nums[right] < total:
-                        left += 1
-                    else:
-                        right -= 1
-        return output
 
     def fourSum_noyield(self, nums, target):
         """
@@ -126,13 +125,14 @@ class Solution:
         if not nums: return []
         nums.sort()
         return k_sum(0, len(nums) - 1, target, 4)
-        
-            
-        
+
 
 if __name__ == '__main__':
     test_cases = [
+        (([0, 0, 0, 0], 0), [[0, 0, 0, 0]]),
         (([1, 0, -1, 0, -2, 2], 0), [[-1, 0, 0, 1], [-2, -1, 1, 2], [-2, 0, 0, 2]]),
+        (([-1, 2, 2, -5, 0, -1, 4], 3), [[-5, 2, 2, 4], [-1, 0, 2, 2]]),
+        (([-1, 0, -5, -2, -2, -4, 0, 1, -2], -9), [[-5, -4, -1, 1], [-5, -4, 0, 0], [-5, -2, -2, 0], [-4, -2, -2, -1]]),
     ]
 
     for test_case in test_cases:
