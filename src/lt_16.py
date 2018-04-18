@@ -24,16 +24,14 @@ class Solution:
         # Time: O(n^2)
         # Space: O(1)
         nums.sort()
-        best_val = float('inf')
-        output = None
+        closet_sum = float('inf')
         for i in range(len(nums) - 2):
             left, right = i + 1, len(nums) - 1
             while left < right:
                 total = nums[i] + nums[left] + nums[right]
                 diff = total - target
-                if abs(diff) < best_val:
-                    best_val = abs(diff)
-                    output = total
+                if abs(diff) < abs(closet_sum - target):
+                    closet_sum = total
 
                 if diff < 0:
                     left += 1
@@ -41,13 +39,14 @@ class Solution:
                     right -= 1
                 else:
                     return target
-        return output
+        return closet_sum
 
 
 if __name__ == '__main__':
     test_cases = [
-        (([0,1,2], 3), 3),
+        (([0, 1, 2], 3), 3),
         (([-1, 2, 1, -4], 1), 2),
+        (([1, 1, -1, -1, 3], -1), -1),
     ]
 
     for test_case in test_cases:
