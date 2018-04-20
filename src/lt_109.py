@@ -42,8 +42,6 @@ from utils import serialize_tree, print_tree, is_height_balanced_bst
 #         self.right = None
 
 class Solution:
-    def __init__(self):
-        self.count = 0
     def sortedListToBST(self, head):
         """
         :type head: ListNode
