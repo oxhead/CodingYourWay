@@ -73,11 +73,12 @@ class Solution:
             return output
         output = generate(nums)
         return [list(s) for s in set([tuple(o) for o in output])]
-        
+
 
 if __name__ == '__main__':
     test_cases = [
         ([1, 1, 2], [[1, 1, 2], [1, 2, 1], [2, 1, 1]]),
+        ([1, 2, 1], [[1, 1, 2], [1, 2, 1], [2, 1, 1]]),
     ]
 
     for test_case in test_cases:
