@@ -2,10 +2,10 @@
 https://leetcode.com/problems/permutations
 
 Related:
-  - lt_31
-  - lt_47
-  - lt_60
-  - lt_77
+  - lt_31_next-permutation
+  - lt_47_permutations-ii
+  - lt_60_permutation-sequence
+  - lt_77_combinations
 """
 
 """
@@ -37,13 +37,10 @@ class Solution:
         output = [[]]
         for n in nums:
             tmp = []
-            print(n)
-            print('before:', output)
             for sub in output:
                 for i in range(len(sub) + 1):
                     tmp.append(sub[:i] + [n] + sub[i:])
             output = tmp
-            print('after:', output)
         return output
 
     def permute_recursive(self, nums):
