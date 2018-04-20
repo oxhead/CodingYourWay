@@ -28,7 +28,9 @@ class Solution:
         :type root: TreeNode
         :rtype: int
         """
-        return 0 if root == None else max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
+        # Time: O(n)
+        # Space: O(h)
+        return 0 if not root else max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
 
 
 if __name__ == '__main__':
