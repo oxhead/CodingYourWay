@@ -44,6 +44,16 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(h)
+        if not root: return root
+        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+
+    def invertTree_v2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: TreeNode
+        """
+        # Time: O(n)
+        # Space: O(h)
         def swap_tree(node):
             if not node: return
             node.left, node.right = node.right, node.left
@@ -51,6 +61,7 @@ class Solution:
             swap_tree(node.right) 
         swap_tree(root)
         return root
+
 
 if __name__ == '__main__':
     test_cases = [
