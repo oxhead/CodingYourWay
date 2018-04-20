@@ -22,6 +22,7 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(n)
+        # https://github.com/kamyu104/LeetCode/blob/master/Python/contains-duplicate-iii.py
         if k < 0 or t < 0: return False
         window = collections.OrderedDict()
         for n in nums:
