@@ -2,13 +2,13 @@
 https://leetcode.com/problems/binary-tree-inorder-traversal
 
 Related:
-  - lt_98
-  - lt_144
-  - lt_145
-  - lt_173
-  - lt_230
-  - lt_272
-  - lt_285
+  - lt_98_validate-binary-search-tree
+  - lt_144_binary-tree-preorder-traversal
+  - lt_145_binary-tree-postorder-traversal
+  - lt_173_binary-search-tree-iterator
+  - lt_230_kth-smallest-element-in-a-bst
+  - lt_272_closest-binary-search-tree-value-ii
+  - lt_285_minimum-distance-between-bst-nodes
 """
 
 """
@@ -42,7 +42,27 @@ class Solution:
         """
         :type root: TreeNode
         :rtype: List[int]
+        """
+        # Time: O(n)
+        # Space: O(n)
+        node = root
+        stack = []
+        output = []
+        while stack or node:
+            while node:
+                stack.append(node)
+                node = node.left
+            current = stack.pop()
+            output.append(current.val)
+            node = current.right
+        return output
+
+    def inorderTraversal_stack(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
         """ 
+        # Simulate call stack
         output, stack = [], [(root, False)]
         while stack:
             node, is_visited = stack.pop()
@@ -55,23 +75,6 @@ class Solution:
                 stack.append((node.left, False))
         return output
 
-    def inorderTraversal_iterative2(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[int]
-        """
-        path_list = []
-        stack = []
-        node = root
-        while len(stack) > 0 or node:
-            while node:
-                stack.append(node)
-                node = node.left
-            node = stack.pop()
-            path_list.append(node.val)
-            node = node.right
-        return path_list
- 
     def inorderTraversal_recursive(self, root):
         """
         :type root: TreeNode
@@ -115,6 +118,7 @@ class Solution:
                     output.append(node.val)
                     node = node.right
         return output
+
 
 if __name__ == '__main__':
     test_cases = [
