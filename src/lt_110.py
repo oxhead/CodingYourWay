@@ -54,6 +54,8 @@ class Solution:
         :type root: TreeNode
         :rtype: bool
         """
+        # Time: O(n)
+        # Space: O(h)
         def get_height(node):
             if not node: return 0
             left_height = get_height(node.left)
@@ -75,6 +77,7 @@ class Solution:
             #return 1 + max(find_height(node.left), find_height(node.right))
         if not root: return True
         return abs(find_height(root.left) - find_height(root.right)) <= 1 and self.isBalanced(root.left) and self.isBalanced(root.right)
+
 
 if __name__ == '__main__':
     test_cases = [
