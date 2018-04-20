@@ -57,6 +57,7 @@ class Solution:
         elif not root.left and not root.right: return 1
         return traverse(root, 0, float('inf'))
 
+
 if __name__ == '__main__':
     test_cases = [
         ([], 0),
