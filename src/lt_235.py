@@ -59,6 +59,23 @@ class Solution(object):
         if p.val < root.val: return self.lowestCommonAncestor(root.left, p, q)
         if p.val > root.val: return self.lowestCommonAncestor(root.right, p, q)
 
+    def lowestCommonAncestor_v2(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        if not root: return None
+        elif root.val in (p.val, q.val): return root
+        elif p.val < root.val < q.val or q.val < root.val < p.val: return root
+        else:
+            if root.val > p.val and root.val > q.val:
+                return self.lowestCommonAncestor(root.left, p, q)
+            else:
+                return self.lowestCommonAncestor(root.right, p, q)
+
+
 if __name__ == '__main__':
     test_cases = [
         (([6, 2, 8, 0, 4, 7, 9, None, None, 3, 5], 2, 8), 6),
