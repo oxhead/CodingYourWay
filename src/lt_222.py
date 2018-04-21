@@ -29,6 +29,26 @@ class Solution:
         """
         # Time: O(logn ^ 2)
         # Space: O(logn)
+        # https://www.liuchuo.net/archives/3253
+        if not root: return 0
+        height_left, height_right = 0, 0
+        left, right = root, root
+        while left:
+            left = left.left
+            height_left += 1
+        while right:
+            right = right.right
+            height_right += 1
+        if height_left == height_right: return 2 ** height_left - 1
+        else: return 1 + self.countNodes(root.left) + self.countNodes(root.right)
+
+    def countNodes_v2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        # Time: O(logn ^ 2)
+        # Space: O(logn)
         def get_level(node):
             return 1 + get_level(node.left) if node else -1
         h = get_level(root)
@@ -38,7 +58,7 @@ class Solution:
         else:
             return self.countNodes(root.left) + (1 << h-1) 
 
-    def countNodes(self, root):
+    def countNodes_naive(self, root):
         """
         :type root: TreeNode
         :rtype: int
@@ -46,7 +66,7 @@ class Solution:
         # Time: O(n)
         # Space: O(logn)
         return 0 if not root else 1 + self.countNodes(root.left) + self.countNodes(root.right)
-            
+
 
 if __name__ == '__main__':
     test_cases = [
