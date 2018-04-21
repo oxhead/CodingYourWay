@@ -2,9 +2,9 @@
 https://leetcode.com/problems/valid-parentheses
 
 Related:
-  - lt_22
-  - lt_32
-  - lt_301
+  - lt_22_generate-parentheses
+  - lt_32_longest-valid-parentheses
+  - lt_301_remove-invalid-parentheses
 """
 
 """
@@ -14,6 +14,7 @@ The brackets must close in the correct order, "()" and "()[]{}" are all valid bu
 """
 
 class Solution(object):
+    
     def isValid(self, s):
         """
         :type s: str
@@ -23,15 +24,14 @@ class Solution(object):
         # Space: O(n)
         stack = []
         for c in s:
-            if c in ('(', '{', '['):
+            if c in ('(', '[', '{'):
                 stack.append(c)
+            elif not stack: return False
             else:
-                if len(stack) == 0: return False
-                c_left = stack.pop()
-                if c_left == '(' and c != ')': return False
-                if c_left == '{' and c != '}': return False
-                if c_left == '[' and c != ']': return False
-        return len(stack) == 0
+                p = stack.pop()
+                if (p, c) not in (('(', ')'), ('[', ']'), ('{', '}')): return False
+        return True
+
 
 if __name__ == '__main__':
     test_cases = [
