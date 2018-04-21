@@ -2,12 +2,8 @@
 https://leetcode.com/problems/generate-parentheses
 
 Related:
-  - lt_17
-  - lt_20
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_17_letter-combinations-of-a-phone-number
+  - lt_20_valid-parentheses
 """
 
 """
@@ -43,7 +39,7 @@ class Solution:
         output = []
         generate(n, n, "", output)
         return output
-            
+
 
 if __name__ == '__main__':
     test_cases = [
