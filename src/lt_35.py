@@ -40,6 +40,22 @@ class Solution:
         """
         # Time: O(logn)
         # Space: O(1)
+        # Similar to the lower bound function, where nums[mid] >= target
+        left, right = 0, len(nums)
+        while left < right:
+            mid = left + (right - left) // 2
+            if nums[mid] < target: left = mid + 1
+            else: right = mid
+        return right
+
+    def searchInsert_v2(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        # Time: O(logn)
+        # Space: O(1)
         left, right = 0, len(nums) - 1
         while left <= right:
             mid = left + (right - left) // 2
