@@ -2,11 +2,7 @@
 https://leetcode.com/problems/intersection-of-two-arrays
 
 Related:
-  - lt_350
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_350_intersection-of-two-arrays-ii
 """
 
 """
@@ -35,7 +31,6 @@ class Solution:
                 output.add(n)
         return list(output)
 
-        
 
 if __name__ == '__main__':
     test_cases = [
