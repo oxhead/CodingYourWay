@@ -43,6 +43,30 @@ class Solution:
                     right = mid - 1
         return -1
 
+    def search_v2(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        # Time: O(logn)
+        # Space: O(1)
+        left, right = 0, len(nums)
+        while left < right:
+            mid = left + (right - left) // 2
+            if nums[mid] == target: return mid
+            elif nums[left] <= nums[mid]:
+                if nums[left] <= target < nums[mid]:
+                    right = mid
+                else:
+                    left = mid + 1
+            else:
+                if nums[mid] < target <= nums[right - 1]:
+                    left = mid + 1
+                else:
+                    right = mid
+        return -1
+
     def search_naive(self, nums, target):
         """
         :type nums: List[int]
