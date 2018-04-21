@@ -41,12 +41,14 @@ class Solution:
         # Time: O(logn)
         # Space: O(1)
         # Similar to the lower bound function, where nums[mid] >= target
-        left, right = 0, len(nums)
-        while left < right:
+        # if nums[mid] < target, left = mid + 1
+        # otherwise, right = mid - 1
+        left, right = 0, len(nums) - 1
+        while left <= right:
             mid = left + (right - left) // 2
-            if nums[mid] < target: left = mid + 1
-            else: right = mid
-        return right
+            if nums[mid] < target: left += 1
+            else: right = mid - 1
+        return left
 
     def searchInsert_v2(self, nums, target):
         """
@@ -54,8 +56,7 @@ class Solution:
         :type target: int
         :rtype: int
         """
-        # Time: O(logn)
-        # Space: O(1)
+        # This might not work when duplicat elements exist
         left, right = 0, len(nums) - 1
         while left <= right:
             mid = left + (right - left) // 2
@@ -66,6 +67,22 @@ class Solution:
             else:
                 left = mid + 1
         return left
+
+    def searchInsert_v3(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        # Time: O(logn)
+        # Space: O(1)
+        # Similar to the lower bound function, where nums[mid] >= target
+        left, right = 0, len(nums)
+        while left < right:
+            mid = left + (right - left) // 2
+            if nums[mid] < target: left = mid + 1
+            else: right = mid
+        return right
 
 
 if __name__ == '__main__':
