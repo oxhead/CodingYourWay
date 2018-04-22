@@ -35,6 +35,7 @@ class Solution:
             return 0x7FFFFFFF
         return sign * ans
 
+
 if __name__ == '__main__':
     test_cases = [
         ((29, 3), 9),
