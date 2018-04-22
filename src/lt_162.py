@@ -2,10 +2,6 @@
 https://leetcode.com/problems/find-peak-element
 
 Related:
-
-Complexity:
-  - Time:
-  - Space:
 """
 
 """
@@ -31,6 +27,20 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
+        # Time: O(logn)
+        # Space: O(1)
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = left + (right - left) // 2
+            if mid < len(nums) -1 and nums[mid] < nums[mid + 1]: left = mid + 1
+            else: right = mid - 1
+        return left
+
+    def findPeakElement_v2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
         # https://shenjie1993.gitbooks.io/leetcode-python/162%20Find%20Peak%20Element.html
         left, right = 0, len(nums) - 1
         while left < right:
@@ -41,8 +51,10 @@ class Solution:
                 right = mid
         return left
 
+
 if __name__ == '__main__':
     test_cases = [
+        ([1, 2, 1, 2, 3], 4),
         ([1, 2, 3, 1], 2),
         ([1, 2, 3, 4], 3),
         ([4, 3, 2, 1], 0),
