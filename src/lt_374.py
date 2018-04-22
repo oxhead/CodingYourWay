@@ -43,16 +43,13 @@ class Solution(object):
         """
         # Time: O(logn)
         # Space: O(1)
-        n_min, n_max = 1, n
-        while True:
-            mid = (n_min + n_max) // 2
+        left, right = 1, n
+        while left <= right:
+            mid = left + (right - left) // 2
             result = guess(mid)
-            if result == 0:
-                return mid
-            elif result == 1:
-                n_min = mid + 1
-            else:
-                n_max = mid - 1
+            if result == 0: return mid
+            elif result == 1: left = mid + 1
+            else: right = mid - 1
 
 
 if __name__ == '__main__':
