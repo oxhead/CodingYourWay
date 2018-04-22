@@ -30,6 +30,25 @@ class Solution:
             left, right = 0, len(nums) - 1
             while left <= right:
                 mid = left + (right - left) // 2
+                if comparator(nums[mid], target): left = mid + 1
+                else: right = mid - 1
+            return left
+        left = binary_search(nums, target, lambda x, y: x < y)
+        right = binary_search(nums, target, lambda x, y: x <= y)
+        return [left, right - 1] if left < len(nums) and nums[left] == target else [-1, -1]
+ 
+    def searchRange_v2(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        # Time: O(logn)
+        # Space: O(1)
+        def binary_search(nums, target, comparator):
+            left, right = 0, len(nums) - 1
+            while left <= right:
+                mid = left + (right - left) // 2
                 if comparator(nums[mid], target):
                     right = mid - 1
                 else:
@@ -63,8 +82,11 @@ class Solution:
 
 if __name__ == '__main__':
     test_cases = [
+        (([], 0), [-1, -1]),
         (([1], 1), [0, 0]),
+        (([2, 2], 3), [-1, -1]),
         (([5, 7, 7, 8, 8, 10], 8), [3, 4]),
+        (([5, 7, 7, 8, 8, 10], 6), [-1, -1]),
     ]
 
     for test_case in test_cases:
