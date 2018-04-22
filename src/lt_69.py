@@ -31,33 +31,16 @@ class Solution:
         :type x: int
         :rtype: int
         """
-        if x < 2: return x
+        # Time: O(logn)
+        # Space: O(1)
+        if x == 0 or x == 1: return x
         left, right = 1, x // 2
         while left <= right:
             mid = left + (right - left) // 2
-            current = mid**2
-            if current == x:
-                return mid
-            elif current > x:
-                right = mid - 1
-            else:
-                left = mid + 1
-        return left - 1
-
-    def mySqrt_v2(self, x):
-        """
-        :type x: int
-        :rtype: int
-        """
-        if x == 0 or x == 1: return x
-        left = 0
-        right = x
-        while left <= right:
-            mid = (left + right) // 2
-            remaining = x // mid
-            if remaining == mid: return mid
-            elif remaining < mid: right = mid -1
-            else: left = mid + 1
+            n = mid ** 2
+            if n == x: return mid
+            elif n < x: left = mid + 1
+            else: right = mid - 1
         return right
 
 
