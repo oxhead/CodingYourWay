@@ -35,6 +35,7 @@ If the current candidate does not exist in all words' prefix, you could stop bac
 class TrieNode:
     def __init__(self):
         self.is_word = False
+        self.word = None
         self.leaves = {}
 
     def insert(self, word):
@@ -43,11 +44,44 @@ class TrieNode:
             if c not in current.leaves:
                 current.leaves[c] = TrieNode()
             current = current.leaves[c]
+        # for version 2
         current.is_word = True
+        current.word = word
 
 
 class Solution:
     def findWords(self, board, words):
+        """
+        :type board: List[List[str]]
+        :type words: List[str]
+        :rtype: List[str]
+        """
+        # Time: O(?)
+        # Space: O(?)
+        def search(trie, i, j):
+            if visited[i][j] or board[i][j] not in trie.leaves: return
+            trie = trie.leaves[board[i][j]]
+            if trie.word:
+                output.append(trie.word)
+                trie.word = None
+            visited[i][j] = True
+            if i > 0: search(trie, i - 1, j)
+            if j > 0: search(trie, i, j - 1)
+            if i < len(board) - 1: search(trie, i + 1, j)
+            if j < len(board[0]) - 1: search(trie, i, j + 1)
+            visited[i][j] = False
+
+        trie = TrieNode()
+        for word in words:
+            trie.insert(word)
+        output = []
+        visited = [[False] * len(board[i]) for i in range(len(board))]
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                search(trie, i, j)
+        return output
+
+    def findWords_v2(self, board, words):
         """
         :type board: List[List[str]]
         :type words: List[str]
@@ -113,11 +147,12 @@ class Solution:
             if found:
                 output.append(word)
         return output
-                       
 
 
 if __name__ == '__main__':
     test_cases = [
+        (([["a", "a"]], ["aaa"]), []),
+        (([['o','a','a','n'], ['e','t','a','e'], ['i','h','k','r'], ['i','f','l','v']], ["eat"]), ["eat"]),
         (([['a']], ['a', 'a']), ['a']),
         (([['o','a','a','n'], ['e','t','a','e'], ['i','h','k','r'], ['i','f','l','v']], ["oath","pea","eat","rain"]), ["eat","oath"]),
     ]
