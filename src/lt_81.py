@@ -74,9 +74,6 @@ class Solution:
         return False
 
 
-
-        
-
 if __name__ == '__main__':
     test_cases = [
         (([1], 1), True),

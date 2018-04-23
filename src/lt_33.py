@@ -31,6 +31,7 @@ class Solution:
             mid = left + (right - left) // 2
             if nums[mid] == target:
                 return mid
+            # This is important to have <= here but not <
             elif nums[left] <= nums[mid]:
                 if nums[left] <= target <=  nums[mid]:
                     right = mid - 1
