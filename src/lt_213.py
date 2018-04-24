@@ -42,6 +42,7 @@ class Solution:
             dp2[i] = max(nums[i] + dp2[i - 2], dp2[i - 1])
         return max(dp1[-2], dp2[-1])
 
+
 if __name__ == '__main__':
     test_cases = [
         ([], 0),
