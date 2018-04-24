@@ -2,13 +2,9 @@
 https://leetcode.com/problems/product-of-array-except-self
 
 Related:
-  - lt_42
-  - lt_152
-  - lt_265
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_42_trapping-rain-water
+  - lt_152_maximum-product-subarray
+  - lt_265_paint-house-ii
 """
 
 """
