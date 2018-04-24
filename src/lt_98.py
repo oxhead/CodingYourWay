@@ -96,6 +96,7 @@ class Solution:
         if not root: return True
         return is_valid_tree(root.left, root.val, operator.lt) and is_valid_tree(root.right, root.val, operator.gt)
 
+
 if __name__ == '__main__':
     test_cases = [
         ([2, 1, 3], True),
