@@ -50,6 +50,28 @@ class Solution:
             output[i] = reduce(mul, nums[:i] + nums[i+1:], 1)
         return output
 
+    def productExceptSelf_v2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        product = 1
+        count = 0
+        for n in nums:
+            if n == 0:
+                count += 1
+                if count > 1:
+                    product = 0
+                    break
+            product *= n
+        output = []
+        for n in nums:
+            if n == 0 or count == 1:
+                output.append(product)
+            else:
+                output.append(product / n)
+        return output
+
 
 if __name__ == '__main__':
     test_cases = [
