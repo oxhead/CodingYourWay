@@ -38,6 +38,7 @@ class Solution:
                 return False
         return True
 
+
 if __name__ == '__main__':
     test_cases = [
         ([[0, 10]], True),
