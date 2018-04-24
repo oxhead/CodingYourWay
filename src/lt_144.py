@@ -2,12 +2,8 @@
 https://leetcode.com/problems/binary-tree-preorder-traversal
 
 Related:
-  - lt_94
-  - lt_255
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_94_binary-tree-inorder-traversal
+  - lt_255_verify-preorder-sequence-in-binary-search-tree
 """
 
 """
