@@ -2,14 +2,14 @@
 https://leetcode.com/problems/house-robber
 
 Related:
-  - lt_152
-  - lt_123
-  - lt_256
-  - lt_276
-  - lt_337
-  - lt_600
-  - lt_656
-  - lt_740
+  - lt_152_maximum-product-subarray
+  - lt_213_house-robber-ii
+  - lt_256_paint-house
+  - lt_276_paint-fence
+  - lt_337_house-robber-iii
+  - lt_600_non-negative-integers-without-consecutive-ones
+  - lt_656_coin-path
+  - lt_740_delete-and-earn
 """
 
 """
