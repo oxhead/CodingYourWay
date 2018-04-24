@@ -39,7 +39,7 @@ class Solution:
         :type wordList: List[str]
         :rtype: int
         """
-        # Time: O(n * d), d is the number of alphabetic characters.
+        # Time: O(n * 26 ^ d), n is the length of wordList and d is the length of words(the same length).
         # Space: O(n)
         distance = 0
         candidates = [beginWord]
@@ -90,6 +90,31 @@ class Solution:
             wordDict -= front
         return 0 
 
+    def ladderLength(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: int
+        """
+        distance = 0
+        valid_words = set(wordList)
+        visited = set([beginWord])
+        candidates = [beginWord]
+        while candidates:
+            queue = []
+            for candidate in candidates:
+                if candidate == endWord: return distance + 1
+                for i in range(len(candidate)):
+                    for c in "abcdefghijklmnopqrstuvwxyz":
+                        word = candidate[:i] + c + candidate[i+1:]
+                        if word not in visited and word in valid_words:
+                            queue.append(word)
+                            visited.add(word)
+            distance += 1
+            candidates = queue
+        return 0
+                
 
 if __name__ == '__main__':
     test_cases = [
