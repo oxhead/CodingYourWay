@@ -2,10 +2,7 @@
 https://leetcode.com/problems/intersection-of-two-linked-lists
 
 Related:
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_599_minimum-index-sum-of-two-lists
 """
 
 """
@@ -67,6 +64,7 @@ class Solution(object):
             count += 1
             tmp = tmp.next
         return count
+        
 
 if __name__ == '__main__':
     test_cases = [
