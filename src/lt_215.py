@@ -2,13 +2,9 @@
 https://leetcode.com/problems/kth-largest-element-in-an-array
 
 Related:
-  - lt_324
-  - lt_347
-  - lt_414
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_324_wiggle-sort-ii
+  - lt_347_top-k-frequent-elements
+  - lt_414_third-maximum-number
 """
 
 """
@@ -21,6 +17,8 @@ Note:
 You may assume k is always valid, 1 ≤ k ≤ array's length.
 """
 
+import heapq
+
 class Solution:
     def findKthLargest(self, nums, k):
         """
@@ -28,7 +26,6 @@ class Solution:
         :type k: int
         :rtype: int
         """
-        import heapq
         heapq.heapify(nums)
         return heapq.nlargest(k, nums)[-1]
 
@@ -72,6 +69,22 @@ class Solution:
                 if nums[j] > nums[i]:
                     nums[j], nums[i] = nums[i], nums[j] 
         return nums[len(nums) - k]
+
+    def findKthLargest_heap(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        heap = []
+        for n in nums:
+            if len(heap) < (len(nums) - k + 1): heapq.heappush(heap, -n)
+            else:
+                if n < -heap[0]:
+                    heapq.heappop(heap)
+                    heapq.heappush(heap, -n) 
+        return -heap[0]
+
 
 if __name__ == '__main__':
     test_cases = [
