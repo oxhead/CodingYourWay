@@ -2,12 +2,8 @@
 https://leetcode.com/problems/kth-smallest-element-in-a-bst
 
 Related:
-  - lt_94
-  - lt_671
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_94_binary-tree-inorder-traversal
+  - lt_671_second-minimum-node-in-a-binary-tree
 """
 
 """
@@ -36,6 +32,8 @@ class Solution:
         :type k: int
         :rtype: int
         """
+        # Time: O(n)
+        # Space: O(n)
         # https://tenderleo.gitbooks.io/leetcode-solutions-/content/GoogleMedium/230.html
         stack = []
         node = root
@@ -85,7 +83,7 @@ class Solution:
         nums = []
         traverse(root, nums)
         return sorted(nums)[k-1]
-            
+
 
 if __name__ == '__main__':
     test_cases = [
