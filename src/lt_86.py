@@ -31,6 +31,8 @@ class Solution:
         :type x: int
         :rtype: ListNode
         """
+        # Time: O(n)
+        # Space: O(1)
         left_head = left = ListNode(-1)
         right_head = right = ListNode(-1)
         node = head
