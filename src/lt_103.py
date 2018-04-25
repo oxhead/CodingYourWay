@@ -44,6 +44,30 @@ class Solution:
         # Time: O(n)
         # Space: O(n)
         if not root: return []
+        output = []
+        queue = [root]
+        level = 0
+        while queue:
+            level += 1
+            if level % 2 == 1:
+                output.append([n.val for n in queue])
+            else:
+                output.append([n.val for n in reversed(queue)])
+            tmp = []
+            for node in queue:
+                if node.left: tmp.append(node.left)
+                if node.right: tmp.append(node.right)
+            queue = tmp
+        return output
+
+    def zigzagLevelOrder_v2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        # Time: O(n)
+        # Space: O(n)
+        if not root: return []
 
         output = []
         queue_current = [root]
@@ -65,6 +89,7 @@ class Solution:
 
         return output
 
+            
 if __name__ == '__main__':
     test_cases = [
         ([], []),
