@@ -70,7 +70,7 @@ class Solution:
                     else:
                         dp[i][j] = dp[i-1][j] + dp[i][j-1] 
         return dp[-1][-1]
-        
+
 
 if __name__ == '__main__':
     test_cases = [
