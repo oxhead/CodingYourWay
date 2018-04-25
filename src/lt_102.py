@@ -2,11 +2,11 @@
 https://leetcode.com/problems/binary-tree-level-order-traversal
 
 Related:
-  - lt_103
-  - lt_107
-  - lt_111
-  - lt_314
-  - lt_637
+  - lt_103_binary-tree-zigzag-level-order-traversal
+  - lt_107_binary-tree-level-order-traversal-ii
+  - lt_111_minimum-depth-of-binary-tree
+  - lt_314_binary-tree-vertical-order-traversal
+  - lt_637_average-of-levels-in-binary-tree
 """
 
 """
@@ -39,6 +39,25 @@ return its level order traversal as:
 
 class Solution:
     def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        # Time: O(n)
+        # Space: O(n)
+        if not root: return []
+        output = []
+        queue = [root]
+        while queue:
+            output.append([n.val for n in queue])
+            tmp = []
+            for node in queue:
+                if node.left: tmp.append(node.left)
+                if node.right: tmp.append(node.right)
+            queue = tmp
+        return output
+
+    def levelOrder_v2(self, root):
         """
         :type root: TreeNode
         :rtype: List[List[int]]
