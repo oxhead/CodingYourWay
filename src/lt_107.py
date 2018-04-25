@@ -42,6 +42,8 @@ class Solution:
         :type root: TreeNode
         :rtype: List[List[int]]
         """
+        # Time: O(n)
+        # Space: O(n)
         if not root: return []
 
         output = []
@@ -50,10 +52,8 @@ class Solution:
             output.insert(0, [n.val for n in queue])
             queue_level = []
             for node in queue:
-                if node.left:
-                    queue_level.append(node.left)
-                if node.right:
-                    queue_level.append(node.right)
+                if node.left: queue_level.append(node.left)
+                if node.right: queue_level.append(node.right)
             queue = queue_level
         return output
 
