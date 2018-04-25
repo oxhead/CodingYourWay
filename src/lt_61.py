@@ -2,12 +2,8 @@
 https://leetcode.com/problems/rotate-list
 
 Related:
-  - lt_189
-  - lt_725
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_189_rotate-array
+  - lt_725_split-linked-list-in-parts
 """
 
 """
@@ -75,9 +71,34 @@ class Solution:
         tail.next = None
         return head
 
+    def rotateRight_v2(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        if not head: return head
+        node = head
+        count = 1
+        while node.next:
+            node = node.next
+            count += 1
+        node.next = head
+        tail = node
+        slow = fast = head
+        for _ in range(k % count):
+            fast = fast.next
+        while fast != tail:
+            slow = slow.next
+            fast = fast.next
+        head = slow.next
+        slow.next = None
+        return head
+
 if __name__ == '__main__':
     test_cases = [
          (([1, 2, 3, 4, 5], 2), [4, 5, 1, 2, 3]),
+         (([1, 2, 3], 2000000000), [2, 3, 1]),
     ]
 
     for test_case in test_cases:
