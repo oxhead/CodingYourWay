@@ -2,12 +2,8 @@
 https://leetcode.com/problems/linked-list-cycle
 
 Related:
-  - lt_141
-  - lt_287
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_141_linked-list-cycle
+  - lt_287_find-the-duplicate-number
 """
 
 """
@@ -33,9 +29,17 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
+        # Time: O(n)
+        # Space: O(1)
         # https://www.quora.com/How-does-Floyds-cycle-finding-algorithm-work-How-does-moving-the-tortoise-to-the-beginning-of-the-linked-list-while-keeping-the-hare-at-the-meeting-place-followed-by-moving-both-one-step-at-a-time-make-them-meet-at-starting-point-of-the-cycle
-        if not head or not head.next: return None
-
+        # x: distance from head to where the cycle begins
+        # y: distance from where the cycle begins to the meeting point
+        # z: distance from the meeting point to where the cycle begins
+        # the slow pointer travels x + y
+        # the fast pointer travels x + y + z + y = x + 2y + z
+        # since the faster pointer travels at 2x speed of the slow pointer
+        # 2 * (x + y) = x + 2y + z
+        # x = z
         fast = slow = head
         while fast and fast.next:
             fast = fast.next.next
@@ -48,7 +52,8 @@ class Solution(object):
                 return slow
 
         return None
-        
+
+
 if __name__ == '__main__':
     test_cases = [
         ([(1, None)], None),
