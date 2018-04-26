@@ -2,11 +2,7 @@
 https://leetcode.com/problems/linked-list-cycle
 
 Related:
-  - lt_142
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_142_linked-list-cycle-ii
 """
 
 """
@@ -30,14 +26,15 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
-        head1 = head
-        head2 = head.next
-        while head1 and head2:
-            if head1 == head2: return True
-            head1 = head1.next
-            head2 = head2.next
-            if head2: head2 = head2.next
+        # Time: O(n)
+        # Space: O(1)
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast: return True
         return False
+
         
 if __name__ == '__main__':
     test_cases = [
