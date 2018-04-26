@@ -58,6 +58,7 @@ class Solution:
             max_length = max(max_length, i - j)
         return max_length
 
+
 if __name__ == '__main__':
     test_cases = [
         ("c", 1),
