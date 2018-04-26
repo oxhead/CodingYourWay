@@ -23,10 +23,10 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(1)
-        count = 0
+        profit = 0
         for i in range(1, len(prices)):
-            count += max(0, prices[i] - prices[i - 1])
-        return count
+            profit += max(0, prices[i] - prices[i - 1])
+        return profit
 
     def maxProfit_oneline(self, prices):
         """
