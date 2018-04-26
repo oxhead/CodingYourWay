@@ -34,6 +34,7 @@ class Solution:
             sell_1 = max(sell_1, buy_1 + price)
             buy_2 = max(buy_2, sell_1 - price)
             sell_2 = max(sell_2, buy_2 + price)
+            print(price, buy_1, sell_1, buy_2, sell_2)
         return sell_2
 
     def maxProfit_atmostk(self, prices):
@@ -76,6 +77,39 @@ class Solution:
             max_price = max(max_price, prices[i])
             dp2[i] = max(dp2[i + 1], max_price - prices[i])
         return max([d1 + d2 for d1, d2 in zip(dp1, dp2)])
+
+    def maxProfit_TLE(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        # Time: O(n^2)
+        # Space: O(1)
+        def max_profit(start, end):
+            min_price = float('inf')
+            max_profit = 0
+            for i in range(start, end + 1):
+                min_price = min(min_price, prices[i])
+                max_profit = max(max_profit, prices[i] - min_price)
+            return max_profit
+        profit = 0
+        for i in range(len(prices)):
+            profit = max(profit, max_profit(0, i) + max_profit(i + 1, len(prices) - 1))
+        return profit
+
+    def maxProfit_v2(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        buy_1 = buy_2 = float('-inf')
+        sell_1 = sell_2 = 0
+        for price in prices:
+            if buy_1 < -price: buy_1 = -price
+            if sell_1 < buy_1 + price: sell_1 = buy_1 + price
+            if buy_2 < sell_1 - price: buy_2 = sell_1 - price
+            if sell_2 < buy_2 + price: sell_2 = buy_2 + price
+        return sell_2
 
 
 if __name__ == '__main__':
