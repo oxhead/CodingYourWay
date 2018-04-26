@@ -71,7 +71,7 @@ class Solution:
         for sub in self.combinationSum2(candidates[1:], target - candidates[0]):
             output.append([candidates[0]] + sub)
         return [list(s) for s in set([tuple(sub) for sub in output])]
-        
+
 
 if __name__ == '__main__':
     test_cases = [
