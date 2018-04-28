@@ -25,11 +25,9 @@ class Solution:
         :type nums2: List[int]
         :rtype: List[int]
         """
-        output = set()
-        for n in nums1:
-            if n in nums2:
-                output.add(n)
-        return list(output)
+        # Time: O(m + n)
+        # Space: O(m + n)
+        return list(set(nums1) & set(nums2))
 
 
 if __name__ == '__main__':
