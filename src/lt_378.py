@@ -2,13 +2,9 @@
 https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix
 
 Related:
-  - lt_668 (kth-smallest-number-in-multiplication-table)
-  - lt_407 (find-k-th-smallest-pair-distance)
-  - lt_379 (find-k-pairs-with-smallest-sums)
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_668_kth-smallest-number-in-multiplication-table
+  - lt_407_find-k-th-smallest-pair-distance
+  - lt_379_find-k-pairs-with-smallest-sums
 """
 
 """
@@ -114,9 +110,73 @@ class Solution:
                 heapq.heappush(heap, target.next())
         return matrix[target.i][target.j]
 
+    def kthSmallest_heap_slow(self, matrix, k):
+        """
+        :type matrix: List[List[int]]
+        :type k: int
+        :rtype: int
+        """
+        heap = []
+        count = 0
+        for row in matrix:
+            for n in row:
+                heapq.heappush(heap, n)
+        while count < k - 1:
+            val = heapq.heappop(heap)
+            count += 1
+        return heap[0]
+
+    def kthSmallest_heap_clean(self, matrix, k):
+        """
+        :type matrix: List[List[int]]
+        :type k: int
+        :rtype: int
+        """
+        heap = []
+        for i in range(len(matrix)):
+            heapq.heappush(heap, (matrix[i][0], i, 0))
+        for _ in range(k):
+            n, i, j = heapq.heappop(heap)
+            if j < len(matrix[i]) - 1:
+                heapq.heappush(heap, (matrix[i][j+1], i, j+1))
+        return n
+
+    def kthSmallest_binarysearch_v2(self, matrix, k):
+        """
+        :type matrix: List[List[int]]
+        :type k: int
+        :rtype: int
+        """
+        m, n = len(matrix), len(matrix[0])
+        left, right = matrix[0][0], matrix[m-1][n-1]
+        while left < right:
+            mid = left + (right - left) // 2
+            count = 0
+            j = n - 1
+            for i in range(m):
+                while j >= 0 and matrix[i][j] > mid: j -= 1
+                count += (j + 1) 
+            if count < k: left = mid + 1
+            else: right = mid
+        return left
+
+    def kthSmallest_sort(self, matrix, k):
+        """
+        :type matrix: List[List[int]]
+        :type k: int
+        :rtype: int
+        """
+        nums = []
+        for row in matrix:
+            nums.extend(row)
+        nums.sort()
+        return nums[k-1]
+ 
+
 if __name__ == '__main__':
     test_cases = [
         (([[1, 5, 9], [10, 11, 13], [12, 13, 15]], 8), 13),
+        (([[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], 5), 5),
     ]
 
     for test_case in test_cases:
