@@ -33,6 +33,34 @@ class Solution:
         :type nums2: List[int]
         :rtype: float
         """
+        # Time: O(log(min(m, n)))
+        # Space: O(1)
+        # https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/2496/Concise-JAVA-solution-based-on-Binary-Search
+        def get_kth(num1, start1, nums2, start2, k):
+            if start1 >= len(nums1): return nums2[start2 + k - 1]
+            if start2 >= len(nums2): return nums1[start1 + k - 1]
+            if k == 1: return min(nums1[start1], nums2[start2])
+            mid1, mid2 = float('inf'), float('inf')
+            if start1 + k // 2 - 1 < len(nums1): mid1 = nums1[start1 + k // 2 - 1]
+            if start2 + k // 2 - 1 < len(nums2): mid2 = nums2[start2 + k // 2 - 1]
+            if mid1 < mid2:
+                return get_kth(nums1, start1 + k//2, nums2, start2, k - k//2)
+            else:
+                return get_kth(nums1, start1, nums2, start2 + k//2, k - k//2)
+        m, n = len(nums1), len(nums2)
+        k1 = (m + n + 1) // 2
+        k2 = (m + n + 2) // 2
+        if k1 == k2:
+            return get_kth(nums1, 0, nums2, 0, k1)
+        else:
+            return (get_kth(nums1, 0, nums2, 0, k1) + get_kth(nums1, 0, nums2, 0, k2)) / 2
+
+    def findMedianSortedArrays_v2(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
         # Time: O(log(m+n))
         # Space: O(1)
         # https://github.com/algorhythms/LeetCode/blob/master/002%20Median%20of%20Two%20Sorted%20Arrays.py
@@ -74,7 +102,7 @@ class Solution:
             print('case 2')
             return (find_kth(nums1, nums2, (m + n - 1) >> 1) + find_kth(nums1, nums2, (m + n) >> 1)) / 2 
 
-    def findMedianSortedArrays_naive(self, nums1, nums2):
+    def findMedianSortedArrays_heap(self, nums1, nums2):
         """
         :type nums1: List[int]
         :type nums2: List[int]
@@ -110,13 +138,39 @@ class Solution:
                 return (previous + current) / 2 
             previous = current
 
+    def findMedianSortedArrays_failed(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        k = (len(nums1) + len(nums2) + 1) // 2 - 1
+        count = 0
+        left1, right1, left2, right2 = 0, len(nums1) - 1, 0, len(nums2) - 1
+        print('k={}'.format(k))
+        while count < k and left1 <= right1 and left2 <= right2:
+            mid1 = left1 + (right1 - left1) // 2
+            mid2 = left2 + (right2 - left2) // 2
+            if nums1[mid1] <= nums2[mid2]:
+                count += right2 - mid2
+                right2 = mid2
+            else:
+                count += right1 - mid1
+                right1 = mid1
+        if right1 == -1:
+            return 
+        print(right1, right2)
+        return (nums1[right1] + nums2[right2]) / 2 
+
+
 if __name__ == '__main__':
     test_cases = [
-        # (([1], []), 1),
-        # (([1, 3], [2]), 2.0),
-        # (([1, 2], [3, 4]), 2.5),
+        (([1], []), 1),
+        (([1, 3], [2]), 2.0),
+        (([1, 2], [3, 4]), 2.5),
         (([1, 2, 3], [4, 5, 6]), 3.5),
-        #(([1, 3, 5, 7, 9], [2, 4, 6, 8]), 5),
+        (([1, 3, 5, 7, 9], [2, 4, 6, 8]), 5),
+        (([1], [2, 3, 4, 5, 6]), 3.5),
     ]
 
     for test_case in test_cases:
