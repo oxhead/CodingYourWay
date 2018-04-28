@@ -2,15 +2,11 @@
 https://leetcode.com/problems/find-the-duplicate-number
 
 Related:
-  - lt_41
-  - lt_136
-  - lt_142
-  - lt_268
-  - lt_645
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_41_first-missing-positive
+  - lt_136_single-number
+  - lt_142_linked-list-cycle-ii
+  - lt_268_missing-number
+  - lt_645_set-mismatch
 """
 
 """
@@ -73,11 +69,30 @@ class Solution:
             else: s.add(n)
         return -1
 
+    def findDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # Time: O(nlogn)
+        # Space: O(1)
+        left, right = 1, len(nums) - 1
+        while left <= right:
+            mid = left + (right - left) // 2
+            count = sum([n <= mid for n in nums])
+            if count > mid:
+                right = mid - 1
+            else:
+                left = mid + 1
+        return left
+
+
 if __name__ == '__main__':
     test_cases = [
         ([1, 1], 1),
         ([1, 2, 1], 1),
         ([1, 1, 1], 1),
+        ([1, 2, 2, 3, 4, 5], 2),
     ]
 
     for test_case in test_cases:
