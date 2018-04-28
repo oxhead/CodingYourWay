@@ -37,18 +37,17 @@ class Solution:
         # https://tenderleo.gitbooks.io/leetcode-solutions-/content/GoogleMedium/230.html
         stack = []
         node = root
+        count = 0
         while stack or node:
             while node:
                 stack.append(node)
                 node = node.left
-            top = stack.pop()
-            k -= 1
-            if k == 0:
-                node = top
-                break
-            else:
-                node = top.right
-        return node.val
+            current = stack.pop()
+            count += 1
+            if count == k:
+                return current.val
+            node = current.right
+        return -1
 
     def kthSmallest_recursive(self, root, k):
         """
