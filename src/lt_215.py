@@ -76,18 +76,18 @@ class Solution:
         :type k: int
         :rtype: int
         """
+        # Time: O(nlogk)
+        # Space: O(k)
         heap = []
-        for n in nums:
-            if len(heap) < (len(nums) - k + 1): heapq.heappush(heap, -n)
-            else:
-                if n < -heap[0]:
-                    heapq.heappop(heap)
-                    heapq.heappush(heap, -n) 
-        return -heap[0]
+        for n in nums: 
+            heapq.heappush(heap, n)
+            if len(heap) > k: heapq.heappop(heap)
+        return heap[0]
 
 
 if __name__ == '__main__':
     test_cases = [
+        (([2, 1], 2), 1),
         (([3, 2, 1, 5, 6, 4], 2), 5),
     ]
 
