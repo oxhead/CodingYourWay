@@ -114,7 +114,6 @@ class Solution:
             if node.next:
                 heapq.heappush(heap, (node.next.val, index, node.next))
         return dummy.next
-        
 
 
 if __name__ == '__main__':
