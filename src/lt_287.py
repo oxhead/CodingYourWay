@@ -35,15 +35,34 @@ class Solution:
         # linked list = 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 1 -> 2
         # slow: 0 -> 1 -> 2 -> ...
         # fast: 0 -> 2 -> 4 -> ...
+        
+        # This is important. Moves first to avoid check in the loop.
         fast = nums[nums[0]]
         slow = nums[0]
         while fast != slow:
             fast = nums[nums[fast]]
             slow = nums[slow]
+        # This is important. Moves back to where both fast and slow starts.
         fast = 0
         while fast != slow:
             fast = nums[fast]
             slow = nums[slow]
+        # Return the value, but not nums[fast]
+        return fast
+
+    def findDuplicate_v2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        slow, fast = 0, 0
+        while (slow == fast == 0) or slow != fast:
+             slow = nums[slow]
+             fast = nums[nums[fast]]
+        fast = 0
+        while slow != fast:
+             slow = nums[slow]
+             fast = nums[fast]
         return fast
 
     def findDuplicate_sort(self, nums):
@@ -69,21 +88,17 @@ class Solution:
             else: s.add(n)
         return -1
 
-    def findDuplicate(self, nums):
+    def findDuplicate_binarysearch(self, nums):
         """
         :type nums: List[int]
         :rtype: int
         """
-        # Time: O(nlogn)
-        # Space: O(1)
         left, right = 1, len(nums) - 1
         while left <= right:
             mid = left + (right - left) // 2
             count = sum([n <= mid for n in nums])
-            if count > mid:
-                right = mid - 1
-            else:
-                left = mid + 1
+            if count > mid: right = mid - 1
+            else: left = mid + 1
         return left
 
 
