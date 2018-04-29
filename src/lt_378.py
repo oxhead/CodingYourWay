@@ -2,9 +2,9 @@
 https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix
 
 Related:
-  - lt_668_kth-smallest-number-in-multiplication-table
-  - lt_407_find-k-th-smallest-pair-distance
   - lt_379_find-k-pairs-with-smallest-sums
+  - lt_407_find-k-th-smallest-pair-distance
+  - lt_668_kth-smallest-number-in-multiplication-table
 """
 
 """
