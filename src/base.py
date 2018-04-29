@@ -18,6 +18,14 @@ class TreeNode:
         self.left = None
         self.right = None
 
+# Definition for binary tree with next pointer.
+class TreeLinkNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+        self.next = None
+
 class NestedInteger(object):
     def __init__(self, data):
         self.data = data
