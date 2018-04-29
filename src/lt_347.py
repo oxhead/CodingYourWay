@@ -2,15 +2,11 @@
 https://leetcode.com/problems/top-k-frequent-elements
 
 Related:
-  - lt_192
-  - lt_215
-  - lt_451
-  - lt_659
-  - lt_692
-
-Complexity:
-  - Time: O()
-  - Space: O()
+  - lt_192_word-frequency
+  - lt_215_kth-largest-element-in-an-array
+  - lt_451_sort-characters-by-frequency
+  - lt_659_split-array-into-consecutive-subsequences
+  - lt_692_top-k-frequent-words
 """
 
 """
@@ -25,6 +21,8 @@ Note:
     Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
 """
 
+import collections
+
 class Solution:
     def topKFrequent(self, nums, k):
         """
@@ -32,13 +30,31 @@ class Solution:
         :type k: int
         :rtype: List[int]
         """
-        counters = {}
-        for n in nums:
-            if n not in counters:
-                counters[n] = 0
-            counters[n] += 1
-        sorted_counters = sorted(counters.items(), key=lambda x: x[1], reverse=True)
-        return [x[0] for x in sorted_counters][:k]
+        # Time: O(nlogn)
+        # Space: O(n)
+        counters = collections.Counter(nums)
+        return sorted(counters.keys(), key=lambda x: counters[x], reverse=True)[:k]
+
+    def topKFrequent_bucketsort(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        # Time: O(n)
+        # Space: O(n)
+        counters = collections.Counter(nums)
+        buckets = [[] for _ in range(len(nums) + 1)]
+        for i, count in counters.items():
+            buckets[count].append(i)
+
+        output = []
+        for i in range(len(buckets) - 1, -1, -1):
+            for j in range(len(buckets[i])):
+                output.append(buckets[i][j])
+                if len(output) == k: return output
+        return output
+
 
 if __name__ == '__main__':
     test_cases = [
