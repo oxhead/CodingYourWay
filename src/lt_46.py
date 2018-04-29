@@ -74,6 +74,20 @@ class Solution:
                 output.extend([[n] + sub for sub in self.permute_verbose(nums[:i] + nums[i+1:])])
             return output
 
+    def permute_v2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        def build(nums, current):
+            if not nums:
+                output.append(current)
+            for i, n in enumerate(nums):
+                build(nums[:i] + nums[i+1:], current + [n])
+        output = []
+        build(nums, [])
+        return output
+
 
 if __name__ == '__main__':
     test_cases = [
