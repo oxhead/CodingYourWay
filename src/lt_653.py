@@ -74,6 +74,7 @@ class Solution:
         if not root: return False
         left, right = BSTIterator(root, True), BSTIterator(root, False)
         while left.value() < right.value():
+            print(left.value(), right.value())
             if left.value() + right.value() == k:
                 return True
             elif left.value() + right.value() < k:
@@ -82,7 +83,7 @@ class Solution:
                 right.next()
         return False
 
-    def findTarget_set(self, root, k):
+    def findTarget_hashtable(self, root, k):
         """
         :type root: TreeNode
         :type k: int
@@ -98,10 +99,48 @@ class Solution:
                 return traverse(node.left) or traverse(node.right)
         records = set()
         return traverse(root)
-        
+
+    def findTarget_hashtable_v2(self, root, k):
+        """
+        :type root: TreeNode
+        :type k: int
+        :rtype: bool
+        """
+        records = set()
+        queue = [root] 
+        while queue:
+            node = queue.pop()
+            if node.val in records: return True
+            records.add(k - node.val)
+            if node.left: queue.append(node.left)
+            if node.right: queue.append(node.right)
+        return False
+
+    def findTarget_dfs(self, root, k):
+        """
+        :type root: TreeNode
+        :type k: int
+        :rtype: bool
+        """
+        # Time: O(nlong)
+        # Space: O(h)
+        def search(node, selected, k):
+            if not node: return False
+            elif selected.val == k: return False
+            elif node.val == k: return True
+            elif node.val > k: return search(node.left, selected, k)
+            else: return search(node.right, selected, k)
+        def find(root, node, k):
+            if not node: return False
+            return search(root, node, k - node.val) or find(root, node.left, k) or find(root, node.right, k)
+        if not root: return False
+        return find(root, root, k)
+
 
 if __name__ == '__main__':
     test_cases = [
+        (([1], 2), False),
+        (([2, 1, 3], 4), True),
         (([5, 3, 6, 2, 4, None, 7], 9), True),
         (([5, 3, 6, 2, 4, None, 7], 28), False),
     ]
