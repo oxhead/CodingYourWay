@@ -44,6 +44,7 @@ class Solution:
                 current = current.next
         return dummy.next
 
+
 if __name__ == '__main__':
     test_cases = [
         ([1, 2, 3], [1, 2, 3]),
