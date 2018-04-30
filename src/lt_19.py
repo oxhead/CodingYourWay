@@ -107,7 +107,7 @@ class Solution:
         else:
             previous.next = slow.next
         return head
-                
+
 
 if __name__ == '__main__':
     test_cases = [
