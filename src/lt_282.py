@@ -42,7 +42,8 @@ class Solution:
         # 1 + 2   -  34       3           2            -31
         # 1 + 2   *  34       3           2            69
         def dfs(index, current_str, current_val, previous):
-            if index >= len(num) and current_val == target: output.append(current_str)
+            if index >= len(num):
+                if current_val == target: output.append(current_str)
             else:
                 for i in range(index, len(num)):
                     if i != index and num[index] == "0": continue
