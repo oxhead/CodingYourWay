@@ -2,6 +2,7 @@
 https://leetcode.com/problems/remove-duplicates-from-sorted-list
 
 Related:
+  - lt_82_remove-duplicates-from-sorted-list-ii
 """
 
 """
@@ -12,6 +13,7 @@ Given 1->1->2, return 1->2.
 Given 1->1->2->3->3, return 1->2->3. 
 """
 
+from base import ListNode
 from utils import to_list, to_linked_list
 
 # Definition for singly-linked list.
@@ -38,6 +40,23 @@ class Solution:
                 previous = node
             node = node.next   
         return head
+
+    def deleteDuplicates_v2(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        dummy = ListNode(None)
+        previous = dummy
+        node = head
+        while node:
+            val = node.val
+            while node.next and node.next.val == val:
+                node = node.next
+            previous.next = node
+            previous = previous.next
+            node = node.next
+        return dummy.next
 
 
 if __name__ == '__main__':
