@@ -28,6 +28,9 @@ class Solution:
         """
         # Time: O(?)
         # Space: O(?)
+        # Hints:
+        # 1) backtracking the number of left pararenthesis and right pararenthesis until both are zero
+        # 2) backtracking is allowed only when left > 0 and right > left
         def generate(left, right, current, output):
             if left == 0 and right == 0:
                 output.append(current)
