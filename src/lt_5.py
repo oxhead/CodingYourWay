@@ -37,6 +37,25 @@ class Solution:
         """
         # Time: O(n^2)
         # Space: O(n^2)
+        # Hint: (1) The naive way is to do bruteforce for each substring and then
+        #       check whether its a palindrome or not
+        #       (2) Find the repitive structure and then use DP to reuse results
+        # Example: abcba
+        # size = 1
+        # a b c b a
+        # 1 1 1 1 1
+        # size = 2
+        # a b c b a
+        # 0 0 0 0 0
+        # size = 3
+        # a b c b a (should use 2-d array to record substring)
+        # 0 0 0 3 b
+        # size = 4
+        # a b c b a
+        # 0 0 0 0 0
+        # size = 5
+        # a b c b a
+        # 0 0 0 0 5 (because s[0] == s[4] and s[3] == 1)
         n = len(s)
         dp = [[-1] * n for _ in range(n)]
         for size in range(1, n+1):
