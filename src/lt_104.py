@@ -30,6 +30,7 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(h)
+        # Hint: return the maximum length of the left and right subtrees recursively
         return 0 if not root else max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
 
 
