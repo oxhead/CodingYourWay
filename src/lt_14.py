@@ -2,10 +2,6 @@
 https://leetcode.com/problems/longest-common-prefix
 
 Related:
-
-Complexity:
-  - Time: O()
-  - Space: O()
 """
 
 """
@@ -14,6 +10,20 @@ Write a function to find the longest common prefix string amongst an array of st
 
 class Solution:
     def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        # Time: O(n * k)
+        # Space: O(1)
+        if not strs: return ""
+        for i, c in enumerate(strs[0]):
+            for s in strs[1:]:
+                if (i < len(s) and s[i] != c) or i >= len(s):
+                    return strs[0][:i]
+        return strs[0]
+
+    def longestCommonPrefix_v2(self, strs):
         """
         :type strs: List[str]
         :rtype: str
@@ -27,6 +37,7 @@ class Solution:
                 break
             index = i
         return str_template[:index+1] if index >= 0 else ''
+
 
 if __name__ == '__main__':
     test_cases = [
