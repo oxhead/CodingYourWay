@@ -35,6 +35,7 @@ class Solution:
         """
         # Time: O(?)
         # Space: O(?)
+        # Hint: sorting + backtracking
         def produce(nums, target, current, output):
             if target == 0:
                 output.append(list(current))
