@@ -2,15 +2,11 @@
 https://leetcode.com/problems/longest-increasing-subsequence
 
 Related:
-  - lt_334
-  - lt_354
-  - lt_646
-  - lt_673
-  - lt_712
-
-Complexity:
-  - Time:
-  - Space:
+  - lt_334_increasing-triplet-subsequence
+  - lt_354_russian-doll-envelopes
+  - lt_646_maximum-length-of-pair-chain
+  - lt_673_number-of-longest-increasing-subsequence
+  - lt_712_minimum-ascii-delete-sum-for-two-strings
 """
 
 """
@@ -32,7 +28,19 @@ class Solution:
         :rtype: int
         """
         # https://tenderleo.gitbooks.io/leetcode-solutions-/content/GoogleMedium/300.html
-
+        # Time: O(nlogn)
+        # Space: O(n)
+        # Hint: Find the index over previous elements where x >= target
+        # Example: [10, 9, 2, 5, 3, 7, 101, 18]
+        # i  n    results           LIS
+        # 0   10  [10]              1
+        # 1    9  [9]               1
+        # 2    2  [2]               1
+        # 3    5  [2, 5]            2
+        # 4    3  [2, 3]            2
+        # 5    7  [2, 3, 7]         3
+        # 6  101  [2, 3, 7, 101]    4
+        # 7   18  [2, 3, 7, 18]     4
         def binary_search(data, val):
             left = 0
             right = len(data) - 1
@@ -75,8 +83,48 @@ class Solution:
             current_max = max(current_max, dp[i])        
         return current_max
 
+    def lengthOfLIS_bruteforce(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # Time: O(n^2)
+        # Space: O(n)
+        if not nums: return 0
+        count = 1
+        lis = [1] * len(nums)
+        for i in range(len(nums) - 2, -1, -1):
+            c = lis[i]
+            for j in range(i + 1, len(nums)):
+                if nums[j] > nums[i]:
+                    if  c + lis[j] > lis[i]: lis[i] = c + lis[j]
+            count = max(count, lis[i])
+        return count
+
+    def lengthOfLIS(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        def binary_search(nums, target):
+            left, right = 0, len(nums) - 1
+            while left < right:
+                mid = left + (right - left) // 2
+                if nums[mid] < target: left = mid + 1
+                else: right = mid
+            return left
+        results = [float('inf')] * len(nums)
+        for i, n in enumerate(nums):
+            index = binary_search(results, n)
+            results[index] = n
+        return len([n for n in results if n != float('inf')])
+        
+
 if __name__ == '__main__':
     test_cases = [
+        ([0], 1),
+        ([2, 2], 1),
+        ([10, 9, 2, 5, 3, 4], 3),
         ([10, 9, 2, 5, 3, 7, 101, 18], 4),
     ]
 
