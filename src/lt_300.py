@@ -83,7 +83,7 @@ class Solution:
             current_max = max(current_max, dp[i])        
         return current_max
 
-    def lengthOfLIS_bruteforce(self, nums):
+    def lengthOfLIS_dp(self, nums):
         """
         :type nums: List[int]
         :rtype: int
@@ -101,24 +101,6 @@ class Solution:
             count = max(count, lis[i])
         return count
 
-    def lengthOfLIS(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        def binary_search(nums, target):
-            left, right = 0, len(nums) - 1
-            while left < right:
-                mid = left + (right - left) // 2
-                if nums[mid] < target: left = mid + 1
-                else: right = mid
-            return left
-        results = [float('inf')] * len(nums)
-        for i, n in enumerate(nums):
-            index = binary_search(results, n)
-            results[index] = n
-        return len([n for n in results if n != float('inf')])
-        
 
 if __name__ == '__main__':
     test_cases = [
