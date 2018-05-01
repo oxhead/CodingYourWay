@@ -24,6 +24,16 @@ class Solution:
         # Time: O(n)
         # Space: O(n)
         # http://rainykat.blogspot.com/2017/01/leetcodefg-128-longest-consecutive.html
+        # Hints:
+        # 1) only maintain the farest range
+        # Approaches:
+        # 1) hash table
+        # Examples:
+        # 4 1 3 2
+        # 1
+        # 1 1
+        # 2 1 2
+        # 4 4 2 4 (no need to update element 3 because it's between 1 - 4
         records = {}
         max_length = 0
         for n in nums:

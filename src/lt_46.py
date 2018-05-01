@@ -33,6 +33,27 @@ class Solution:
         :rtype: List[List[int]]
         """
         # Time: O(n * n!)
+        # Space: O(n), call stack depth
+        # Hint:
+        # 1) backtracking
+        def build(nums, current):
+            if not nums:
+                output.append(list(current))
+                return
+            for i, n in enumerate(nums):
+                current.append(n)
+                build(nums[:i] + nums[i+1:], current)
+                current.pop()
+        output = []
+        build(nums, [])
+        return output
+
+    def permute_iterative(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        # Time: O(n * n!)
         # Space: O(n * n!)
         output = [[]]
         for n in nums:
@@ -73,20 +94,6 @@ class Solution:
             for i, n in enumerate(nums):
                 output.extend([[n] + sub for sub in self.permute_verbose(nums[:i] + nums[i+1:])])
             return output
-
-    def permute_v2(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        def build(nums, current):
-            if not nums:
-                output.append(current)
-            for i, n in enumerate(nums):
-                build(nums[:i] + nums[i+1:], current + [n])
-        output = []
-        build(nums, [])
-        return output
 
 
 if __name__ == '__main__':

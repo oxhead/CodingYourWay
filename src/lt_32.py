@@ -22,6 +22,10 @@ class Solution:
         # Time: O(n)
         # Space: O(n)
         # https://tenderleo.gitbooks.io/leetcode-solutions-/content/GoogleHard/32.html
+        # Hint:
+        #  1) remember keep tracking of the invalid index from -1
+        # Approaches:
+        #  1) Stack
         max_count = 0
         invalid_index = -1
         stack = []

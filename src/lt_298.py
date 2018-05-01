@@ -51,6 +51,12 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(h)
+        # Hint:
+        # 1) recursion
+        # 2) tracking the length of consecutive path
+        # 3) use a separate global variable to track the longest path
+        # Approaches:
+        # 1) recursion
         def dfs(node):
             if not node: return 0
             count = 1

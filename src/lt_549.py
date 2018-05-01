@@ -48,6 +48,12 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(h)
+        # Hint:
+        # 1) recursion
+        # 2) maintain two path -- increasing and decresing path
+        # 3) maintain a global max_length
+        # 4) calculate the path length by path_length_inc + path_length_dec - 1 (duplicate paraent)
+        # 5) a path is eather increasing or decreasing -- the above calculation is precise
         def dfs(node):
             if not node: return 0, 0
             count_left = dfs(node.left)

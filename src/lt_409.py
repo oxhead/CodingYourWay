@@ -35,6 +35,9 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(n)
+        # Hint: even number of characters with ONLY one odd number of character (can be duplicate)
+        # Approaches:
+        #  1) Hash Table (Counter)
         counter = collections.Counter(s)
         count = 0
         odd_count = False
@@ -45,6 +48,7 @@ class Solution:
                 count += v - 1
                 odd_count = True
         return count + int(odd_count)
+
 
 if __name__ == '__main__':
     test_cases = [

@@ -30,6 +30,10 @@ class Solution:
         # https://tenderleo.gitbooks.io/leetcode-solutions-/content/GoogleMedium/300.html
         # Time: O(nlogn)
         # Space: O(n)
+        # Approaches:
+        # (1) Bruteforce
+        # (2) DP
+        # (3) Binary Search (similar to intersion sort?)
         # Hint: Find the index over previous elements where x >= target
         # Example: [10, 9, 2, 5, 3, 7, 101, 18]
         # i  n    results           LIS

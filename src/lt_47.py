@@ -27,25 +27,10 @@ class Solution:
         :rtype: List[List[int]]
         """
         # Time: O(n * n!)
-        # Space: O(n * n!)
-        output = [[]]
-        for n in nums:
-            tmp = []
-            for sub in output:
-                for i in range(len(sub) + 1):
-                    tmp.append(sub[:i] + [n] + sub[i:])
-                    if i < len(sub) and sub[i] == n:
-                        break
-            output = tmp
-        return output
-
-    def permuteUnique_recursive(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        # Time: O(n * n!)
         # Space: O(n)
+        # Hints:
+        # 1) backtracking
+        # 2) sorting to void duplicates
         def generate(nums, current):
             if not nums:
                 output.append(current)
@@ -56,6 +41,24 @@ class Solution:
         output = []
         nums.sort()
         generate(nums, [])
+        return output
+ 
+    def permuteUnique_iterative(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        # Time: O(n * n!)
+        # Space: O(n * n!)
+        output = [[]]
+        for n in nums:
+            tmp = []
+            for sub in output:
+                for i in range(len(sub) + 1):
+                    tmp.append(sub[:i] + [n] + sub[i:])
+                    if i < len(sub) and sub[i] == n:
+                        break
+            output = tmp
         return output
 
     def permuteUnique_slow(self, nums):
