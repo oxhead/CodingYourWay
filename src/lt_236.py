@@ -39,6 +39,12 @@ class Solution(object):
         :type q: TreeNode
         :rtype: TreeNode
         """
+        # Time: O(n)
+        # Space: O(h)
+        # Hints:
+        # 1) Check the left and right subtrees separately.
+        # 2) If p and q are in the two subtrees, the root the LCA
+        # 3) Else, returns the non-empty subtree (both p and q in the subtree)
         if not root: return root
         if p == root or q == root: return root
         left = self.lowestCommonAncestor(root.left, p, q)
@@ -81,6 +87,21 @@ class Solution(object):
         elif in_tree(root.right, p) and in_tree(root.right, q):
             return self.lowestCommonAncestor(root.right, p, q)
         return None
+
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        if not root: return None
+        elif root == p: return p
+        elif root == q: return q
+        left_lca = self.lowestCommonAncestor(root.left, p, q)
+        right_lca = self.lowestCommonAncestor(root.right, p, q)
+        if left_lca and right_lca: return root
+        return left_lca if left_lca else right_lca
 
 
 if __name__ == '__main__':
