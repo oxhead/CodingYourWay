@@ -30,11 +30,18 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(h)
+        # Hints:
+        # 1) Distinguish cases of two subtress
+        # 2) If both are not empty, return the minimum depth
+        # 3) Else, return the non-empty subtree
         if not root: return 0
         if root.left and root.right:
             return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
         else:
-            return max(self.minDepth(root.left), self.minDepth(root.right)) + 1
+            if root.left: return self.minDepth(root.left) + 1
+            else: return self.minDepth(root.right) + 1
+            # The above is easier to understand
+            #return max(self.minDepth(root.left), self.minDepth(root.right)) + 1
 
     def minDepth_verbose(self, root):
         """
