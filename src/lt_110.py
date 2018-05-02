@@ -56,6 +56,10 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(h)
+        # Hints:
+        # 1) Design a method that returns the height of the tree but return -1 if one of the subtreesis not balanced or the height difference of two subtrees is great than 1.
+        # Approaches:
+        # 1) Recursion
         def get_height(node):
             if not node: return 0
             left_height = get_height(node.left)
