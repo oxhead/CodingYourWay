@@ -44,6 +44,8 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(1)
+        # Hints:
+        # 1) Recursion check
         def is_matched(left, right):
             if not left and not right: return True
             if not left or not right: return False
@@ -79,6 +81,7 @@ if __name__ == '__main__':
         ([1], True),
         ([1, 2, 2, 3, 4, 4, 3], True),
         ([1, 2, 2, None, 3, None, 3], False),
+        ([3, 9, 20, None, None, 15, 7], True),
     ]
 
     for test_case in test_cases:
