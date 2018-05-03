@@ -64,7 +64,7 @@ class Solution:
 if __name__ == '__main__':
     test_cases = [
         (3, 5),
-        #(19, 1767263190),
+        (19, 1767263190),
     ]
 
     for test_case in test_cases:
