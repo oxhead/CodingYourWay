@@ -37,8 +37,13 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[str]
         """
+        # Time: O(n)
+        # Space: O(h)
+        # Hints:
+        # 1) Use backtrakcing.
         def dfs(node, path, path_list):
             if not node: return
+            # in this way, no need to pop out the traversed node before this function exists
             current_path = path + [node.val]
             if not node.left and not node.right:
                 path_list.append(current_path)
@@ -49,6 +54,24 @@ class Solution(object):
         path_list = []
         dfs(root, [], path_list)
         return ['->'.join([str(p) for p in path]) for path in path_list]
+
+    def binaryTreePaths_v2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[str]
+        """
+        def build(node, current, output):
+            if not node:
+                return
+            current.append(node.val)
+            if not node.left and not node.right:
+                output.append(list(current))
+            build(node.left, current, output)
+            build(node.right, current, output)
+            current.pop()
+        output = []
+        build(root, [], output)
+        return ["->".join([str(n) for n in p]) for p in output]
 
     def binaryTreePaths2(self, root):
         """
@@ -67,6 +90,7 @@ class Solution(object):
         path_list = []
         dfs(root, "", path_list)
         return path_list
+
 
 if __name__ == '__main__':
     test_cases = [

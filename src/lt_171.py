@@ -2,11 +2,7 @@
 https://leetcode.com/problems/excel-sheet-column-number
 
 Related:
-  - lt_168
-
-Complexity:
-  - Time: O(1)
-  - Space: O(1)
+  - lt_168_excel-sheet-column-title
 """
 
 """
@@ -32,6 +28,18 @@ class Solution:
         :rtype: int
         """
         return sum([26**i * (ord(c) - 64) for i, c in enumerate(reversed(s.upper()))])
+
+    def titleToNumber(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        s = reversed(s)
+        count = 0
+        for i, c in enumerate(s):
+            count += (ord(c) - ord('A') + 1) * 26**i
+        return count
+
 
 if __name__ == '__main__':
     test_cases = [

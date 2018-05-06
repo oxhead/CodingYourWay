@@ -47,6 +47,8 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(h)
+        # Hints:
+        # 1) Use backtracking to keep track the current visisted node.
         def search(node, total, current, output):
             if node and not node.left and not node.right and total == node.val:
                 output.append(current + [node.val])

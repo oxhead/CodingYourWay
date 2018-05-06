@@ -44,6 +44,8 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(h)
+        # Hints:
+        # 1) Make sure when it reaches the leaf node.
         if not root: return False
         if not root.left and not root.right: return root.val == sum
         return self.hasPathSum(root.left, sum - root.val) or self.hasPathSum(root.right, sum - root.val)

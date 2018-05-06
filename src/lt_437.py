@@ -86,9 +86,11 @@ class Solution:
             records[current] += 1
             count += search(node.left, current, target, records) + search(node.right, current, target, records)
             # remember to pop out the current count because the subtree is traversed
+            # this is similar to backtracking
             records[current] -= 1
             return count
 
+        # This hashtable stores the path sums that are traversed so far
         records = collections.defaultdict(int)
         records[0] = 1
         return search(root, 0, sum, records)

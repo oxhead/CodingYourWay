@@ -1,6 +1,5 @@
 """
 https://leetcode.com/problems/binary-tree-maximum-path-sum
-https://leetcode.com/problems/path-sum
 
 Related:
   - lt_112_path-sum
@@ -47,11 +46,18 @@ class Solution:
             if not node: return float('-inf'), 0
             left = search(node.left)
             right = search(node.right)
+            # !!! this zero is very important
+            # the single_path_sum stores the max sum. three cases
+            # 1) current + left child
+            # 2) current + right child
+            # 3) no nodes are considered (handled bt the max_path_sum
             single_path_sum = max(node.val + left[1], node.val + right[1], 0)
-            max_path_sum = max(left[0], right[0], left[1] + node.val + right[1])
-            return max_path_sum, single_path_sum
-        max_path_sum, _ = search(root)
-        return max_path_sum
+            # the max path sum is either form the left subtree, the right subtree or
+            # both (including the current node) 
+            global_path_sum = max(left[0], right[0], left[1] + node.val + right[1])
+            return global_path_sum, single_path_sum
+        global_path_sum, _ = search(root)
+        return global_path_sum
 
     def maxPathSum_global(self, root):
         """
@@ -90,10 +96,12 @@ class Solution:
         if not root: return float('-inf')
         return max(max_path_sum(root, root.val), self.maxPathSum(root.left), self.maxPathSum(root.right))
 
+
 if __name__ == '__main__':
     test_cases = [
         #([], 0),
         ([1, 2, 3], 6),
+        ([1, -2, -3], 1),
         ([-2, -1], -1),
         ([1, -2, -3, 1, 3, -2, None, -1], 3),
         ([5, 4, 8, 11, None, 13, 4, 7, 2, None, None, None, 1], 48),

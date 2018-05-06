@@ -36,6 +36,27 @@ class Solution:
         # Time: O(min(m, n))
         # Space: O(1)
         if not l1: return l2
+        elif not l2: return l1
+        dummy = ListNode(None)
+        node = dummy
+        while l1 or l2:
+            n1 = l1.val if l1 else float('inf')
+            n2 = l2.val if l2 else float('inf')
+            node.next = l1 if n1 <= n2 else l2
+            l1 = l1.next if n1 <= n2 else l1
+            l2 = l2.next if n2 < n1 else l2
+            node = node.next
+        return dummy.next
+
+    def mergeTwoLists_v2(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        # Time: O(min(m, n))
+        # Space: O(1)
+        if not l1: return l2
         if not l2: return l1
         if l1.val <= l2.val:
             head = l1
