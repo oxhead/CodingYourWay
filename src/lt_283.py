@@ -26,6 +26,9 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(1)
+        # Hints:
+        # 1) index_zero starts from 0 (move non-zero elements to the front)
+        # 2) increment index_zero for each movement (non-zero elements) 
         index_zero = 0
         for i in range(len(nums)):
             if nums[i]:
@@ -41,6 +44,16 @@ class Solution:
         # else do nothing
         nums.sort(key=functools.cmp_to_key(lambda x, y: 0 if y else -1))
 
+    def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        zero_index = 0
+        for i, n in enumerate(nums):
+            if n != 0:
+                nums[i], nums[zero_index] = nums[zero_index], nums[i]
+                zero_index += 1
 
 if __name__ == '__main__':
     test_cases = [

@@ -30,6 +30,8 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(1)
+        # Hints:
+        # 1) Avoid special cases such as [3, 3] and val=3
         if not nums: return 0
         elif len(nums) == 1: return 0 if nums[0] == val else 1
         left, right = 0, len(nums) - 1
@@ -40,6 +42,7 @@ class Solution:
             else:
                 left += 1
         return right + 1
+
         
 if __name__ == '__main__':
     test_cases = [
