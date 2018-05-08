@@ -29,6 +29,11 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(1)
+        # Hints:
+        # 1) use negative numbers to represet seen numbers
+        # 2) [3, 2, 1, 2]
+        #    [-3, -2, -1, x]
+        #                found -2 in the position nums[abs(2) -1]
         output = []
         for n in nums:
             if nums[abs(n) - 1] < 0:
@@ -46,6 +51,7 @@ class Solution:
             nums[abs(nums[i]) - 1] *= -1
         print(nums)
         return []
+
 
 if __name__ == '__main__':
     test_cases = [
