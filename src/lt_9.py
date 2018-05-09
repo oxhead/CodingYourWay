@@ -28,6 +28,9 @@ class Solution:
         """
         # Time: O(1)
         # Space: O(1)
+        # Hints:
+        # 1) Reverse the integer and compare with the original x
+        # 2) Using module and shift to reverse the integer
         if x < 0: return False
         n, y = x, 0
         while n:
@@ -50,6 +53,18 @@ class Solution:
             left += 1
             right -= 1
         return True
+
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        n, y = x, 0
+        while n:
+            y *= 10
+            y += n % 10
+            n //= 10
+        return x == y
 
 if __name__ == '__main__':
     test_cases = [
