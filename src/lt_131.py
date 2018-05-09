@@ -27,6 +27,10 @@ class Solution:
         """
         # Time: O(?)
         # Space: O(n)
+        # Hints:
+        # 1) backtracking (s -> s1s2
+        # 2) if s2 if palindrom, current + [s2]
+        # 3) keep splitting s2
         def is_palindrome(ps):
             return ps == ps[::-1]
 
@@ -44,6 +48,27 @@ class Solution:
         output = []
         search(0, len(s), [])
         return output
+
+    def partition_cached(self, s):
+        """
+        :type s: str
+        :rtype: List[List[str]]
+        """
+        def search(start, end, current):
+            r = s[start:end]
+            if r in records or r == r[::-1]:
+                output.append(current + [r])
+            for i in range(start + 1, end):
+                r = s[start:i]
+                if r not in records and r != r[::-1]: continue
+                records.add(r)
+                current.append(r)
+                search(i, end, current)
+                current.pop() 
+        records = set()
+        output = []
+        search(0, len(s), [])
+        return output 
 
 
 if __name__ == '__main__':
