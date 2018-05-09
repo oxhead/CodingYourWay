@@ -208,6 +208,51 @@ class Solution:
                 max_index = i
         start = (max_index - 1 - P[max_index]) // 2
         return s[start:start+P[max_index]]
+
+    def longestPalindrome_v2(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        dp = [[0] * len(s) for _ in range(len(s))]
+        output = ""
+        for size in range(len(s)):
+            for i in range(len(s)):
+                j = i + size
+                if j >= len(s): continue
+                if s[i] != s[j]:
+                    dp[i][j] = 0
+                else:
+                    if j - i <= 1:
+                        dp[i][j] = 1
+                    else:
+                        if dp[i+1][j-1] == 1:
+                            dp[i][j] = 1 
+                if dp[i][j] == 1:
+                    output = s[i:j+1]
+        return output
+
+    def longestPalindrome_center(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        # Time: O(n^2)
+        # Space: O(1)
+        # Hints:
+        # 1) Check possible palindroms from each possible center positions
+        # 2) The center positions can be a single index (odd length) or two indexes (even length)
+        def search(left, right):
+            nonlocal output
+            while left >=0 and right < len(s) and s[left] == s[right]:
+                if right - left + 1 > len(output): output = s[left:right+1]
+                left -= 1
+                right += 1
+        output = ""
+        for i in range(len(s)):
+            search(i, i)
+            search(i, i + 1)
+        return output
         
 
 if __name__ == '__main__':
