@@ -27,6 +27,8 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(1)
+        # Hints:
+        # 1) Use two pointers
         left = 0
         right = len(s) - 1
         while left < right:

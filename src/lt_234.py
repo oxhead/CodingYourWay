@@ -28,6 +28,14 @@ class Solution:
         :type head: ListNode
         :rtype: bool
         """
+        # Time: O(n)
+        # Space: O(1)
+        # Hints:
+        # 1) Find the middle point with fast/slow pointers
+        # 2) Reverse the second half of the linked list
+        # 3) Compare the two sub-lists
+        # Notes:
+        # 1) Better to find the middle point from a dummy node (before head), which avoids the two-node problem.
         def find_middle_node(node):
             slow = fast = node
             while fast and fast.next:
@@ -40,6 +48,7 @@ class Solution:
                 node.next, previous, node = previous, node, node.next
             return previous
 
+        # this handles two nodes cases becasue head2 will compare with head at least once
         middle = find_middle_node(head)
         head2 = reverse(middle)
         while head2:
