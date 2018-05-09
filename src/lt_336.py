@@ -29,6 +29,20 @@ class Solution:
         # Time: O(n * k^2)
         # Space: O(n * k)
         # https://www.jianshu.com/p/fcde442da61b
+        # Hints:
+        # 1) Don't do pairwise comparison because n can be very large
+        # 2) Use hashtable to store existing reversed words
+        # Examples:
+        # bat
+        # b at x : check "b" in table and "at" is palindrome
+        # ba t xx: check "ba" in table and "t" is palindrome
+        # bat: check "bat" in table and "" is palindrome
+        # xx b at: check "at" in table and "b" is palindrome
+        # x ba t: check "t" in table and "ba" is palindrome
+        # bat: check "" in table and "bat" is palindrom
+        # Note:
+        # 1) Avoid using the empty string twice because it can produce duplicate strings
+        # 2) Need to check palindrome from two sides
         def is_palindrome(word):
             left, right = 0, len(word) - 1
             while left < right:
@@ -50,6 +64,22 @@ class Solution:
                         output.append([records[w1], i])
                 if w2 in records and records[w2] != i and is_palindrome(w1):
                     output.append([records[w2], i])
+        return output
+
+    def palindromePairs_TLE(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[List[int]]
+        """
+        # Time: O(n^2 * k)
+        # Space: O(k)
+        output = []
+        for i in range(len(words)):
+            for j in range(len(words)):
+                if i == j: continue
+                s = words[i] + words[j]
+                if s == s[::-1]:
+                    output.append([i, j])
         return output
            
 
