@@ -81,13 +81,12 @@ if __name__ == '__main__':
         ([1], True),
         ([1, 2, 2, 3, 4, 4, 3], True),
         ([1, 2, 2, None, 3, None, 3], False),
-        ([3, 9, 20, None, None, 15, 7], True),
+        ([3, 9, 20, None, None, 15, 7], False),
     ]
 
     for test_case in test_cases:
         print('case:', test_case)
         output = Solution().isSymmetric(parse_tree(test_case[0]))
-        # output = Solution().isSymmetric_iterative(parse_tree(test_case[0]))
         print('output:', output)
         assert output == test_case[1]
 
