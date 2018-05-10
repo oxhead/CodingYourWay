@@ -96,8 +96,40 @@ class Solution:
                 if failed:
                     for m, n in trace:
                         board[m][n] = "O"
-                    
-        
+
+    def solve_failed(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: void Do not return anything, modify board in-place instead.
+        """
+        # This is not a good idea because you have to roll back when the path is not valid
+        def search(i, j):
+            if not ( 0 <= i < len(board) and 0 <= j < len(board[i])): return False
+            if board[i][j] == '?': return False
+            if board[i][j] == 'X': return True
+            board[i][j] = 'X'
+            result = [search(a, b) for a, b in ((i+1, j), (i, j+1), (i-1, j), (i, j-1))]
+            if i == 3 and j == 3: print(i, j, result)
+            if all(result): return True
+            board[i][j] = 'O'
+            return False
+        if not board or not board[0]: return
+        for i in range(len(board)):
+            board[i][0] = '?' if board[i][0] == 'O' else board[i][0]
+            board[i][len(board[i])-1] = '?' if board[i][len(board[i])-1] == 'O' else board[i][len(board[i])-1]
+        for j in range(len(board[0])):
+            board[0][j] = '?' if board[0][j] == 'O' else board[0][j]
+            board[len(board)-1][j] = '?' if board[len(board)-1][j] == 'O' else board[len(board)-1][j]
+        for i in range(1, len(board) - 1):
+            for j in range(1, len(board[i]) - 1):
+                search(i, j)
+        for i in range(len(board)):
+            board[i][0] = 'O' if board[i][0] == '?' else board[i][0]
+            board[i][len(board[i])-1] = 'O' if board[i][len(board[i])-1] == '?' else board[i][len(board[i])-1]
+        for j in range(len(board[0])):
+            board[0][j] = 'O' if board[0][j] == '?' else board[0][j]
+            board[len(board)-1][j] = 'O' if board[len(board)-1][j] == '?' else board[len(board)-1][j]
+
 
 if __name__ == '__main__':
     test_cases = [
