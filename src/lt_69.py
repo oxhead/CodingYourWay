@@ -33,6 +33,8 @@ class Solution:
         """
         # Time: O(logn)
         # Space: O(1)
+        # Hints:
+        # 1) We are only sure that when a number is larger than the root of x; therefore, right is the correct index
         if x == 0 or x == 1: return x
         left, right = 1, x // 2
         while left <= right:

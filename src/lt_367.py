@@ -1,6 +1,5 @@
 """
 https://leetcode.com/problems/valid-perfect-square
-https://leetcode.com/problems/sqrtx
 
 Related:
   - lt_69_sqrtx
