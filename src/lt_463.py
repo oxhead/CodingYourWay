@@ -28,6 +28,9 @@ class Solution:
         """
         # Time: O(n^2)
         # Space: O(1)
+        # Hints:
+        # 1) The neighbor islands produce redundant counts on edges
+        # 2) Make sure do not over and under count the redundant edges
         count = 0
         for i in range(len(grid)):
             for j in range(len(grid[i])):
@@ -65,7 +68,7 @@ class Solution:
 if __name__ == '__main__':
     test_cases = [
         ([[1, 1], [1, 1]], 8),
-        ([[0,1,0,0], [1,1,1,0], [0,1,0,0], [1,1,0,0]], 16),
+        ([[0, 1, 0, 0], [1, 1, 1, 0], [0, 1, 0, 0], [1, 1, 0, 0]], 16),
     ]
 
     for test_case in test_cases:
