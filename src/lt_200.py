@@ -38,6 +38,26 @@ class Solution:
         :type grid: List[List[str]]
         :rtype: int
         """
+        # Time: O(m*n)
+        # Space: O(m*n), call stack
+        def search(i, j):
+            if not (0 <= i < len(grid) and 0 <= j < len(grid[i]) and grid[i][j] == '1'): return 0
+            grid[i][j] = 0
+            count = 1
+            for a, b in ((i+1, j), (i, j+1), (i-1, j), (i, j-1)):
+                count += search(a, b)
+            return count
+        count = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[i])):
+                if search(i, j) > 0: count += 1
+        return count
+
+    def numIslands_v2(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
         # https://www.tangjikai.com/algorithms/leetcode-200-number-of-islands
         def dfs(i, j):
             grid[i][j] = WATER
