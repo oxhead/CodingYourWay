@@ -58,6 +58,16 @@ class Solution:
         # Hints:
         # 1) dp(i, j) = dp(i-1, j), for s[:i] and t[:j]
         # 2) if s[i-1] == t[j-1], dp(i, j) = dp(i-1, j) + dp(i-1, j-1)
+        # Examples:
+        #   rabbit   rabbit
+        #  1000000  1000000
+        # r1000000  1100000
+        # a1000000  1110000
+        # b1000000  1111000
+        # b1000000  1112100
+        # b1000000  1113300
+        # i1000000  1113330
+        # t1000000  1113333
         dp = [[0] * (len(t) + 1) for _ in range(len(s) + 1)]
         for i in range(len(s) + 1):
             dp[i][0] = 1
