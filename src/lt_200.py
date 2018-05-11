@@ -32,6 +32,8 @@ Example 2:
 Answer: 3
 """
 
+import collections
+
 class Solution:
     def numIslands(self, grid):
         """
@@ -40,6 +42,8 @@ class Solution:
         """
         # Time: O(m*n)
         # Space: O(m*n), call stack
+        # Hints:
+        # 1) DFS
         def search(i, j):
             if not (0 <= i < len(grid) and 0 <= j < len(grid[i]) and grid[i][j] == '1'): return 0
             grid[i][j] = 0
@@ -165,6 +169,70 @@ class Solution:
                     if n > 0 and grid[m][n - 1] == "1":
                         stack.append((m, n - 1))
         return count
+
+    def numIslands_bfs(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        # Time: O(m * n)
+        # Space: (m * n)
+        # Hints:
+        # 1) BFS
+        count = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[i])):
+                if grid[i][j] == '0': continue
+                count += 1
+                grid[i][j] = '0'
+                queue = collections.deque([(i, j)])
+                while queue:
+                    a, b = queue.popleft()
+                    for r, c in (a-1, b), (a+1, b), (a, b-1), (a, b+1):
+                        if not (0 <= r < len(grid) and 0 <= c < len(grid[r]) and grid[r][c] == '1'): continue 
+                        queue.append((r, c))
+                        grid[r][c] = '0'
+        return count
+
+    def numIslands_unionfind(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        # Time: O(m * n)
+        # Space: O(m * n)
+        # Hints:
+        # 1) Union find
+        # Notice:
+        # 1) I didn't initialize self.count to the number of 1s; instead, I count how many union operations
+        # 2) Substract the number of union operations from the number of 1s = the number of connected components
+        class UnionFind:
+            def __init__(self, n):
+                self.set = list(range(n))
+                self.count = 0
+
+            def find_set(self, x):
+                if self.set[x] != x:
+                    self.set[x] = self.find_set(self.set[x])
+                return self.set[x]
+
+            def union_set(self, x, y):
+                x_root, y_root = map(self.find_set, (x, y))
+                if x_root != y_root:
+                    self.set[min(x_root, y_root)] = max(x_root, y_root)
+                    self.count += 1
+
+        if not any(grid): return 0
+        num_1s = sum(sum(list(map(int, row))) for row in grid)
+        m, n = len(grid), len(grid[0])
+        uf = UnionFind(m * n)
+        for i in range(len(grid)):
+            for j in range(len(grid[i])):
+                if grid[i][j] == '0': continue
+                for a, b in (i-1, j), (i+1, j), (i, j-1), (i, j+1):
+                    if not ( 0 <= a < m and 0 <= b < n and grid[a][b] == '1'): continue
+                    uf.union_set(i * n + j, a * n + b)
+        return num_1s - uf.count
 
 
 if __name__ == '__main__':
