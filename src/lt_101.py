@@ -62,16 +62,16 @@ class Solution:
         # Time: O(n)
         # Space: O(h), h is the tree height
         if not root: return True
-        queue = [root.left, root.right]
-        while queue:
-            front, end = queue.pop(0), queue.pop()
-            if not front and not end: continue
-            if not (front and end): return False
-            if front.val != end.val: return False
-            queue.insert(0, front.right)
-            queue.insert(0, front.left)
-            queue.append(end.left)
-            queue.append(end.right)
+        q = [root, root]
+        while q:
+            n1, n2 = q.pop(), q.pop()
+            if not n1 and not n2: continue
+            if not n1 or not n2: return False
+            if n1.val != n2.val: return False
+            q.append(n1.left)
+            q.append(n2.right)
+            q.append(n1.right)
+            q.append(n2.left)
         return True
 
 
