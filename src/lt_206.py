@@ -69,6 +69,21 @@ class Solution:
             head = tmp
         return previous
 
+    def reverseList_recursive(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        # Time: O(n)
+        # Space: O(h)
+        def reverse_list(node, previous):
+            if not node: return previous
+            next_node = node.next
+            node.next = previous
+            return reverse_list(next_node, node)
+        if not head: return head
+        return reverse_list(head, None)
+
 
 if __name__ == '__main__':
     test_cases = [
