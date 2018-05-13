@@ -54,6 +54,8 @@ class Solution:
         """
         # Time: O(n), equal to O(2^logn)=O(n)
         # Space: O(n)
+        # Hints:
+        # 1) The non-leaf node returns 0, which means the path sum is 0
         def search(node, count):
             if node not in records: return 0
             elif (node[0] + 1, (node[1] - 1) * 2 + 1) not in records and (node[0] + 1, (node[1] - 1) * 2 + 2) not in records:
@@ -88,6 +90,31 @@ class Solution:
         records = {}
         for n in nums:
             records[(n // 100, n % 100 // 10)] = n % 10
+        return path_sum(1, 1, 0)
+
+    def pathSum_verbose(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        def path_sum(d, p, c):
+            if (d, p) not in records: return -1
+            left = (d + 1, 2 * (p - 1) + 1)
+            right = (d + 1, 2 * p)
+            if left not in records and right not in records: return c + records[(d, p)]
+            left_path_sum = path_sum(left[0], left[1], c + records[(d, p)])
+            right_path_sum = path_sum(right[0], right[1], c + records[(d, p)])
+            total = 0
+            if left_path_sum >= 0: total += left_path_sum 
+            if right_path_sum >= 0: total += right_path_sum
+            return total
+            
+        records = {}
+        for num in nums:
+            D = num // 100
+            P = num // 10 % 10
+            V = num % 10
+            records[(D, P)] = V
         return path_sum(1, 1, 0)
 
 
