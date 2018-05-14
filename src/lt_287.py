@@ -26,6 +26,8 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
+        # Time: O(n)
+        # Space: O(1)
         # https://en.wikipedia.org/wiki/Cycle_detection
         # https://github.com/algorhythms/LeetCode/blob/master/287%20Find%20the%20Duplicate%20Number.py
         # N = n + 1

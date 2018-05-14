@@ -44,15 +44,32 @@ class Solution:
         """
         # Time: O(n * logn)
         # Space: O(n)
+        # Hints:
+        # 1) Sort the array and help reduce the number of comparison
         indexs = sorted(range(len(nums)), key=lambda i: nums[i])
         for i in range(len(nums)):
             j = i + 1
+            # the key to reduce comparisons is nums[indexs[j]] - nums[indexs[i]] <= t
             while j < len(nums) and nums[indexs[j]] - nums[indexs[i]] <= t:
                 if abs(indexs[i] - indexs[j]) <= k:
                     return True
                 j += 1
         return False
 
+    def containsNearbyAlmostDuplicate_TLE(self, nums, k, t):
+        """
+        :type nums: List[int]
+        :type k: int
+        :type t: int
+        :rtype: bool
+        """
+        for i in range(len(nums)):
+            j =  i + 1
+            while j < len(nums) and j - i <= k:
+                if abs(nums[i] - nums[j]) <= t: return True
+                j += 1
+        return False
+    
 
 if __name__ == '__main__':
     test_cases = [

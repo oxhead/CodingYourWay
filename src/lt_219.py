@@ -17,6 +17,8 @@ class Solution:
         :type k: int
         :rtype: bool
         """
+        # Time: O(n)
+        # Space: O(n)
         records = {}
         for i, n in enumerate(nums):
             if n not in records:

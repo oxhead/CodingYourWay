@@ -20,7 +20,22 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(n)
+        # Approaches:
+        #                  Time     Space
+        # 1) Brute force   O(n^2)   O(1)
+        # 2) Sort          O(nlogn) O(1)
+        # 3) Hash Table    O(n)     O(n)
         return len(nums) > len(set(nums))
+
+    def containsDuplicate_sort(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        nums.sort()
+        for i in range(1, len(nums)):
+            if nums[i] == nums[i-1]: return True
+        return False
 
 
 if __name__ == '__main__':
