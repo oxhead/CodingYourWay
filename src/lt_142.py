@@ -53,6 +53,24 @@ class Solution(object):
 
         return None
 
+    def detectCycle_v2(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        slow = head
+        fast = head.next
+        while fast and fast.next and fast != slow:
+            fast = fast.next.next
+            slow = slow.next
+        if not fast: return None
+        if not fast == slow: return None
+        fast = head.next
+        while fast != slow:
+            fast = fast.next
+            slow = slow.next
+        return fast
+
 
 if __name__ == '__main__':
     test_cases = [
