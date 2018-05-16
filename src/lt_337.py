@@ -77,6 +77,19 @@ class Solution:
             return amount
         records = {}
         return search(root, True)
+
+    def rob_failed(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        def traverse(node):
+            if not node: return 0, 0
+            if not node.left and not node.right: return node.val, 0
+            left = traverse(node.left)
+            right = traverse(node.right)
+            return node.val + left[1] + right[1], left[0] + right[0]
+        return max(traverse(root))
         
 
 if __name__ == '__main__':
@@ -84,6 +97,7 @@ if __name__ == '__main__':
         ([1, 2, 3], 5),
         ([3, 2, 3, None, 3, None, 1], 7),
         ([3, 4, 5, 1, 3, None, 1], 9),
+        ([4, 1, None, 2, None, 3], 7),
     ]
 
     for test_case in test_cases:

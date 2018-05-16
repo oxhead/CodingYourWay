@@ -26,6 +26,8 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(1)
+        # Hints:
+        # 1) Two cases: either rob the current house i (nums[i] + dp[i - 2] or not to rob (dp[i-1]_
         if not nums or len(nums) == 0: return 0
         elif len(nums) == 1: return nums[0]
 

@@ -25,6 +25,8 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(n)
+        # Hints:
+        # 1) Find the minimum with one selected color for the house i
         if not costs: return 0
         dp = [[float('inf')] * 3 for _ in range(len(costs))]
         dp[0] = [c for c in costs[0]]
@@ -50,10 +52,11 @@ class Solution:
             dp[i][2] = min(dp[i-1][2] + min(costs[i][0], costs[i][1]), min(dp[i-1][0], dp[i-1][1]) + costs[i][2])
         return min(dp[-1])
 
+
 if __name__ == '__main__':
     test_cases = [
-        #([[1, 2, 3], [1, 2, 3], [1, 2, 3]], 4),
-        #([[17, 2, 17], [16, 16, 5], [14, 3, 19]], 10),
+        ([[1, 2, 3], [1, 2, 3], [1, 2, 3]], 4),
+        ([[17, 2, 17], [16, 16, 5], [14, 3, 19]], 10),
         ([[3, 5, 3], [6, 17, 6], [7, 13, 18], [9, 10, 18]], 26),
     ]
 

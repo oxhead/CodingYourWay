@@ -28,15 +28,23 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(n)
-        if n == 0: return 0
-        elif n == 1: return k
-
-        ways = [0] * n
-        ways[0] = k
-        ways[1] = (k - 1) * ways[0] + k
+        # Hints:
+        # 1) two cases: same with the previous one or not
+        # Examples:
+        # n = 3, k = 3
+        # fence   0  1  2
+        # colors  3  9
+        #               2 * (9 + 3)
+        #                    9 = same with fence 1 = (k - 1) * dp[n - 1]
+        #                        3 = different with fence 1 = (k - 1) * dp[n - 2]
+        if n == 1: return k
+        dp = [0] * n
+        dp[0] = k
+        dp[1] = (k - 1) * dp[0] + k
         for i in range(2, n):
-            ways[i] = (k - 1) * (ways[i - 1] + ways[i - 2])
-        return ways[-1]
+            dp[i] = (k - 1) * (dp[i - 1] + dp[i - 2])
+        return dp[-1]
+
 
 if __name__ == '__main__':
     test_cases = [
@@ -46,6 +54,7 @@ if __name__ == '__main__':
         ((2, 1), 1),
         ((2, 2), 4),
         ((2, 3), 9),
+        ((3, 3), 24),
         ((3, 1), 0),
         ((3, 2), 6),
         ((3, 3), 24),

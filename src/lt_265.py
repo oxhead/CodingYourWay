@@ -28,6 +28,8 @@ class Solution:
         """
         # Time: O(n * k)
         # Space: O(n * k)
+        # Hints:
+        # 1) Calculate the minimum cost of a selected color at the house i
         if not costs or len(costs) == 0: return 0
 
         dp = [[float('inf')] * len(costs[i]) for i in range(len(costs))]
@@ -36,6 +38,7 @@ class Solution:
             for j in range(len(costs[i])):
                 dp[i][j] = costs[i][j] + min(dp[i-1][:j] + dp[i-1][j+1:])
         return min(dp[-1])
+
 
 if __name__ == '__main__':
     test_cases = [

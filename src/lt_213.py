@@ -26,6 +26,8 @@ class Solution:
         """
         # Time: O(n)
         # Space: O(n)
+        # Hints:
+        # 1) Two cases: either rob the first house (the last house cannot be robbed) or not (the last house can be robbed)
         if not nums: return 0
         elif len(nums) == 1: return nums[0]
         
@@ -40,6 +42,7 @@ class Solution:
         dp2[1] = nums[1] 
         for i in range(2, len(nums)):
             dp2[i] = max(nums[i] + dp2[i - 2], dp2[i - 1])
+        # be careful about dp1[-2]
         return max(dp1[-2], dp2[-1])
 
 
