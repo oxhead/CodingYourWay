@@ -96,11 +96,25 @@ class Solution:
         if not root: return float('-inf')
         return max(max_path_sum(root, root.val), self.maxPathSum(root.left), self.maxPathSum(root.right))
 
+    def maxPathSum_failed(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        def traverse(node):
+            if not node: return float('-inf'), float('-inf')
+            if not node.left and not node.right: return node.val, float('-inf')
+            left = traverse(node.left)
+            right = traverse(node.right)
+            return max(node.val, node.val + left[0] + right[0], node.val + left[0], node.val + right[0]), max(max(left), max(right))
+            
+        return max(traverse(root))
+
 
 if __name__ == '__main__':
     test_cases = [
-        #([], 0),
         ([1, 2, 3], 6),
+        ([-10, 9, 20, None, None, 15, 7], 42),
         ([1, -2, -3], 1),
         ([-2, -1], -1),
         ([1, -2, -3, 1, 3, -2, None, -1], 3),
