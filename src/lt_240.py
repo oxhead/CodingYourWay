@@ -37,6 +37,7 @@ class Solution:
         """
         # Time: O(mlogn)
         # Space: O(1)
+        # Hints: Binary Search for each row or column
         m = len(matrix) if matrix else -1
         n = len(matrix[0]) if m > 0 else -1
         if m < 1 or n < 1: return False
@@ -52,7 +53,7 @@ class Solution:
 
         return False
 
-    def searchMatrix_v2(self, matrix, target):
+    def searchMatrix_twopointers(self, matrix, target):
         """
         :type matrix: List[List[int]]
         :type target: int
@@ -60,6 +61,7 @@ class Solution:
         """
         # Time: O(m + n)
         # Space: O(1)
+        # Hints: Two pointers
         m = len(matrix) if matrix else -1
         n = len(matrix[0]) if m > 0 else -1
         if m < 1 or n < 1: return False
